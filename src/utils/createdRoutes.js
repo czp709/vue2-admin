@@ -4,8 +4,8 @@
  * @param {Object} route 路由
  */
 function hasPermission (roles, route) {
-    if (route.meta && route.meta.level) { // 路由需要权限就要在权限数组里面判断
-        return route.meta.level.includes(roles)
+    if (route.meta && route.meta.levelname) { // 路由需要权限就要在权限数组里面判断
+        return roles.includes(route.meta.levelname)
     } else { // 不需要权限就直接通过
         return true
     }

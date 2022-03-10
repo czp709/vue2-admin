@@ -4,7 +4,7 @@
 
 #### vue2+element+axios 后台模板
 
-为了减少打包体积，vue、elementui使用的是cdn引入
+为了减少打包体积，vue、elementui使用的是cdn引入,为了稳定性推荐使用自己的cdn服务。本人在日常使用中是将vue，element文件放在了自己的服务器，这样既保证了一定的稳定性和快速响应。也方便在其他项目中通过CDN引入。
 
 #### 引入mock，便于前后端分离开发。
 
@@ -28,15 +28,9 @@ this.$postAPI(url).then(res => {})
 
 #### router 权限控制
 
-根据登录接口返回的level字段进行判断，分为1，2两级
+根据登录接口返回的level字段进行判断，其中meta的levelname表示页面所需权限，不配置默认全可以访问。给每一位用户添加了level字段，level字段由此用户所持有权限的页面的levelname拼接而成。
 
 在router/index.js中含有路由守卫
-
-为了体现出权限差距，设置了admin账户。
-
-登陆时账号输入admin密码随便输入为1级账号
-
-账号密码都随便输入为2级账号
 
 #### VUEX
 
@@ -73,9 +67,11 @@ window.addEventListener('storage', function (e) {
 
 router/levelRouters/index.js中配置登陆后首页的页面路由
 
-其中meta属性中配置侧边栏的icon，title，是否显示。当hidden:true时侧边导航栏不显示
+其中meta的levelname表示页面所需权限，不配置默认全可以访问。给每一位用户添加了level字段，level字段有此用户所持有权限的页面的levelname拼接而成。
 
-其中meta的level表示那些权限用户可以访问此页面，不配置默认全可以访问。侧边导航栏也是根据此字段动态生成
+其中meta属性中配置侧边栏的icon，title，是否显示。当hidden:true时侧边导航栏不显示。
+
+动态导航栏是根据level、levelname、hidden生成的。
 
 #### 初始包含页面
 

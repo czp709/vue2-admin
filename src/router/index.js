@@ -1,3 +1,4 @@
+// import Vue from 'vue'
 import VueRouter from 'vue-router'
 import login from '@/components/login'
 import retrievePassword from '@/components/retrievePassword'

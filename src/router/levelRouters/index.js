@@ -3,7 +3,7 @@ export const levelRouters = [
     {
         path: '/home',
         component: () => import('@/layout/home'),
-        meta: { hidden: false, level: [1, 2] },
+        meta: { hidden: false },
         children: [
             // 第一个子路由是做默认跳转用的,即进入home后默认进入的子路由，通常和第二个子路由引入的文件相同（即默认进入第二个子路由）
             {
@@ -20,7 +20,7 @@ export const levelRouters = [
                 component: () => import('@/views/test1/test1.vue'),
                 meta: {
                     hidden: false, //hidden为false，在侧边导航栏显示
-                    level: [1, 2], //那些权限用户可以访问此页面，即level=1，level=2都可以访问
+                    levelname: "acd150a6885f609532931d89844070b1", //那些权限用户可以访问此页面，即level=1，level=2都可以访问
                     title: '实例页面1', //侧边导航栏显示的名称
                     icon: 'el-icon-coin' //侧边导航栏的图标
                 }
@@ -31,7 +31,7 @@ export const levelRouters = [
                 component: () => import('@/views/test2/test2.vue'),
                 meta: {
                     hidden: false,
-                    level: [1],
+                    levelname: "87da0c1d74d7335f83acb6f445b85a44",
                     icon: 'el-icon-document',
                     title: '实例页面2'
                 }

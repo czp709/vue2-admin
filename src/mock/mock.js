@@ -9,7 +9,7 @@ Mock.mock(`${process.env.VUE_APP_BASE_URL}login`, 'post', function (option) {
         return Mock.mock({
             code: 200,
             data: {
-                level: 1,
+                level: "acd150a6885f609532931d89844070b187da0c1d74d7335f83acb6f445b85a44",
                 logo: "https://czp-1304694162.cos.ap-nanjing.myqcloud.com/xiaoxiaoyu.png",
                 name: Random.cname(),
                 token: Random.id()
@@ -19,7 +19,7 @@ Mock.mock(`${process.env.VUE_APP_BASE_URL}login`, 'post', function (option) {
         return Mock.mock({
             code : 200,
             data: {
-                level: 2,
+                level: "87da0c1d74d7335f83acb6f445b85a44",
                 logo: "https://czp-1304694162.cos.ap-nanjing.myqcloud.com/xiaoxiaoyu.png",
                 name: Random.cname(),
                 token: Random.id()
