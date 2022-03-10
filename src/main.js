@@ -6,7 +6,6 @@ import router from './router'
 import store from './store'
 import "./mock/mock.js";
 import { getAPI, postAPI, putAPI, deleteAPI } from './api/api'
-
 Vue.prototype.$Cookies = Cookies
 Vue.prototype.axios = axios
 Vue.prototype.$getAPI = getAPI
