@@ -15,6 +15,7 @@ const state = {
     })(),
     clubInfo: {},
     level: 0,
+    menufold:true
 };
 const mutations = {
     saveclubInfo(state, clubInfo) {
@@ -22,6 +23,9 @@ const mutations = {
     },
     savelevel(state, level) {
         state.level = level
+    },
+    changefold(state){
+        state.menufold=!state.menufold
     }
 };
 const actions = {

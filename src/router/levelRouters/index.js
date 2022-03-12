@@ -36,6 +36,30 @@ export const levelRouters = [
                     title: '实例页面2'
                 }
             },
+            {
+                path:'/page3',
+                name:"page3",
+                component:()=>import('@/views/test3/test3.vue'),
+                children:[
+                    {
+                        path: '/page3',
+                        name: '页面3',
+                        component: () => import('@/views/test3/views/test4.vue'),
+                        meta: {
+                            hidden: false,
+                            levelname: "87da0c1d74d7335f83acb6f445b85a44",
+                            icon: 'el-icon-document',
+                            title: '实例页面3'
+                        }
+                    },
+                ],
+                meta: {
+                    hidden: false,
+                    levelname: "87da0c1d74d7335f83acb6f445b85a44",
+                    icon: 'el-icon-document',
+                    title: '实例菜单3'
+                }
+            },
             // 最后一个路由配置404页面，即用户访问了不存在的路由后同意跳转到404页面
             // 注意！！！一定要放在最后一项，否则在此路由后配置的的路由都将失效。
             {

@@ -49,7 +49,7 @@
     </div>
     <div style="position:fixed;bottom:0px;width:100%;background: rgba(250, 250, 250, .8);text-align: center;padding:5px">
       <a
-        style="color:#666;font-size:10px"
+        style="color:#409eff;font-size:12px"
         href="https://beian.miit.gov.cn/"
         target="_blank"
       >

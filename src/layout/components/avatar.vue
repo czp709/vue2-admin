@@ -4,28 +4,26 @@
       <el-avatar
         :src="clubInfo.logo||logo"
         slot="reference"
-        :size='60'
+        :size='40'
       ></el-avatar>
-      <el-dropdown
-        class="name"
-        placement="bottom"
-      >
-        <span
-          class="el-dropdown-link"
-          id="large"
-        >
+      <el-dropdown placement="bottom">
+        <span class="el-dropdown-link" id="large">
           {{ clubInfo.name || name}}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item
-            command="a"
-            v-if="level === 1"
-          >
+          <el-dropdown-item>
             <el-link
               style="width: 100%"
               href="#/page1"
               :underline="false"
             >进入示例页面1</el-link>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <el-button
+            @click="logout"
+            type="text"
+            style="width:100%"
+            >退出</el-button>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -44,7 +42,14 @@ export default {
     }
   },
   methods: {
-
+    logout () {
+      var that = this
+      that.$confirm("确认退出吗?", "提示", {}).then(() => {
+        this.$store.dispatch("user/logout").then(() => {
+          this.$router.replace("/")
+        })
+      })
+    }
   },
   computed: {
     ...mapState({
@@ -55,28 +60,20 @@ export default {
 }
 </script>
 <style scoped>
+.demo-basic--circle{
+  display: inline-block;
+}
 .block {
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 10vh;
 }
 
 #large {
   font-size: 16px;
 }
 
-.el-dropdown-link {
-  cursor: pointer;
-  color: white;
-}
-
-.el-icon-arrow-down {
-  font-size: 12px;
-}
-
-.name {
-  margin-top: 10px;
+.el-dropdown {
+  margin-right: 10px;
 }
 </style>

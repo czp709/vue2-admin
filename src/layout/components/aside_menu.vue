@@ -1,12 +1,14 @@
 <template>
   <el-menu
+    class="el-menu-vertical-demo"
     :default-active="menuDefaultActive"
-    background-color="rgba(0,0,0,0)"
+    background-color="#3d4657"
     active-text-color="#ffd04b"
     text-color="#fff"
     unique-opened
     router
     ref="asidemenu"
+    :collapse="$store.state.user.menufold"
   >
     <template v-for="item in addRouters[0].children">
       <template v-if="item.children && !item.meta.hidden">
@@ -16,7 +18,7 @@
         >
           <template slot="title">
             <i :class="item.meta.icon"></i>
-            <span>{{ item.meta.title }}</span>
+            <span slot="title">{{ item.meta.title }}</span>
           </template>
           <el-menu-item
             class="subs"
@@ -25,7 +27,7 @@
             :key="child.index"
           >
             <i :class="child.meta.icon"></i>
-            {{ child.meta.title }}
+            <span slot="title">{{ child.meta.title }}</span>
           </el-menu-item>
         </el-submenu>
       </template>
@@ -35,7 +37,7 @@
           :key="item.index"
         >
           <i :class="item.meta.icon"></i>
-          <span>{{ item.meta.title }}</span>
+          <span slot="title">{{ item.meta.title }}</span>
         </el-menu-item>
       </template>
     </template>
@@ -63,7 +65,10 @@ export default {
 .el-menu {
   border-right: none !important;
 }
-
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 180px;
+  min-height: 400px;
+}
 .el-submenu .el-submenu__title:hover {
   border-left: #33a2ef solid 6px !important;
   background-color: #3d4657 !important;

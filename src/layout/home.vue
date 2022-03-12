@@ -6,24 +6,18 @@
       style="overflow-x: hidden"
     >
       <Main-Aside></Main-Aside>
-      <div class="logout">
-        <el-button
-          type="danger"
-          icon="el-icon-switch-button"
-          circle
-          @click="logout"
-        ></el-button>
-      </div>
     </el-aside>
     <el-main class="main">
-      <TopHeader
+      <headerMenu
         class="header"
         v-if="!$store.state.user.isPC"
-      ></TopHeader>
+      ></headerMenu>
+      <Topheader v-if="$store.state.user.isPC"></Topheader>
       <el-card
         class="box-card"
         id="box"
         shadow="hover"
+        :body-style="{padding:'12px'}"
       >
         <transition name="slide-fade">
           <router-view></router-view>
@@ -42,13 +36,14 @@
 </template>
 <script>
 import MainAside from "./components/aside.vue"
-import TopHeader from "./components/header.vue"
-
+import headerMenu from "./components/headerMenu.vue"
+import Topheader from "./components/header.vue"
 export default {
   name: "Home",
   components: {
     MainAside,
-    TopHeader
+    headerMenu,
+    Topheader
   },
   data () {
     return {
@@ -62,25 +57,15 @@ export default {
 
   },
   methods: {
-    logout () {
-      var that = this
-      that.$confirm("确认退出吗?", "提示", {}).then(() => {
-        this.$store.dispatch("user/logout").then(() => {
-          this.$router.replace("/")
-        })
-      })
-    }
+
   }
 }
 </script>
 <style scoped>
 .aside {
-  width: 180px !important;
+  width: auto !important;
   height: 100vh;
   background-color: #3d4657;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
 }
 
 .header {
@@ -102,7 +87,7 @@ export default {
 }
 
 .el-card {
-  min-height: 100% !important;
+  min-height: 80% !important;
   border: none !important;
 }
 

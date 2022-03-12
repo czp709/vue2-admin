@@ -1,72 +1,50 @@
 <template>
-  <el-menu
-    class="el-menu-demo"
-    mode="horizontal"
-    unique-opened
-    router
-  >
-    <template v-for="item in List">
-      <el-submenu
-        :index="item.path"
-        :key="item.index"
-        v-if="item.children && !item.meta.hidden"
-      >
-        <template slot="title">
-          <i :class="item.meta.icon"></i>
-        </template>
-        <el-menu-item
-          class="subs"
-          :index="child.path"
-          v-for="child in item.children"
-          :key="child.index"
-        >
-          <i :class="child.meta.icon"></i>
-          {{ child.meta.title }}
-        </el-menu-item>
-      </el-submenu>
-      <el-menu-item
-        v-else
-        :index="item.path"
-        :key="item.index"
-      >
-        <i :class="item.meta.icon"></i>
-      </el-menu-item>
-    </template>
-  </el-menu>
+    <div>
+        <el-header style="text-align: right; font-size: 12px;">
+            <span @click="$store.commit('user/changefold')">
+                <i v-show="!$store.state.user.menufold" class="el-icon-s-fold"></i>
+                <i v-show="$store.state.user.menufold" class="el-icon-s-unfold"></i>
+            </span>
+            <Avatar></Avatar>
+        </el-header>
+    </div>
 </template>
 <script>
-import { mapGetters } from "vuex"
+import Avatar from "./avatar.vue"
 export default {
-  name: "TopHeader",
+  components: {
+    Avatar
+  },
+  name: "Aside",
   data () {
     return {
-      screenWidth: document.documentElement.clientWidth || document.documentElement.offsetWidth || document.body.offsetWidth || window.innerWidth,
-      name: "admin",
-      circleUrl: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
     }
   },
-  methods: {},
-  computed: {
-    ...mapGetters({
-      addRouters: "user/addRouters"
-    }),
-    List () {
-      return this.addRouters[0].children.filter((item) => {
-        if (!item.meta.hidden) {
-          return true
-        } else {
-          return false
-        }
-      })
-    }
-  },
-  mounted () {
+  methods: {
+    // 修改密码点击确定执行的函数
+    changepwd () {
 
+    }
   }
 }
 </script>
 <style scoped>
-.header {
-  justify-content: space-between !important;
+.el-header {
+    height: auto !important;
+    padding: 10px;
+    border-bottom: 1px solid #dcdfe6;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logout{
+    display: inline-block;
+}
+.el-header i{
+    font-size:22px;
+    float: left;
+    color: #606266;
 }
 </style>
