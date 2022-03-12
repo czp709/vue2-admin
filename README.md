@@ -4,7 +4,7 @@
 
 一级账号：admin 密码：123456
 
-二级账号：vistor  密码：123456
+二级账号：visitor  密码：123456
 
 #### vue2+element+axios 后台模板
 
