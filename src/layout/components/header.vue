@@ -1,10 +1,12 @@
 <template>
     <div>
         <el-header style="text-align: right; font-size: 12px;">
-            <span @click="$store.commit('user/changefold')">
-                <i v-show="!$store.state.user.menufold" class="el-icon-s-fold"></i>
-                <i v-show="$store.state.user.menufold" class="el-icon-s-unfold"></i>
-            </span>
+            <el-tooltip class="item" effect="dark" content="点击展开/收起侧边导航栏" placement="bottom">
+                <span @click="$store.commit('user/changefold')">
+                    <i v-show="!$store.state.user.menufold" class="el-icon-s-fold"></i>
+                    <i v-show="$store.state.user.menufold" class="el-icon-s-unfold"></i>
+                </span>
+            </el-tooltip>
             <Avatar></Avatar>
         </el-header>
     </div>

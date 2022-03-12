@@ -1,7 +1,7 @@
 <template>
   <div class="aside">
     <div class="aside_top">
-      <img src="@/assets/logo.png">
+      <img src="@/assets/logo.png" title="czp出品">
       <span v-show="!$store.state.user.menufold">Admin</span>
     </div>
     <asidemenu></asidemenu>
