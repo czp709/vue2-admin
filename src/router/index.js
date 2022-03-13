@@ -1,8 +1,8 @@
 // import Vue from 'vue'
 import VueRouter from 'vue-router'
-import login from '@/components/login'
-import retrievePassword from '@/components/retrievePassword'
-import {levelRouters} from './levelRouters/index'
+const login = () => import('@/components/login')
+const retrievePassword = () => import('@/components/retrievePassword')
+import { levelRouters } from './levelRouters/index'
 import beforEach from '@/router/beforEach'
 Vue.use(VueRouter)
 
@@ -30,10 +30,10 @@ const createRouter = () => new VueRouter({
 const router = createRouter()
 // 重置路由（由于router2没有提供重置路由的方式，所以采用替换路由的方式）
 export function resetRouter() {
-  const newRouter = createRouter()
-  router.matcher = newRouter.matcher // reset router
+    const newRouter = createRouter()
+    router.matcher = newRouter.matcher // reset router
 }
 // 路由守卫
-router.beforeEach((to, from, next) => beforEach(to, from, next,router));
+router.beforeEach((to, from, next) => beforEach(to, from, next, router));
 
 export default router
