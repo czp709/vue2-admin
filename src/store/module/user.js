@@ -15,7 +15,7 @@ const state = {
     })(),
     clubInfo: {},
     level: 0,
-    menufold:sessionStorage.getItem('menufold')=='false' ? false : true
+    menufold: localStorage.getItem('menufold') == 'false' ? false : true
 };
 const mutations = {
     saveclubInfo(state, clubInfo) {
@@ -24,9 +24,9 @@ const mutations = {
     savelevel(state, level) {
         state.level = level
     },
-    changefold(state){
-        state.menufold=!state.menufold
-        sessionStorage.setItem('menufold',state.menufold)
+    changefold(state) {
+        state.menufold = !state.menufold
+        localStorage.setItem('menufold', state.menufold)
     }
 };
 const actions = {
