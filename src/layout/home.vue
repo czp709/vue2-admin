@@ -90,11 +90,6 @@ export default {
   min-height: 80% !important;
   border: none !important;
 }
-
-.logout {
-  display: flex;
-  justify-content: center;
-}
 .slide-fade-enter-active {
   transition: all 0.3s ease;
 }

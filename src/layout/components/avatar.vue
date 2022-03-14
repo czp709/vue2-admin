@@ -4,10 +4,14 @@
       <el-avatar
         :src="clubInfo.logo||logo"
         slot="reference"
-        :size='40'
+        :size='35'
+        :title="clubInfo.name"
       ></el-avatar>
       <el-dropdown placement="bottom">
-        <span class="el-dropdown-link" id="large">
+        <span
+          class="el-dropdown-link"
+          id="large"
+        >
           {{ clubInfo.name || name}}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -20,9 +24,9 @@
           </el-dropdown-item>
           <el-dropdown-item>
             <el-button
-            @click="logout"
-            type="text"
-            style="width:100%"
+              @click="logout"
+              type="text"
+              style="width:100%;color:red"
             >退出</el-button>
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -60,7 +64,7 @@ export default {
 }
 </script>
 <style scoped>
-.demo-basic--circle{
+.demo-basic--circle {
   display: inline-block;
 }
 .block {

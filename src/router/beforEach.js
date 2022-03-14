@@ -16,7 +16,7 @@ const beforeEach = ((to, from, next, router) => {
     if (whiteList.indexOf(to.path) !== -1 && whiteList.indexOf(from.path) == -1) {
       store.dispatch("user/logout")
     }
-    Selfexecution()
+    Selfexecution
     next()
   } else {
     // 如果没有登陆过就将除了白名单页面之外的页面访问都重定向到登陆页面

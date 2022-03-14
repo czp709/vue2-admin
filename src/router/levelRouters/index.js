@@ -32,15 +32,15 @@ export const levelRouters = [
                 meta: {
                     hidden: false,
                     levelname: "87da0c1d74d7335f83acb6f445b85a44",
-                    icon: 'el-icon-document',
+                    icon: 'el-icon-s-custom',
                     title: '实例页面2'
                 }
             },
             {
-                path:'/page3',
-                name:"page3",
-                component:()=>import('@/views/test3/test3.vue'),
-                children:[
+                path: '/page3',
+                name: "page3",
+                component: () => import('@/views/test3/test3.vue'),
+                children: [
                     {
                         path: '/page3',
                         name: '页面3',
@@ -48,7 +48,7 @@ export const levelRouters = [
                         meta: {
                             hidden: false,
                             levelname: "87da0c1d74d7335f83acb6f445b85a44",
-                            icon: 'el-icon-document',
+                            icon: 'el-icon-s-flag',
                             title: '实例页面3'
                         }
                     },
@@ -56,7 +56,7 @@ export const levelRouters = [
                 meta: {
                     hidden: false,
                     levelname: "87da0c1d74d7335f83acb6f445b85a44",
-                    icon: 'el-icon-document',
+                    icon: 'el-icon-s-opportunity',
                     title: '实例菜单3'
                 }
             },
@@ -71,4 +71,4 @@ export const levelRouters = [
             }]
     }]
 
- 
+
