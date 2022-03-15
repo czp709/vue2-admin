@@ -1,10 +1,12 @@
 # vue2-admin
 
-体验地址：[vue2-admin](http://chenzp.ltd)
+体验地址：[vue2-admin](http://chenzp.club)
 
 一级账号：admin 密码：123456
 
 二级账号：visitor  密码：123456
+
+遇到BUG或者有更好的实现方式欢迎联系我（有代码不理解的地方也可以给我发邮件询问）。邮箱：chenzhipeng709@163.com
 
 #### vue2+element+axios 后台模板
 
@@ -14,7 +16,7 @@
 
 #### 对 axios 进行封装
 
-在utils/request.js中可以配置请求头，
+在utils/request.js中可以配置请求头，可以根据自己的实际情况进行修改
 
 将请求的基础url配置在环境中
 
@@ -27,6 +29,8 @@ axios调用方式为：
 ```JavaScript
 this.$getAPI(url).then(res => {})
 this.$postAPI(url).then(res => {})
+this.$deleteAPI(url).then(res => {})
+this.$putAPI(url).then(res => {})
 ```
 
 
@@ -34,7 +38,7 @@ this.$postAPI(url).then(res => {})
 
 根据登录接口返回的level字段进行判断，其中meta的levelname表示页面所需权限，不配置默认全可以访问。给每一位用户添加了level字段，level字段由此用户所持有权限的页面的levelname拼接而成。
 
-在router/index.js中含有路由守卫
+在router/beforEach.js中含有路由守卫，基础的路由守卫已经添加，若还要实现其余功能（如：进行过某个操作后才能进入某个页面）可以在router/beforEach.js 内的Selfexecution函数内添加相应逻辑。
 
 #### VUEX
 

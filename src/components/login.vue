@@ -1,25 +1,24 @@
 <template>
   <div class="login-wrap">
-    <div class="ms-login1">
+    <div class="ms-login">
       <div class="title">登录</div>
       <el-form
         :model="ruleForm"
         :rules="rules"
         ref="ruleForm"
         label-width="0px"
-        class="demo-ruleForm"
       >
         <el-form-item prop="username">
           <el-input
             type="text"
             v-model="ruleForm.username"
-            placeholder="请输入账号"
+            placeholder="账号"
           ></el-input>
         </el-form-item>
         <el-form-item prop="pwd">
           <el-input
             type="password"
-            placeholder="请输入密码"
+            placeholder="密码"
             show-password
             v-model="ruleForm.pwd"
             @keyup.enter.native="isShow = true"
@@ -49,11 +48,11 @@
     </div>
     <div style="position:fixed;bottom:0px;width:100%;background: rgba(250, 250, 250, .8);text-align: center;padding:5px">
       <a
-        style="color:#409eff;font-size:12px"
+        style="color:#666;font-size:12px"
         href="https://beian.miit.gov.cn/"
         target="_blank"
       >
-        豫ICP备2021008006号-1</a>
+        豫ICP备2021008006号-2</a>
     </div>
   </div>
 </template>
@@ -74,7 +73,7 @@ export default {
             },
             // 输入框数据验证方式
             rules: {
-                username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+                username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
                 pwd: [{ required: true, message: '请输入密码', trigger: 'blur' }]
             }
         }
@@ -116,13 +115,13 @@ export default {
     },
     // 以下两个生命周期函数作用为提示试用账号密码，正式场景应删除掉
     mounted () {
-      // this.notifyId = this.$notify({
-      //   message: '一级账号为admin，二级账号为visitor。密码皆随便输入',
-      //   duration: 0
-      // });
+      this.notifyId = this.$notify({
+        message: '一级账号为admin,二级账号为visitor。密码皆随便输入',
+        duration: 0
+      });
     },
     beforeDestroy () {
-      // this.notifyId.close()
+      this.notifyId.close()
     }
 }
 </script>
@@ -155,13 +154,13 @@ export default {
   color: rgb(147, 146, 157);
 }
 
-.ms-login1 {
+.ms-login {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 250px;
-  height: 400px;
+  width: 200px;
+  height: auto;
   padding: 30px;
   border-radius: 15px;
   background: rgba(250, 250, 250, 0.8);
@@ -170,7 +169,9 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
-
+.el-form {
+  margin: 40px 0;
+}
 .login-btn {
   text-align: center;
 }
@@ -180,37 +181,14 @@ export default {
   height: 36px;
 }
 
-.register {
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px !important;
-}
-
 .el-link {
   font-size: 10px !important;
-}
-
-.remember {
-  margin: 3px 0 10px 0;
-}
-
-@media screen and (min-height: 550px) {
-  .login-copyright {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-  }
-}
-.vue-auth-box_ {
-  top: 50% !important;
 }
 
 .bottom_btn {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin-top: 20px;
 }
 </style>

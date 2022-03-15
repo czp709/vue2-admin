@@ -16,14 +16,16 @@ const beforeEach = ((to, from, next, router) => {
     if (whiteList.indexOf(to.path) !== -1 && whiteList.indexOf(from.path) == -1) {
       store.dispatch("user/logout")
     }
-    Selfexecution
+    Selfexecution(to, from, next, router)
     next()
   } else {
     // 如果没有登陆过就将除了白名单页面之外的页面访问都重定向到登陆页面
     whiteList.indexOf(to.path) !== -1 ? next() : next('/')
   }
 })
-const Selfexecution = (() => {
+
+function Selfexecution(to, from, next, router) {
   // 你可以在这个地方加入登陆后的其它的路由拦截，例如没有执行某个操作不能进入含有权限的某个页面等
-})()
+  
+}
 export default beforeEach

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width:100% !important;padding:40px 0;display:flex;justify-content:center;align-items: center;">
     <div class="error">
       <!-- 图片可保存到本地 -->
       <img src="../assets/404.png">
@@ -25,10 +25,6 @@ export default {
 
 <style scoped>
 .error {
-  position: absolute;
-  top: 50%;
-  margin-top: -250px;
-  width: calc(100vw - 220px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -38,7 +34,7 @@ export default {
 .error img {
   display: block;
   margin: 0 auto;
-  width:100%;
+  width: 50%;
 }
 .error p {
   text-align: center;
