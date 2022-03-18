@@ -19,7 +19,7 @@
         <transition name="slide-fade">
           <router-view></router-view>
         </transition>
-        <div style="width:100%;background: rgba(250, 250, 250, .8);text-align: center;padding:5px 0">
+        <div style="width:100%;text-align: center;padding:5px 0">
           <a
             style="color:#666;font-size:5px"
             href="https://beian.miit.gov.cn/"
@@ -70,8 +70,13 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.main {
+  padding-right: 6px !important;
+}
+
 .el-header {
   padding: 0 !important;
+  background-color: #fff;
 }
 .slide-fade-enter-active {
   transition: all 0.3s ease;

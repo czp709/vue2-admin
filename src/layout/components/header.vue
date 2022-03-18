@@ -45,7 +45,7 @@ export default {
 <style scoped>
 .header {
   height: auto !important;
-  padding: 10px;
+  padding: 10px 20px;
   border-bottom: 1px solid #dcdfe6;
   display: flex;
   flex-direction: row;
