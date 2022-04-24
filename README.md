@@ -1,6 +1,6 @@
 # vue2-admin
 
-体验地址：[vue2-admin](http://chenzp.club)
+体验地址：[vue2-admin](https://czp709.github.io/#/)
 
 一级账号：admin 密码：123456
 
