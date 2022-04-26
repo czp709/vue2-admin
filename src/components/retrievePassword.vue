@@ -91,7 +91,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100vh;
-  background-image: url("https://xiaoxiaoyu.club/pic/bgc.jpeg");
+  background-image: url("../assets/bgc.webp");
   background-repeat: no-repeat;
   background-position: center 0;
   background-size: cover;
