@@ -8,7 +8,7 @@
     unique-opened
     router
     ref="asidemenu"
-    :collapse="$store.state.user.menufold"
+    :collapse="$store.state.control_lable.menufold"
   >
     <template v-for="item in addRouters[0].children">
       <el-submenu

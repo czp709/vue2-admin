@@ -5,7 +5,7 @@
         src="@/assets/logo.png"
         title="品牌logo"
       >
-      <span v-show="!$store.state.user.menufold">Admin</span>
+      <span v-show="!$store.state.control_lable.menufold">Admin</span>
     </div>
     <asidemenu></asidemenu>
   </div>

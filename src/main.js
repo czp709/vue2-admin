@@ -5,13 +5,8 @@ import Cookies from "js-cookie"
 import router from './router'
 import store from './store'
 import "./mock/mock.js";
-import { getAPI, postAPI, putAPI, deleteAPI } from './api/api'
 Vue.prototype.$Cookies = Cookies
-Vue.prototype.axios = axios
-Vue.prototype.$getAPI = getAPI
-Vue.prototype.$postAPI = postAPI
-Vue.prototype.$putAPI = putAPI
-Vue.prototype.$deleteAPI = deleteAPI
+Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.config.devtools = process.env.NODE_ENV === 'development' ? true : false
 // 防止用户修改sessionStorage

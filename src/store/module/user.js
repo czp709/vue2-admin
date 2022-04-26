@@ -4,18 +4,10 @@ import createdRoutes from '@/utils/createdRoutes.js'
 import { asyncRoutes, resetRouter } from '@/router/index.js'
 import Cookies from "js-cookie"
 import router from '../../router'
-
 Vue.use(Vuex)
 const state = {
-    isPC: (function () {
-        let flag = navigator.userAgent.match(
-            /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
-        )
-        return !flag
-    })(),
     clubInfo: {},
-    level: 0,
-    menufold: localStorage.getItem('menufold') == 'false' ? false : true
+    level: 0
 };
 const mutations = {
     saveclubInfo(state, clubInfo) {
@@ -24,18 +16,14 @@ const mutations = {
     savelevel(state, level) {
         state.level = level
     },
-    changefold(state) {
-        state.menufold = !state.menufold
-        localStorage.setItem('menufold', state.menufold)
-    }
 };
 const actions = {
-    saveUserInfo({ commit }, data) {
+    saveUserInfo({ commit }, res) {
         return new Promise(resolve => {
-            Cookies.set('token', data.data.data.token, { expires: 1 })
-            sessionStorage.setItem('userInfo', JSON.stringify(data))
-            commit('saveclubInfo', data.data.data)
-            commit('savelevel', data.data.data.level)
+            Cookies.set('token', res.data.data.token, { expires: 1 })
+            sessionStorage.setItem('userInfo', JSON.stringify(res))
+            commit('saveclubInfo', res.data.data)
+            commit('savelevel', res.data.data.level)
             resolve()
         })
     },

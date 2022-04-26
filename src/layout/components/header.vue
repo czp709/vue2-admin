@@ -9,13 +9,13 @@
       content="点击展开/收起侧边导航栏"
       placement="bottom"
     >
-      <span @click="$store.commit('user/changefold')">
+      <span @click="$store.commit('control_lable/changefold')">
         <i
-          v-show="!$store.state.user.menufold"
+          v-show="!$store.state.control_lable.menufold"
           class="el-icon-s-fold"
         ></i>
         <i
-          v-show="$store.state.user.menufold"
+          v-show="$store.state.control_lable.menufold"
           class="el-icon-s-unfold"
         ></i>
       </span>

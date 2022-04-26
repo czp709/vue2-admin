@@ -1,7 +1,7 @@
 <template>
   <el-container style="height: 100vh;">
     <el-aside
-      v-if="$store.state.user.isPC"
+      v-if="$store.state.control_lable.isPC"
       class="aside"
       style="overflow-x: hidden"
     >
@@ -9,10 +9,10 @@
     </el-aside>
     <el-container>
       <el-header>
-        <Topheader v-if="$store.state.user.isPC"></Topheader>
+        <Topheader v-if="$store.state.control_lable.isPC"></Topheader>
         <headerMenu
           class="headerMenu"
-          v-if="!$store.state.user.isPC"
+          v-if="!$store.state.control_lable.isPC"
         ></headerMenu>
       </el-header>
       <el-main class="main">

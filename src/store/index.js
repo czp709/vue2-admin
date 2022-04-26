@@ -1,6 +1,7 @@
 // import Vue from 'vue'
 import Vuex from 'vuex'
 import user from './module/user'
+import control_lable from './module/control_lable'
 import createPersistedState from "vuex-persistedstate"
 Vue.use(Vuex)
 
@@ -12,7 +13,8 @@ export default new Vuex.Store({
     actions: {
     },
     modules: {
-        user
+        user,
+        control_lable
     },
     getters: {
     },

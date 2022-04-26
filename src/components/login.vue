@@ -1,5 +1,8 @@
 <template>
-  <div class="login-wrap">
+  <div
+    class="login-wrap"
+    v-loading="loading"
+  >
     <div class="ms-login">
       <div class="title">登录</div>
       <el-form
@@ -28,7 +31,7 @@
       <div class="login-btn">
         <el-button
           type="primary"
-          @click="isShow = true"
+          @click="Vcode_show = true"
           v-preventReClick
         >登录</el-button>
       </div>
@@ -39,33 +42,69 @@
           :underline="false"
         >找回密码</el-link>
       </div>
-      <!-- 滑动验证组件 -->
+      <!-- 滑动验证组件，正式使用请删除 -->
       <Vcode
-        :show="isShow"
-        @success="onSuccess"
-        @close="isShow=false"
+        :show="Vcode_show"
+        @success="login"
+        @close="Vcode_show=false"
       />
     </div>
-    <div style="position:fixed;bottom:0px;width:100%;background: rgba(250, 250, 250, .8);text-align: center;padding:5px">
+    <!-- 友情链接 -->
+    <div class="links">
+      <span>
+        Copyright©2022 vue2-admin
+      </span>
+      <span>
+        作者:
+        <a
+          href="http://blog.chenzp.club"
+          target="_blank"
+        >
+          @zipen</a>
+      </span>
+      <span>
+        邮箱
+        <a
+          href="mailto:chenzhipeng709@163.com"
+          target="_blank"
+        >
+          chenzhipeng709@163.com</a>
+      </span>
       <a
-        style="color:#666;font-size:12px"
         href="https://beian.miit.gov.cn/"
         target="_blank"
       >
-        豫ICP备2021008006号-2</a>
+        豫ICP备2021008006号</a>
+      <span>
+        友情链接:
+        <a
+          style="margin-left:10px"
+          href="http://blog.briskgo.cn/"
+          target="_blank"
+        >
+          @yova's lab</a>
+        <a
+          style="margin-left:10px"
+          href="http://blog.coderzlp.top"
+          target="_blank"
+        >
+          @zhai's blog</a>
+      </span>
     </div>
   </div>
 </template>
 <script>
 import Vcode from "vue-puzzle-vcode";
+import user from "@/api/user"
 export default {
     components: {
         Vcode
     },
     data: function () {
         return {
-        // 滑动验证显示控制变量
-            isShow: false,
+            loading:false,
+            // 滑动验证显示控制变量
+            Vcode_show: false,
             // 输入的账号密码
             ruleForm: {
                 username: '',
@@ -80,21 +119,12 @@ export default {
     },
 
     methods: {
-        // 滑动验证成功
-        onSuccess () {
-            this.isShow = false
-            this.login()
-        },
         login () {
-            const loading = this.$loading({
-                lock: true,
-                text: '登录中',
-                spinner: 'el-icon-loading',
-                background: 'rgba(0, 0, 0, 0.7)'
-            })
-            var data = this.ruleForm
-            this.$postAPI('login', data).then(res => {
-                loading.close()
+            let that = this
+            let data = this.ruleForm
+            this.Vcode_show = false
+            this.loading=true
+            user.loginApi(data).then(res => {
                 if (res.data.code == 200) {
                     // 将用户信息写入VUEX
                     this.$store.dispatch('user/saveUserInfo', res).then(() => {
@@ -102,13 +132,7 @@ export default {
                         this.$store.dispatch('user/addRoutes')
                         this.$router.replace('/home')
                     })
-                    this.$message({
-                        showClose: true,
-                        message: '登陆成功',
-                        type: 'success'
-                    })
-                } else if (res.data.code == 400) {
-                    this.$message.error(res.data.message);
+                    that.loading=false
                 }
             })
         }
@@ -130,7 +154,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100vh;
-  background-image: url("https://xiaoxiaoyu.club/pic/bgc.webp");
+  background-image: url("../assets/bgc.webp");
   background-repeat: no-repeat;
   background-position: center 0;
   background-size: cover;
@@ -190,5 +214,25 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   margin-top: 20px;
+}
+.links {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background: rgba(250, 250, 250, 0.8);
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: #666;
+  font-size: 12px;
+}
+a {
+  color: #409eff;
+  text-decoration: none;
+}
+a:visited {
+  color: #409eff;
+  text-decoration: none;
 }
 </style>
