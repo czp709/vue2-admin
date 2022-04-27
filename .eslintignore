@@ -1,6 +1,1 @@
 **/*.js
-/src/components/slider.vue
-/src/components/retrievePassword.vue
-/src/components/login.vue
-/src/components/404.vue
-/src/components/countdownBtn.vue

@@ -1,33 +1,17 @@
 <template>
   <div class="demo-basic--circle">
     <div class="block">
-      <el-avatar
-        :src="clubInfo.logo||logo"
-        slot="reference"
-        :size='35'
-        :title="clubInfo.name"
-      ></el-avatar>
+      <el-avatar :src="clubInfo.logo||logo" slot="reference" :size='35' :title="clubInfo.name"></el-avatar>
       <el-dropdown placement="bottom">
-        <span
-          class="el-dropdown-link"
-          id="large"
-        >
+        <span class="el-dropdown-link" id="large">
           {{ clubInfo.name || name}}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
-            <el-link
-              style="width: 100%"
-              href="#/page1"
-              :underline="false"
-            >进入示例页面1</el-link>
+            <el-link style="width: 100%" href="#/page1" :underline="false">进入示例页面1</el-link>
           </el-dropdown-item>
           <el-dropdown-item>
-            <el-button
-              @click="logout"
-              type="text"
-              style="width:100%;color:red"
-            >退出</el-button>
+            <el-button @click="logout" type="text" style="width:100%;color:red">退出</el-button>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>

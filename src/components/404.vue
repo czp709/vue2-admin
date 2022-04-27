@@ -4,10 +4,7 @@
       <!-- 图片可保存到本地 -->
       <img src="../assets/404.png">
       <p>抱歉！你访问的页面不存在 :( </p>
-      <span
-        class="back"
-        @click="go()"
-      >返回上页</span>
+      <span class="back" @click="go()">返回上页</span>
     </div>
 
   </div>
@@ -15,11 +12,11 @@
 
 <script>
 export default {
-    methods: {
-        go: function () {
-            this.$router.go(-1)
-        }
+  methods: {
+    go: function () {
+      this.$router.go(-1)
     }
+  }
 }
 </script>
 

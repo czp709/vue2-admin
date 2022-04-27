@@ -1,30 +1,19 @@
 <template>
   <el-container style="height: 100vh;">
-    <el-aside
-      v-if="$store.state.control_lable.isPC"
-      class="aside"
-      style="overflow-x: hidden"
-    >
+    <el-aside v-if="$store.state.control_lable.isPC" class="aside" style="overflow-x: hidden">
       <Main-Aside></Main-Aside>
     </el-aside>
     <el-container>
       <el-header>
         <Topheader v-if="$store.state.control_lable.isPC"></Topheader>
-        <headerMenu
-          class="headerMenu"
-          v-if="!$store.state.control_lable.isPC"
-        ></headerMenu>
+        <headerMenu class="headerMenu" v-if="!$store.state.control_lable.isPC"></headerMenu>
       </el-header>
       <el-main class="main">
         <transition name="slide-fade">
           <router-view></router-view>
         </transition>
         <div style="width:100%;text-align: center;padding:5px 0">
-          <a
-            style="color:#666;font-size:5px"
-            href="https://beian.miit.gov.cn/"
-            target="_blank"
-          >
+          <a style="color:#666;font-size:5px" href="https://beian.miit.gov.cn/" target="_blank">
             豫ICP备2021008006号-2</a>
         </div>
       </el-main>

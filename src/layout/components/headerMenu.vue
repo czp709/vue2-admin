@@ -1,34 +1,16 @@
 <template>
-  <el-menu
-    class="el-menu-demo"
-    mode="horizontal"
-    unique-opened
-    router
-  >
+  <el-menu class="el-menu-demo" mode="horizontal" unique-opened router>
     <template v-for="item in List">
-      <el-submenu
-        :index="item.path"
-        :key="item.index"
-        v-if="item.children && !item.meta.hidden"
-      >
+      <el-submenu :index="item.path" :key="item.index" v-if="item.children && !item.meta.hidden">
         <template slot="title">
           <i :class="item.meta.icon"></i>
         </template>
-        <el-menu-item
-          class="subs"
-          :index="child.path"
-          v-for="child in item.children"
-          :key="child.index"
-        >
+        <el-menu-item class="subs" :index="child.path" v-for="child in item.children" :key="child.index">
           <i :class="child.meta.icon"></i>
           {{ child.meta.title }}
         </el-menu-item>
       </el-submenu>
-      <el-menu-item
-        v-else
-        :index="item.path"
-        :key="item.index"
-      >
+      <el-menu-item v-else :index="item.path" :key="item.index">
         <i :class="item.meta.icon"></i>
       </el-menu-item>
     </template>

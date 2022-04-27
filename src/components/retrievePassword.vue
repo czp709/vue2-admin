@@ -2,87 +2,59 @@
   <div class="login-wrap">
     <div class="ms-login1">
       <div class="title">找回密码</div>
-      <el-form
-        :model="ruleForm"
-        ref="ruleForm"
-        label-width="0px"
-        class="demo-ruleForm"
-      >
+      <el-form :model="ruleForm" ref="ruleForm" label-width="0px" class="demo-ruleForm">
         <el-form-item prop="username">
-          <el-input
-            v-model="ruleForm.username"
-            placeholder="请输入账号"
-          ></el-input>
+          <el-input v-model="ruleForm.username" placeholder="请输入账号"></el-input>
         </el-form-item>
-        <el-form-item
-          prop="email"
-          :rules="[
+        <el-form-item prop="email" :rules="[
             { required: true, message: '请输入邮箱地址', trigger: 'blur' },
             { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
-            ]"
-        >
-          <el-input
-            v-model="ruleForm.email"
-            placeholder="请输入邮箱"
-          ></el-input>
+            ]">
+          <el-input v-model="ruleForm.email" placeholder="请输入邮箱"></el-input>
         </el-form-item>
         <el-form-item>
           <div class="emailCode">
-            <el-input
-              v-model="ruleForm.code"
-              placeholder="请输入验证码"
-              style="margin-right:10px"
-            ></el-input>
-            <countdownBtn
-              @click="emailCode"
-              :rules="[{value:ruleForm.email,type:'email'}]"
-            ></countdownBtn>
+            <el-input v-model="ruleForm.code" placeholder="请输入验证码" style="margin-right:10px"></el-input>
+            <countdownBtn @click="emailCode" :rules="[{value:ruleForm.email,type:'email'}]"></countdownBtn>
           </div>
         </el-form-item>
       </el-form>
       <div class="login-btn">
-        <el-button
-          type="primary"
-          @click="MatchCheck"
-        >确认</el-button>
-        <el-button
-          type="primary"
-          @click="$router.go(-1)"
-          style="margin:10px 0"
-        >返回上一页</el-button>
+        <el-button type="primary" @click="MatchCheck">确认</el-button>
+        <el-button type="primary" @click="$router.go(-1)" style="margin:10px 0">返回上一页</el-button>
       </div>
     </div>
   </div>
 </template>
 <script>
-import countdownBtn from '@/components/countdownBtn'
+import countdownBtn from "@/components/countdownBtn"
 export default {
-    name: 'SchoolRetrievepassword',
-    components:{
-      countdownBtn
-    },
-    data () {
-        return {
-            ruleForm: {
-                username: '',
-                email: '',
-                code: null
-            },
-        }
-    },
-
-    mounted () {
-
-    },
-
-    methods: {
-        emailCode () {
-            // 发送网络请求去发送验证码
-        },
-        MatchCheck () {
-            // 点击确认执行的操作，通常情况下将用户信息和验证码发送到后端进行校验。
-        }
+  name: "SchoolRetrievepassword",
+  components: {
+    countdownBtn
+  },
+  data () {
+    return {
+      ruleForm: {
+        username: "",
+        email: "",
+        code: null
+      }
     }
+  },
+
+  mounted () {
+
+  },
+
+  methods: {
+    emailCode () {
+      // 发送网络请求去发送验证码
+    },
+    MatchCheck () {
+      // 点击确认执行的操作，通常情况下将用户信息和验证码发送到后端进行校验。
+    }
+  }
 }
 </script>
 
