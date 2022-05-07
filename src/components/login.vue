@@ -1,5 +1,17 @@
 <template>
-  <div class="login-wrap" v-loading="loading">
+  <div class="login-wrap bruce" v-loading="loading">
+    <ul class="bubble-bgwall">
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+    </ul>
     <div class="ms-login">
       <div class="title">登录</div>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px">
@@ -22,7 +34,7 @@
     <!-- 友情链接 -->
     <div class="links" v-if="$store.state.control_lable.isPC">
       <span>
-        Copyright©2022 vue2-admin
+        Copyright©2022 vue2
       </span>
       <span>
         作者:
@@ -96,16 +108,12 @@ export default {
 }
 </script>
 <style scoped>
+@import "../assets/style.css";
+@import "../assets/style.scss";
 .login-wrap {
-  position: relative;
   width: 100%;
   height: 100vh;
-  background-image: url("../assets/bgc.webp");
-  background-repeat: no-repeat;
-  background-position: center 0;
-  background-size: cover;
-  zoom: 1;
-  -webkit-background-size: cover;
+  z-index: 100 !important;
 }
 
 .ms-title {
@@ -165,7 +173,7 @@ export default {
   position: fixed;
   bottom: 0px;
   width: 100%;
-  background: rgba(250, 250, 250, 0.8);
+  background: rgba(250, 250, 250, 0.4);
   padding: 5px;
   display: flex;
   flex-direction: row;

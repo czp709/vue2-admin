@@ -1,5 +1,17 @@
 <template>
-  <div class="login-wrap">
+  <div class="login-wrap bruce">
+    <ul class="bubble-bgwall">
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+      <li>vue2</li>
+    </ul>
     <div class="ms-login1">
       <div class="title">找回密码</div>
       <el-form :model="ruleForm" ref="ruleForm" label-width="0px" class="demo-ruleForm">
@@ -59,16 +71,12 @@ export default {
 </script>
 
 <style scoped>
+@import "../assets/style.css";
+@import "../assets/style.scss";
 .login-wrap {
-  position: relative;
   width: 100%;
   height: 100vh;
-  background-image: url("../assets/bgc.webp");
-  background-repeat: no-repeat;
-  background-position: center 0;
-  background-size: cover;
-  zoom: 1;
-  -webkit-background-size: cover;
+  z-index: 100 !important;
 }
 
 .ms-title {
