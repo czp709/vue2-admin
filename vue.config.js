@@ -1,4 +1,4 @@
-const CompressionPlugin = require("compression-webpack-plugin")// 引入compression-webpack-plugin
+const CompressionPlugin = require("compression-webpack-plugin");// 引入compression-webpack-plugin
 module.exports = {
   // 基本路径
   publicPath: "./",
@@ -33,13 +33,15 @@ module.exports = {
   },
   // css处理
   css: {
-    extract: process.env.NODE_ENV !== "development"
+    // 是否使用css分离插件 ExtractTextPlugin
+    extract: true,
+    // 开启 CSS source maps?
+    sourceMap: false,
+    // css预设器配置项
+    loaderOptions: {},
+    requireModuleExtension: true
   },
   configureWebpack: config => {
-    config.externals = {
-      vue: "Vue",
-      "element-ui": "ELEMENT"
-    }
     // 打包时对js/css文件进行压缩
     if (process.env.NODE_ENV === "production") { // 生产环境
       config.plugins.push(
@@ -61,7 +63,7 @@ module.exports = {
           // 删除原始文件只保留压缩后的文件
           // deleteOriginalAssets: false
         })
-      )
+      );
     }
   }
-}
+};

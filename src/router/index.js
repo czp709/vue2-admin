@@ -1,4 +1,4 @@
-// import Vue from 'vue'
+import Vue from 'vue'
 import VueRouter from "vue-router"
 import beforEach from "@/router/beforEach"
 Vue.use(VueRouter)

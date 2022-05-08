@@ -1,4 +1,4 @@
-// import Vue from 'vue'
+import Vue from 'vue'
 import Vuex from "vuex"
 import user from "./module/user"
 import control_lable from "./module/control_lable"

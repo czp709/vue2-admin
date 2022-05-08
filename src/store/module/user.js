@@ -1,4 +1,4 @@
-// import Vue from 'vue'
+import Vue from 'vue'
 import Vuex from "vuex"
 import createdRoutes from "@/utils/createdRoutes.js"
 import router, { resetRouter } from "@/router/index.js"
