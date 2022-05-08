@@ -1,5 +1,5 @@
 <template>
-  <el-menu class="el-menu-vertical-demo" :default-active="menuDefaultActive" background-color="#3d4657" active-text-color="#ffd04b" text-color="#fff" unique-opened router ref="asidemenu" :collapse="$store.state.control_lable.menufold">
+  <el-menu class="el-menu-vertical-demo" :default-active="menuDefaultActive" background-color="#3d4657" active-text-color="#33a2ef" text-color="#fff" unique-opened router ref="asidemenu" :collapse="$store.state.control_lable.menufold">
     <template v-for="item in addRouters[0].children">
       <el-submenu :index="item.path" :key="item.path" v-if="item.children && !item.meta.hidden">
         <template slot="title">

@@ -12,25 +12,22 @@
       <li>vue2</li>
       <li>vue2</li>
     </ul>
-    <div class="ms-login">
+    <div class="ms-login" v-if="retrieve">
       <div class="title">登录</div>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px">
         <el-form-item prop="username">
           <el-input type="text" v-model="ruleForm.username" placeholder="账号"></el-input>
         </el-form-item>
         <el-form-item prop="pwd">
-          <el-input type="password" placeholder="密码" show-password v-model="ruleForm.pwd" @keyup.enter.native="isShow = true"></el-input>
+          <el-input type="password" placeholder="密码" show-password v-model="ruleForm.pwd" @keyup.enter.native="Vcode_show = true"></el-input>
         </el-form-item>
       </el-form>
-      <div class="login-btn">
-        <el-button type="primary" @click="Vcode_show = true" v-preventReClick>登录</el-button>
-      </div>
-      <div class="bottom_btn">
-        <el-link type="primary" href="#/retrievePassword" :underline="false">找回密码</el-link>
-      </div>
+      <el-button type="primary" @click="Vcode_show = true" v-preventReClick>登录</el-button>
+      <el-button type="text" @click="retrieve = false">找回密码</el-button>
       <!-- 滑动验证组件，正式使用请删除 -->
       <Vcode :show="Vcode_show" @success="login" @close="Vcode_show=false" />
     </div>
+    <retrievePassword v-else v-on:isshow="retrieve = true"></retrievePassword>
     <!-- 友情链接 -->
     <div class="links" v-if="$store.state.control_lable.isPC">
       <span>
@@ -38,33 +35,31 @@
       </span>
       <span>
         作者:
-        <a href="http://blog.chenzp.club" target="_blank">@zipen</a>
+        <a href="http://github.com/czp709" target="_blank">@zipen</a>
       </span>
       <span>
         邮箱
         <a href="mailto:chenzhipeng709@163.com" target="_blank">chenzhipeng709@163.com</a>
       </span>
       <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2021008006号</a>
-      <span>
-        友情链接:
-        <a style="margin-left:10px" href="http://blog.briskgo.cn/" target="_blank">@yova's lab</a>
-        <a style="margin-left:10px" href="http://blog.coderzlp.top" target="_blank">@zhai's blog</a>
-      </span>
     </div>
   </div>
 </template>
 <script>
 import Vcode from "vue-puzzle-vcode"
+import retrievePassword from "./retrievePassword.vue"
 import user from "@/api/user"
 export default {
   components: {
-    Vcode
+    Vcode,
+    retrievePassword
   },
   data: function () {
     return {
       loading: false,
       // 滑动验证显示控制变量
       Vcode_show: false,
+      retrieve: true,
       // 输入的账号密码
       ruleForm: {
         username: "",
@@ -107,7 +102,7 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
 @import "../assets/style.css";
 @import "../assets/style.scss";
 .login-wrap {
@@ -116,20 +111,11 @@ export default {
   z-index: 100 !important;
 }
 
-.ms-title {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  margin-top: -230px;
-  text-align: center;
-  font-size: 30px;
-  color: #fff;
-}
-
 .title {
   font-size: 25px;
   text-align: center;
-  color: rgb(147, 146, 157);
+  color: rgb(73, 73, 77);
+  margin-bottom: 10px;
 }
 
 .ms-login {
@@ -141,19 +127,57 @@ export default {
   height: auto;
   padding: 30px;
   border-radius: 15px;
-  background: rgba(250, 250, 250, 0.8);
+  background: rgba(250, 250, 250, 0.3);
   border: 1px solid #ccc;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  -webkit-animation: fadenum 1.5s ease;
+  -moz-animation: fadenum 1.5s ease;
+  animation: fadenum 1.5s ease;
 }
-.el-form {
-  margin: 40px 0;
-}
-.login-btn {
-  text-align: center;
+@-webkit-keyframes fadenum {
+  /*设置内容由显示变为隐藏*/
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
+@-moz-keyframes fadenum {
+  /*设置内容由显示变为隐藏*/
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadenum {
+  /*设置内容由显示变为隐藏*/
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadenum {
+  /*设置内容由显示变为隐藏*/
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.el-form {
+  margin: 20px 0;
+}
 .login-btn button {
   width: 100%;
   height: 36px;
@@ -161,14 +185,10 @@ export default {
 
 .el-link {
   font-size: 10px !important;
+  margin-top: 20px;
+  text-align: center;
 }
 
-.bottom_btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-top: 20px;
-}
 .links {
   position: fixed;
   bottom: 0px;
@@ -181,10 +201,12 @@ export default {
   color: #666;
   font-size: 12px;
 }
+
 a {
   color: #409eff;
   text-decoration: none;
 }
+
 a:visited {
   color: #409eff;
   text-decoration: none;

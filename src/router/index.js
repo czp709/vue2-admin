@@ -8,11 +8,6 @@ export const baseRouter = [
     path: "/",
     name: "login",
     component: () => { return import("@/components/login") }
-  },
-  {
-    path: "/retrievePassword",
-    name: "retrievePassword",
-    component: () => { return import("@/components/retrievePassword") }
   }
 ]
 

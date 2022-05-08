@@ -9,13 +9,7 @@
         <headerMenu class="headerMenu" v-if="!$store.state.control_lable.isPC"></headerMenu>
       </el-header>
       <el-main class="main">
-        <transition name="slide-fade">
-          <router-view></router-view>
-        </transition>
-        <div style="width:100%;text-align: center;padding:5px 0">
-          <a style="color:#666;font-size:5px" href="https://beian.miit.gov.cn/" target="_blank">
-            豫ICP备2021008006号-2</a>
-        </div>
+        <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -53,12 +47,14 @@ export default {
   height: 100vh;
   background-color: #3d4657;
 }
+
 .headerMenu {
   background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .main {
   padding-right: 6px !important;
 }
@@ -66,13 +62,5 @@ export default {
 .el-header {
   padding: 0 !important;
   background-color: #fff;
-}
-.slide-fade-enter-active {
-  transition: all 0.3s ease;
-}
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateX(10px);
-  opacity: 0;
 }
 </style>

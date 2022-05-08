@@ -48,3 +48,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+.el-button--mini,
+.el-button--small {
+  font-size: 6px !important;
+}
+</style>
