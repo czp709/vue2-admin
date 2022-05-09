@@ -27,12 +27,6 @@ export default {
 }
 </script>
 <style scoped>
-/* .aside {
-    display: flex;
-    flex-direction: column;
-    align-content: space-around;
-    justify-content: space-around;
-  } */
 .aside_top {
   color: white;
   display: flex;

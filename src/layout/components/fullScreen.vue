@@ -1,6 +1,6 @@
 <template>
   <div class="fullscreen">
-    <el-tooltip class="item" effect="dark" content="点击打开/关闭全屏显示" placement="bottom">
+    <el-tooltip class="item" effect="dark" :content="`点击${fullscreen ? '关闭':'打开'}全屏显示`" placement="bottom">
       <svg v-if="!fullscreen" @click="handleFullScreen" t="1652066238767" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1912" width="20" height="20">
         <path d="M240.8 196l178.4 178.4-45.6 45.6-177.6-179.2-68 68V128h180.8l-68 68z m133.6 408.8L196 783.2 128 715.2V896h180.8l-68-68 178.4-178.4-44.8-44.8zM715.2 128l68 68-178.4 178.4 45.6 45.6 178.4-178.4 68 68V128H715.2z m-65.6 476.8l-45.6 45.6 178.4 178.4-68 68H896V715.2l-68 68-178.4-178.4z" p-id="1913"></path>
       </svg>
@@ -50,9 +50,6 @@ export default {
 </script>
 
 <style>
-svg {
-  margin: 0 auto;
-}
 .fullscreen {
   height: 20px;
   margin: 0 auto;
