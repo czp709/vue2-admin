@@ -1,5 +1,5 @@
 <template>
-  <el-menu class="el-menu-vertical-demo" :default-active="menuDefaultActive" background-color="#3d4657" active-text-color="#33a2ef" text-color="#fff" unique-opened router ref="asidemenu" :collapse="$store.state.control_lable.menufold">
+  <el-menu class="el-menu-vertical-demo" :default-active="menuDefaultActive" :background-color="$store.state.aside_color" :text-color="$store.state.aside_text_color" unique-opened router ref="asidemenu" :collapse="$store.state.control_lable.menufold">
     <template v-for="item in addRouters[0].children">
       <el-submenu :index="item.path" :key="item.path" v-if="item.children && !item.meta.hidden">
         <template slot="title">
@@ -53,18 +53,16 @@ export default {
 .el-menu-item,
 .el-submenu {
   border-left: rgba(0, 0, 0, 0) solid 4px !important;
+  border-right: rgba(0, 0, 0, 0) solid 4px !important;
   background-color: rgba(0, 0, 0, 0) !important;
-  border-right: rgba(0, 0, 0, 0) solid 4px;
 }
+
+.el-menu-item.is-active,
 .el-submenu.el-submenu__title:hover {
   border-left-color: #33a2ef !important;
 }
 
 .el-menu-item:hover {
-  border-left-color: #33a2ef !important;
-}
-
-.el-menu-item.is-active {
-  border-left-color: #33a2ef !important;
+  background-color: rgba(144, 147, 153, 0.3) !important;
 }
 </style>

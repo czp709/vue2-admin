@@ -1,6 +1,6 @@
 <template>
   <el-container style="height: 100vh;">
-    <el-aside v-if="$store.state.control_lable.isPC" class="aside" style="overflow-x: hidden">
+    <el-aside v-if="$store.state.control_lable.isPC" class="aside" :style="`background-color: ${ $store.state.aside_color }`">
       <Main-Aside></Main-Aside>
     </el-aside>
     <el-container>
@@ -45,7 +45,7 @@ export default {
 .aside {
   width: auto !important;
   height: 100vh;
-  background-color: #3d4657;
+  overflow-x: hidden;
 }
 
 .headerMenu {
