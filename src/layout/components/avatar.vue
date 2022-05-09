@@ -1,10 +1,10 @@
 <template>
   <div class="demo-basic--circle">
     <div class="block">
-      <el-avatar :src="clubInfo.logo||logo" slot="reference" :size='35' :title="clubInfo.name"></el-avatar>
+      <el-avatar :src="userInfo.logo||logo" slot="reference" :size='35' :title="userInfo.name"></el-avatar>
       <el-dropdown placement="bottom">
         <span class="el-dropdown-link" id="large">
-          {{ clubInfo.name || name}}<i class="el-icon-arrow-down el-icon--right"></i>
+          {{ userInfo.name || name}}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     ...mapState({
-      clubInfo: state => { return state.user.clubInfo },
+      userInfo: state => { return state.user.userInfo },
       level: state => { return state.user.level }
     })
   }
