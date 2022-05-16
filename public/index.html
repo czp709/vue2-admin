@@ -24,6 +24,11 @@
   <!-- built files will be auto injected -->
   <!-- 引入vue -->
   <script src="<%= process.env.VUE_APP_BASE_VUE %>" type="text/javascript"></script>
+  <script>
+    if (typeof Vue == 'undefined') {
+      document.write(unescape('%3Cscript src="https://cdn-1311653337.file.myqcloud.com/vue.runtime.min.js" async%3E%3C/script%3E'));
+    }
+  </script>
   <!-- 引入组件库 -->
   <script src="https://unpkg.zhimg.com/element-ui@2.15.7/lib/index.js"></script>
 </body>
