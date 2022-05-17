@@ -1,4 +1,4 @@
-const CompressionPlugin = require("compression-webpack-plugin")// 引入compression-webpack-plugin
+const CompressionPlugin = require("compression-webpack-plugin");// 引入compression-webpack-plugin
 module.exports = {
   // 基本路径
   publicPath: "./",
@@ -39,7 +39,7 @@ module.exports = {
     config.externals = {
       vue: "Vue",
       "element-ui": "ELEMENT"
-    }
+    };
     // 打包时对js/css文件进行压缩
     if (process.env.NODE_ENV === "production") { // 生产环境
       config.plugins.push(
@@ -57,11 +57,11 @@ module.exports = {
           test: /\.js$|\.css$|\.html$/,
           // 压缩超过此大小的文件,以字节为单位
           threshold: 10240,
-          minRatio: 0.8
+          minRatio: 0.8,
           // 删除原始文件只保留压缩后的文件
-          // deleteOriginalAssets: false
+          deleteOriginalAssets: true
         })
-      )
+      );
     }
   }
-}
+};
