@@ -18,6 +18,19 @@ console.log(`%c email:chenzhipeng709@163.com `, 'background: #1475B2; color: #ff
 window.addEventListener("storage", function (e) {
   sessionStorage.setItem(e.key, e.oldValue);
 });
+// vue防抖
+Vue.prototype.$debounce = function (fn, delay) {
+  let timer = null;
+  return function () {
+    let context = this;
+    let args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      fn.apply(context, args);
+    }, delay);
+  };
+};
+
 // button节流，在button中添加v-preventReClick即可控制按钮，防止按钮连击，时间限制2s
 Vue.directive("preventReClick", {
   inserted(el, binding) {
