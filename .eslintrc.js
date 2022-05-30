@@ -125,10 +125,5 @@ module.exports = {
     'jsx-a11y/label-has-for': 'off',
     'vue/no-v-html': 'warn',
     'vue/eqeqeq': 'warn'
-  },
-
-  'extends': [
-    'plugin:vue/essential',
-    '@vue/standard'
-  ]
+  }
 }
