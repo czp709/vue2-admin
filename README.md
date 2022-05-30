@@ -1,16 +1,23 @@
 # vue2-admin
 
-体验地址：[vue2-admin](https://chenzp.club)
-
-体验地址：[zipen's blog](http://blog.chenzp.club)
-
-一级账号：admin 密码：123456
-
-二级账号：visitor 密码：123456
-
-遇到 BUG 或者有更好的实现方式欢迎联系我（有代码不理解的地方也可以给我发邮件询问）。邮箱：chenzhipeng709@163.com
+体验地址：[vue2-admin](https://chenzp.club)  
+一级账号：admin 密码：123456  
+二级账号：visitor 密码：123456  
+遇到 BUG 或者有更好的实现方式欢迎联系我（有代码不理解的地方也可以给我发邮件询问）。邮箱：chenzhipeng709@163.com  
 
 ---
+## 包含功能
+1.首屏加载 loading 动画  
+2.axios 封装  
+3.router 权限控制  
+4.根据权限动态生成侧边导航栏  
+5.登录逻辑  
+6.dashboard 页面布局  
+7.mockjs  
+8.CDN 引入 element 减小打包体积，并含有 cdn 失效更换机制  
+
+---
+
 
 ## vue2+element+axios 后台模板
 
@@ -19,8 +26,6 @@
 ---
 
 ## 引入 mock，便于前后端分离开发。
-
-\_\_
 
 ## 关于 mockjs
 
