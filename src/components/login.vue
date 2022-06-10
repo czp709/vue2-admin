@@ -102,7 +102,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 @import "../assets/style.css";
 @import "../assets/style.scss";
 .login-wrap {
