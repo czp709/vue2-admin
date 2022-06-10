@@ -59,7 +59,7 @@ module.exports = {
           threshold: 10240,
           minRatio: 0.8,
           // 删除原始文件只保留压缩后的文件
-          deleteOriginalAssets: true
+          deleteOriginalAssets: false
         })
       );
     }
