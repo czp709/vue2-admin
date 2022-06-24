@@ -1,9 +1,13 @@
 # vue2-admin
 
-体验地址：[vue2-admin](https://chenzp.club)  
-一级账号：admin 密码：123456  
-二级账号：visitor 密码：123456  
-遇到 BUG 或者有更好的实现方式欢迎联系我（有代码不理解的地方也可以给我发邮件询问）。邮箱：chenzhipeng709@163.com  
+>体验地址：[vue2-admin](https://chenzp.club)  
+>一级账号：admin 密码：123456  
+>二级账号：visitor 密码：123456  
+>遇到 BUG 或者有更好的实现方式欢迎联系我（有代码不理解的地方也可以给我发邮件询问）。邮箱：chenzhipeng709@163.com  
+
+vue2版本github地址：[vue2-admin](https://github.com/czp709/vue2-admin)  
+vue3版本github地址：[vue3-admin](https://github.com/czp709/vue-admin)  
+另有gitee仓库，只需将上方链接地址中的github修改为gitee便可。
 
 ---
 ## 包含功能

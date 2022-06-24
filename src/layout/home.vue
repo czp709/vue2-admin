@@ -31,13 +31,6 @@ export default {
       device: true,
       header: false
     }
-  },
-  // 用来判断设备是否为手机
-  mounted () {
-
-  },
-  methods: {
-
   }
 }
 </script>

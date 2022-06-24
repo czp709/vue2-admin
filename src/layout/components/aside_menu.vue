@@ -38,18 +38,31 @@ export default {
 </script>
 <style scoped>
 .el-menu {
-  border-right: none !important;
+  border-right: 0 !important;
+  padding: 0 5px;
 }
+
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 180px;
+  width: 200px;
 }
+
 .el-menu-vertical-demo:is(.el-menu--collapse) {
-  width: 70px;
+  width: auto;
 }
-.el-submenu .el-menu-item {
-  padding: 0 0 0 25px !important;
+
+.el-sub-menu__title,
+.el-menu-item {
+  min-width: 0 !important;
+  padding: 0 20px !important;
+  margin-bottom: 3px !important;
+  border-radius: 10px !important;
+}
+
+.el-sub-menu {
+  padding: 0 5px !important;
   min-width: 0 !important;
 }
+
 .el-menu-item,
 .el-submenu {
   border-left: rgba(0, 0, 0, 0) solid 4px !important;
@@ -59,10 +72,22 @@ export default {
 
 .el-menu-item.is-active,
 .el-submenu.el-submenu__title:hover {
-  border-left-color: #33a2ef !important;
+  background-color: #33a2ef !important;
+  color: white !important;
 }
 
 .el-menu-item:hover {
-  background-color: rgba(144, 147, 153, 0.3) !important;
+  background-color: #33a2ef !important;
+}
+
+.el-menu--popup {
+  padding: 5px !important;
+}
+
+.el-popper,
+.is-pure,
+.is-light {
+  border: none !important;
+  border-radius: 10px;
 }
 </style>

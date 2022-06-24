@@ -12,7 +12,6 @@ const state = {
 };
 const mutations = {
   changefold(state) {
-    console.log();
     state.menufold = !state.menufold;
     localStorage.setItem("menufold", Boolean(state.menufold));
   }
