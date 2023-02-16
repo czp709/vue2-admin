@@ -1,15 +1,16 @@
-const CompressionPlugin = require("compression-webpack-plugin");// 引入compression-webpack-plugin
+const CompressionPlugin = require('compression-webpack-plugin')
+// 引入compression-webpack-plugin
 module.exports = {
   // 基本路径
-  publicPath: "./",
+  publicPath: './',
   // 相对于打包路径index.html的路径
-  indexPath: "index.html",
+  indexPath: 'index.html',
   // 文件输出目录
-  outputDir: "dist",
+  outputDir: 'dist',
   // eslint-loader 是否在保存的时候检查
   lintOnSave: false,
   // 生成的静态资源存放的目录
-  assetsDir: "static",
+  assetsDir: 'static',
   productionSourceMap: false,
   filenameHashing: false,
   // webpack-dev-server相关配置
@@ -33,17 +34,16 @@ module.exports = {
   },
   // css处理
   css: {
-    // 是否使用css分离插件 ExtractTextPlugin
-    extract: true,
+    extract: process.env.NODE_ENV !== 'development',
     // 开启 CSS source maps?
     sourceMap: false,
     // css预设器配置项
     loaderOptions: {},
     requireModuleExtension: true
   },
-  configureWebpack: config => {
+  configureWebpack: (config) => {
     // 打包时对js/css文件进行压缩
-    if (process.env.NODE_ENV === "production") { // 生产环境
+    if (process.env.NODE_ENV === 'production') { // 生产环境
       config.plugins.push(
         new CompressionPlugin({
           /* [file]被替换为原始资产文件名。
@@ -52,18 +52,18 @@ module.exports = {
              [name]被替换为原始资产的文件名。
              [ext]替换为原始资产的扩展名。
              [query]被查询替换。 */
-          filename: "[path].gz[query]",
+          filename: '[path].gz[query]',
           // 压缩算法
-          algorithm: "gzip",
+          algorithm: 'gzip',
           // 匹配文件
           test: /\.js$|\.css$|\.html$/,
           // 压缩超过此大小的文件,以字节为单位
           threshold: 10240,
-          minRatio: 0.8
+          minRatio: 0.8,
           // 删除原始文件只保留压缩后的文件
-          // deleteOriginalAssets: false
+          deleteOriginalAssets: false
         })
-      );
+      )
     }
   }
-};
+}

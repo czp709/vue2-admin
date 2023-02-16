@@ -1,9 +1,12 @@
-import http from "../utils/http"
-const resquest = "login"
+import request from '@/utils/request'
 
 // get请求
 export default {
-  loginApi (params) {
-    return http.post(`${resquest}`, params)
+  loginApi (data) {
+    return request({
+      url: 'login',
+      method: 'POST',
+      data
+    })
   }
 }

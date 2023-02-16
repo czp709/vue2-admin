@@ -5,7 +5,9 @@
   width: 100%;
   height: 100%;
   z-index: -1 !important;
-  background-image: linear-gradient(270deg, #8146b4, #6990f6);
+	background: #7f7fd5;  /* fallback for old browsers */      
+  background: -webkit-linear-gradient(to right, rgb(127, 127, 213), rgb(134, 168, 231), rgb(145, 234, 228));  /* Chrome 10-25, Safari 5.1-6 */      
+  background: linear-gradient(to right, rgb(127, 127, 213), rgb(134, 168, 231), rgb(145, 234, 228)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
 }
 
 .bubble-bgwall {

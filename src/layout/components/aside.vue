@@ -1,38 +1,30 @@
 <template>
   <div class="aside">
     <div class="aside_top">
-      <img src="@/assets/logo.png" title="品牌logo">
-      <span v-show="!$store.state.control_lable.menufold">Admin</span>
+      <img src="@/assets/logo.png" title="品牌logo"/>
+      <span v-show="!$store.state.controlLable.menufold">Admin</span>
     </div>
     <asidemenu></asidemenu>
   </div>
 </template>
 <script>
-import asidemenu from "@/layout/components/aside_menu"
+import asidemenu from '@/layout/components/aside_menu'
+
 export default {
+  name: 'Aside',
   components: {
     asidemenu
   },
-  name: "Aside",
   data () {
     return {
     }
   },
   methods: {
-    // 修改密码点击确定执行的函数
-    changepwd () {
 
-    }
   }
 }
 </script>
 <style scoped>
-/* .aside {
-    display: flex;
-    flex-direction: column;
-    align-content: space-around;
-    justify-content: space-around;
-  } */
 .aside_top {
   color: white;
   display: flex;

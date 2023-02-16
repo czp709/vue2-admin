@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from 'vue'
 import {
   Avatar,
   Input,
@@ -22,31 +22,32 @@ import {
   MessageBox,
   Message,
   Notification
-} from 'element-ui';
-Vue.use(Avatar);
-Vue.use(Input);
-Vue.use(Form);
-Vue.use(FormItem);
-Vue.use(Link);
-Vue.use(Container);
-Vue.use(Main);
-Vue.use(Header);
-Vue.use(Dropdown);
-Vue.use(DropdownMenu);
-Vue.use(DropdownItem);
-Vue.use(Menu);
-Vue.use(MenuItem);
-Vue.use(MenuItemGroup);
-Vue.use(Tooltip);
-Vue.use(Submenu);
-Vue.use(Aside);
-Vue.use(Button);
-Vue.use(Loading.directive);
+} from 'element-ui'
 
-Vue.prototype.$loading = Loading.service;
-Vue.prototype.$msgbox = MessageBox;
-Vue.prototype.$alert = MessageBox.alert;
-Vue.prototype.$confirm = MessageBox.confirm;
-Vue.prototype.$prompt = MessageBox.prompt;
-Vue.prototype.$notify = Notification;
-Vue.prototype.$message = Message;
+Vue.use(Avatar)
+Vue.use(Input)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Link)
+Vue.use(Container)
+Vue.use(Main)
+Vue.use(Header)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Menu)
+Vue.use(MenuItem)
+Vue.use(MenuItemGroup)
+Vue.use(Tooltip)
+Vue.use(Submenu)
+Vue.use(Aside)
+Vue.use(Button)
+Vue.use(Loading.directive)
+
+Vue.prototype.$loading = Loading.service
+Vue.prototype.$msgbox = MessageBox
+Vue.prototype.$alert = MessageBox.alert
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$prompt = MessageBox.prompt
+Vue.prototype.$notify = Notification
+Vue.prototype.$message = Message

@@ -1,29 +1,30 @@
 import Vue from 'vue'
-import Vuex from "vuex"
-import createdRoutes from "@/utils/createdRoutes.js"
-import router, { resetRouter } from "@/router/index.js"
-import Cookies from "js-cookie"
+import Vuex from 'vuex'
+import createdRoutes from '@/utils/createdRoutes.js'
+import router, { resetRouter } from '@/router/index.js'
+import Cookies from 'js-cookie'
 
+// eslint-disable-next-line no-undef
 Vue.use(Vuex)
 const state = {
-  clubInfo: {},
+  userInfo: {},
   level: 0
 }
 const mutations = {
-  saveclubInfo(state, clubInfo) {
-    state.clubInfo = clubInfo
+  saveuserInfo (state, userInfo) {
+    state.userInfo = userInfo
   },
-  savelevel(state, level) {
+  savelevel (state, level) {
     state.level = level
   }
 }
 const actions = {
-  saveUserInfo({ commit, getters }, res) {
-    return new Promise(resolve => {
-      Cookies.set("token", res.data.data.token, { expires: 1 })
-      sessionStorage.setItem("userInfo", JSON.stringify(res))
-      commit("saveclubInfo", res.data.data)
-      commit("savelevel", res.data.data.level)
+  saveUserInfo ({ commit, getters }, res) {
+    return new Promise((resolve) => {
+      Cookies.set('token', res.data.data.token, { expires: 1 })
+      sessionStorage.setItem('userInfo', JSON.stringify(res))
+      commit('saveuserInfo', res.data.data)
+      commit('savelevel', res.data.data.level)
       // 生成用户可访问的路由表
       const route = getters.addRouters
       // 将生成的路由表逐个添加入路由
@@ -33,10 +34,10 @@ const actions = {
       resolve()
     })
   },
-  logout(context, data) {
-    return new Promise(resolve => {
-      Cookies.remove("token")
-      sessionStorage.removeItem("userInfo")
+  logout (context, data) {
+    return new Promise((resolve) => {
+      Cookies.remove('token')
+      sessionStorage.removeItem('userInfo')
       resetRouter()
       resolve()
     })
@@ -44,8 +45,8 @@ const actions = {
 }
 
 const getters = {
-  addRouters(state) {
-    const { levelRouters } = require("@/router/levelRouters/index")
+  addRouters (state) {
+    const { levelRouters } = require('@/router/levelRouters/index')
     return createdRoutes(levelRouters, state.level)
   }
 }

@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import Vuex from "vuex"
+import Vuex from 'vuex'
+
 Vue.use(Vuex)
 const state = {
   isPC: (function () {
@@ -8,12 +9,12 @@ const state = {
     )
     return !flag
   })(),
-  menufold: !localStorage.getItem("menufold")
+  menufold: localStorage.getItem('menufold') != 'false'
 }
 const mutations = {
   changefold (state) {
     state.menufold = !state.menufold
-    localStorage.setItem("menufold", Boolean(state.menufold))
+    localStorage.setItem('menufold', Boolean(state.menufold))
   }
 }
 

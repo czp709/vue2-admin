@@ -1,12 +1,17 @@
 import Vue from 'vue'
-import Vuex from "vuex"
-import user from "./module/user"
-import control_lable from "./module/control_lable"
-import createPersistedState from "vuex-persistedstate"
+import Vuex from 'vuex'
+import user from './module/user'
+import controlLable from './module/control_lable'
+import createPersistedState from 'vuex-persistedstate'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    // 侧边栏背景色
+    aside_color: '#3d4657',
+    // 侧边栏字体颜色
+    aside_text_color: '#ffffff'
   },
   mutations: {
   },
@@ -14,7 +19,7 @@ export default new Vuex.Store({
   },
   modules: {
     user,
-    control_lable
+    controlLable
   },
   getters: {
   },
