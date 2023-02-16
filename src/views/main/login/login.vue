@@ -14,48 +14,68 @@
     </ul>
     <div v-if="retrieve" class="ms-login">
       <div class="title">登录</div>
-      <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="0px">
+      <el-form
+        ref="ruleForm"
+        :model="ruleForm"
+        :rules="rules"
+        label-width="0px">
         <el-form-item prop="username">
-          <el-input v-model="ruleForm.username" type="text" placeholder="账号"></el-input>
+          <el-input
+            v-model="ruleForm.username"
+            type="text"
+            placeholder="账号"></el-input>
         </el-form-item>
         <el-form-item prop="pwd">
-          <el-input v-model="ruleForm.pwd" type="password" placeholder="密码" show-password @keyup.enter.native="Vcode_show = true"></el-input>
+          <el-input
+            v-model="ruleForm.pwd"
+            type="password"
+            placeholder="密码"
+            show-password
+            @keyup.enter.native="Vcode_show = true"></el-input>
         </el-form-item>
       </el-form>
-      <el-button v-preventReClick type="primary" @click="Vcode_show = true">登录</el-button>
+      <el-button v-preventReClick type="primary" @click="Vcode_show = true">
+        登录
+      </el-button>
       <el-button type="text" @click="retrieve = false">找回密码</el-button>
       <!-- 滑动验证组件，正式使用请删除 -->
-      <Vcode :show="Vcode_show" @success="login" @close="Vcode_show=false" ></Vcode>
+      <Vcode
+        :show="Vcode_show"
+        @success="login"
+        @close="Vcode_show = false"></Vcode>
     </div>
-    <retrievePassword v-else v-on:isshow="retrieve = true"></retrievePassword>
+    <RetrievePassword v-else @isshow="retrieve = true"></RetrievePassword>
     <!-- 友情链接 -->
     <div v-if="$store.state.controlLable.isPC" class="links">
-      <span>
-        Copyright©2022 vue2
-      </span>
+      <span> Copyright©2022 vue2 </span>
       <span>
         作者:
         <a href="http://github.com/czp709" target="_blank">@zipen</a>
       </span>
       <span>
         邮箱
-        <a href="mailto:chenzhipeng709@163.com" target="_blank">chenzhipeng709@163.com</a>
+        <a href="mailto:chenzhipeng709@163.com" target="_blank">
+          chenzhipeng709@163.com
+        </a>
       </span>
-      <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2021008006号</a>
+      <a href="https://beian.miit.gov.cn/" target="_blank">
+        豫ICP备2021008006号
+      </a>
     </div>
   </div>
 </template>
 <script>
 import Vcode from 'vue-puzzle-vcode'
-import retrievePassword from './retrievePassword.vue'
-import user from '@/api/user'
+import retrievePassword from '../retrievePassword/retrievePassword.vue'
+import { loginApi } from '@/api/user'
 
 export default {
+  name: 'LoginPager',
   components: {
     Vcode,
-    retrievePassword
+    RetrievePassword: retrievePassword,
   },
-  data () {
+  data() {
     return {
       loading: false,
       // 滑动验证显示控制变量
@@ -64,33 +84,33 @@ export default {
       // 输入的账号密码
       ruleForm: {
         username: '',
-        pwd: ''
+        pwd: '',
       },
       // 输入框数据验证方式
       rules: {
         username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
-        pwd: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-      }
+        pwd: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+      },
     }
   },
   // 以下两个生命周期函数作用为提示试用账号密码，正式场景应删除掉
-  mounted () {
+  mounted() {
     this.notifyId = this.$notify({
       message: '一级账号为admin,二级账号为visitor。密码皆随便输入',
-      duration: 0
+      duration: 0,
     })
   },
-  beforeDestroy () {
+  beforeDestroy() {
     this.notifyId.close()
   },
 
   methods: {
-    login () {
+    login() {
       const that = this
       const data = this.ruleForm
       this.Vcode_show = false
       this.loading = true
-      user.loginApi(data).then((res) => {
+      loginApi(data).then((res) => {
         if (res.data.code === 200) {
           // 将用户信息写入VUEX
           this.$store.dispatch('user/saveUserInfo', res).then(() => {
@@ -99,13 +119,13 @@ export default {
           that.loading = false
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
 <style scoped>
-@import "../assets/style.css";
-@import "../assets/style.scss";
+@import '../../../assets/style.css';
+@import '../../../assets/style.scss';
 .login-wrap {
   width: 100%;
   height: 100vh;

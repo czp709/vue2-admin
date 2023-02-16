@@ -1,12 +1,17 @@
 <template>
-  <el-container style="height: 100vh;">
-    <el-aside v-if="$store.state.controlLable.isPC" class="aside" :style="`background-color: ${ $store.state.aside_color }`">
+  <el-container style="height: 100vh">
+    <el-aside
+      v-if="$store.state.controlLable.isPC"
+      class="aside"
+      :style="`background-color: ${$store.state.aside_color}`">
       <MainAside></MainAside>
     </el-aside>
     <el-container>
       <el-header>
         <Topheader v-if="$store.state.controlLable.isPC"></Topheader>
-        <headerMenu v-if="!$store.state.controlLable.isPC" class="headerMenu"></headerMenu>
+        <HeaderMenu
+          v-if="!$store.state.controlLable.isPC"
+          class="headerMenu"></HeaderMenu>
       </el-header>
       <el-main class="main">
         <router-view></router-view>
@@ -20,19 +25,19 @@ import headerMenu from './components/headerMenu.vue'
 import Topheader from './components/header.vue'
 
 export default {
-  name: 'Home',
+  name: 'HomePage',
   components: {
     MainAside,
-    headerMenu,
-    Topheader
+    HeaderMenu: headerMenu,
+    Topheader,
   },
-  data () {
+  data() {
     return {
       timer: true,
       device: true,
-      header: false
+      header: false,
     }
-  }
+  },
 }
 </script>
 <style scoped>

@@ -8,18 +8,18 @@ import Cookies from 'js-cookie'
 Vue.use(Vuex)
 const state = {
   userInfo: {},
-  level: 0
+  level: 0,
 }
 const mutations = {
-  saveuserInfo (state, userInfo) {
+  saveuserInfo(state, userInfo) {
     state.userInfo = userInfo
   },
-  savelevel (state, level) {
+  savelevel(state, level) {
     state.level = level
-  }
+  },
 }
 const actions = {
-  saveUserInfo ({ commit, getters }, res) {
+  saveUserInfo({ commit, getters }, res) {
     return new Promise((resolve) => {
       Cookies.set('token', res.data.data.token, { expires: 1 })
       sessionStorage.setItem('userInfo', JSON.stringify(res))
@@ -34,21 +34,21 @@ const actions = {
       resolve()
     })
   },
-  logout (context, data) {
+  logout() {
     return new Promise((resolve) => {
       Cookies.remove('token')
       sessionStorage.removeItem('userInfo')
       resetRouter()
       resolve()
     })
-  }
+  },
 }
 
 const getters = {
-  addRouters (state) {
+  addRouters(state) {
     const { levelRouters } = require('@/router/levelRouters/index')
     return createdRoutes(levelRouters, state.level)
-  }
+  },
 }
 
 export default {
@@ -56,5 +56,5 @@ export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 }

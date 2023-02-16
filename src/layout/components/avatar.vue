@@ -1,17 +1,29 @@
 <template>
   <div class="demo-basic--circle">
     <div class="block">
-      <el-avatar slot="reference" :src="userInfo.logo||logo" :size='35' :title="userInfo.name"></el-avatar>
+      <el-avatar
+        slot="reference"
+        :src="userInfo.logo || logo"
+        :size="35"
+        :title="userInfo.name"></el-avatar>
       <el-dropdown placement="bottom">
         <span id="large" class="el-dropdown-link">
-          {{ userInfo.name || name}}<i class="el-icon-arrow-down el-icon--right"></i>
+          {{ userInfo.name || name
+          }}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
-            <el-link style="width: 100%" href="#/page1" :underline="false">进入示例页面1</el-link>
+            <el-link style="width: 100%" href="#/page1" :underline="false">
+              进入示例页面1
+            </el-link>
           </el-dropdown-item>
           <el-dropdown-item>
-            <el-button type="text" style="width:100%;color:red" @click="logout">退出</el-button>
+            <el-button
+              type="text"
+              style="width: 100%; color: red"
+              @click="logout">
+              退出
+            </el-button>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -19,34 +31,36 @@
   </div>
 </template>
 <script>
-import {
-  mapState
-} from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
-  data () {
+  name: 'HomeAvater',
+  data() {
     return {
       logo: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
-      name: 'admin'
+      name: 'admin',
     }
   },
   computed: {
     ...mapState({
-      userInfo: (state) => { return state.user.userInfo },
-      level: (state) => { return state.user.level }
-    })
+      userInfo: (state) => {
+        return state.user.userInfo
+      },
+      level: (state) => {
+        return state.user.level
+      },
+    }),
   },
   methods: {
-    logout () {
+    logout() {
       const that = this
       that.$confirm('确认退出吗?', '提示', {}).then(() => {
         this.$store.dispatch('user/logout').then(() => {
           this.$router.replace('/')
         })
       })
-    }
-  }
-
+    },
+  },
 }
 </script>
 <style scoped>

@@ -1,30 +1,48 @@
 <template>
-  <el-button type="primary" size="mini" round :disabled="smsFlag" @click="getemailCode">{{sendTime}}</el-button>
+  <el-button
+    type="primary"
+    size="mini"
+    round
+    :disabled="smsFlag"
+    @click="getemailCode">
+    {{ sendTime }}
+  </el-button>
 </template>
 <script>
 export default {
-  props: ['rules'],
-  data () {
+  props: {
+    rules: {
+      type: Array,
+      default: () => {
+        return []
+      },
+    },
+  },
+  data() {
     return {
       sendTime: '获取验证码',
       snsMsgWait: 60,
       sendColor: '',
       smsFlag: false,
-      regexs: { email: /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/, phone: /^(?:(?:\+|00)86)?1[3-9]\d{9}$/ }
+      regexs: {
+        email:
+          /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/,
+        phone: /^(?:(?:\+|00)86)?1[3-9]\d{9}$/,
+      },
     }
   },
   methods: {
-    getemailCode () {
+    getemailCode() {
       const that = this
       if (this.rules.length !== 0) {
         for (const item of this.rules) {
           if (!this.regexs[item.type].test(item.value)) {
-            alert('校验未通过')
+            this.$message.error('校验未通过!')
             return false
           }
         }
       }
-      const countdown = new Promise((resolve, reject) => {
+      const countdown = new Promise((resolve) => {
         const inter = setInterval(() => {
           that.smsFlag = true
           that.sendColor = '#cccccc'
@@ -44,8 +62,8 @@ export default {
         this.$emit('click')
       })
       return true
-    }
-  }
+    },
+  },
 }
 </script>
 <style scoped>

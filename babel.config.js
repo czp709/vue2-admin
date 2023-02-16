@@ -4,17 +4,17 @@ module.exports = {
     [
       '@babel/preset-env',
       {
-        modules: false
-      }
-    ]
+        modules: false,
+      },
+    ],
   ],
   plugins: [
     [
       'component',
       {
         libraryName: 'element-ui',
-        styleLibraryName: 'theme-chalk'
-      }
-    ]
-  ]
+        styleLibraryName: 'theme-chalk',
+      },
+    ],
+  ],
 }

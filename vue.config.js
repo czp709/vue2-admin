@@ -8,7 +8,7 @@ module.exports = {
   // 文件输出目录
   outputDir: 'dist',
   // eslint-loader 是否在保存的时候检查
-  lintOnSave: false,
+  lintOnSave: 'default',
   // 生成的静态资源存放的目录
   assetsDir: 'static',
   productionSourceMap: false,
@@ -24,13 +24,14 @@ module.exports = {
     // 启动热更新
     hotOnly: true,
     // 配置代理，处理多个跨域
-    proxy: { // 配置跨域
+    proxy: {
+      // 配置跨域
       [process.env.VUE_APP_BASE_URL]: {
         target: process.env.VUE_APP_BASE_URL, // 这里后台的地址模拟的;应该填写你们真实的后台接口
         ws: true,
-        changOrigin: true // 允许跨域
-      }
-    }
+        changOrigin: true, // 允许跨域
+      },
+    },
   },
   // css处理
   css: {
@@ -39,11 +40,12 @@ module.exports = {
     sourceMap: false,
     // css预设器配置项
     loaderOptions: {},
-    requireModuleExtension: true
+    requireModuleExtension: true,
   },
   configureWebpack: (config) => {
     // 打包时对js/css文件进行压缩
-    if (process.env.NODE_ENV === 'production') { // 生产环境
+    if (process.env.NODE_ENV === 'production') {
+      // 生产环境
       config.plugins.push(
         new CompressionPlugin({
           /* [file]被替换为原始资产文件名。
@@ -61,9 +63,9 @@ module.exports = {
           threshold: 10240,
           minRatio: 0.8,
           // 删除原始文件只保留压缩后的文件
-          deleteOriginalAssets: false
+          deleteOriginalAssets: false,
         })
       )
     }
-  }
+  },
 }

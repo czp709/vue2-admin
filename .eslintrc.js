@@ -1,20 +1,31 @@
 module.exports = {
   root: true,
-
   env: {
-    node: true
+    node: true,
   },
-
   extends: [
-    'plugin:vue/essential',
-    '@vue/standard'
+    'plugin:vue/recommended',
+    'eslint:recommended',
+    '@vue/prettier',
+    'plugin:import/recommended',
   ],
-
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
   },
-
   rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        printWidth: 80,
+        tabWidth: 2,
+        semi: false,
+        singleQuote: true,
+        jsxSingleQuote: true,
+        bracketSameLine: true,
+        jsxBracketSameLine: true,
+      },
+    ],
+
     // eslint规则 https://cn.eslint.org/docs/rules/
     // Possible Errors
     // 禁用 console
@@ -262,7 +273,45 @@ module.exports = {
       },
     ],
 
+    // Uncategorized
+    // 设置block的lang
+    'vue/block-lang': [
+      'error',
+      {
+        template: {
+          lang: '',
+        },
+        script: {
+          lang: '',
+        },
+        style: {
+          lang: 'less',
+          allowNoLang: true,
+        },
+      },
+    ],
 
+    // 设置组件的使用名
+    'vue/component-name-in-template-casing': [
+      'error',
+      'PascalCase',
+      {
+        registeredComponentsOnly: true,
+        ignores: [],
+      },
+    ],
+
+    // 设置组件的使用名
+    'vue/component-options-name-casing': ['error', 'PascalCase'],
+
+    // 事件名
+    'vue/custom-event-name-casing': [
+      'error',
+      'kebab-case',
+      {
+        ignores: [],
+      },
+    ],
 
     // import/recommended
     // https://github.com/import-js/eslint-plugin-import/tree/v2.25.3/docs/rules
@@ -275,5 +324,5 @@ module.exports = {
         count: 1,
       },
     ],
-  }
+  },
 }

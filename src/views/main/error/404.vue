@@ -1,21 +1,29 @@
 <template>
-  <div style="width:100% !important;padding:40px 0;display:flex;justify-content:center;align-items: center;">
+  <div
+    style="
+      width: 100% !important;
+      padding: 40px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    ">
     <div class="error">
       <!-- 图片可保存到本地 -->
-      <img src="../assets/404.png"/>
-      <p>抱歉！你访问的页面不存在 :( </p>
+      <img src="@/assets/404.png" />
+      <p>抱歉！你访问的页面不存在 :(</p>
       <span class="back" @click="go()">返回上页</span>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
 export default {
+  name: 'ErrorPage404',
   methods: {
-    go () {
+    go() {
       this.$router.go(-1)
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -18,16 +18,13 @@ vue3版本github地址：[vue3-admin](https://github.com/czp709/vue-admin)
 5.登录逻辑  
 6.dashboard 页面布局  
 7.mockjs  
-8.CDN 引入 element 减小打包体积，并含有 cdn 失效更换机制  
+8.基于el-tooltip二次封装的组件，只有当超出长度后才会显示tooltip,支持el-tooltip所有属性
 
 ---
 
 
 ## vue2+element+axios 后台模板
 
-为了减少打包体积，vue、elementui 使用的是 cdn 引入,为了稳定性推荐使用自己的 cdn 服务。本人在日常使用中是将 vue，element 文件放在了自己的服务器，这样既保证了一定的稳定性和快速响应。也方便在其他项目中通过 CDN 引入。
-
----
 
 ## 引入 mock，便于前后端分离开发。
 
