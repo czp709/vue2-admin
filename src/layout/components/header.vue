@@ -13,14 +13,15 @@
   </div>
 </template>
 <script>
-import Avatar from "./avatar.vue"
-import fullscreen from "./fullScreen.vue"
+import Avatar from './avatar.vue'
+import fullscreen from './fullScreen.vue'
+
 export default {
+  name: 'Aside',
   components: {
     Avatar,
     fullscreen
   },
-  name: "Aside",
   data () {
     return {
     }

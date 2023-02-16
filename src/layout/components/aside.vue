@@ -1,19 +1,20 @@
 <template>
   <div class="aside">
     <div class="aside_top">
-      <img src="@/assets/logo.png" title="品牌logo">
+      <img src="@/assets/logo.png" title="品牌logo"/>
       <span v-show="!$store.state.control_lable.menufold">Admin</span>
     </div>
     <asidemenu></asidemenu>
   </div>
 </template>
 <script>
-import asidemenu from "@/layout/components/aside_menu"
+import asidemenu from '@/layout/components/aside_menu'
+
 export default {
+  name: 'Aside',
   components: {
     asidemenu
   },
-  name: "Aside",
   data () {
     return {
     }

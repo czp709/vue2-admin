@@ -1,5 +1,5 @@
 <template>
-  <div class="login-wrap bruce" v-loading="loading">
+  <div v-loading="loading" class="login-wrap bruce">
     <ul class="bubble-bgwall">
       <li>vue2</li>
       <li>vue2</li>
@@ -12,24 +12,24 @@
       <li>vue2</li>
       <li>vue2</li>
     </ul>
-    <div class="ms-login" v-if="retrieve">
+    <div v-if="retrieve" class="ms-login">
       <div class="title">登录</div>
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px">
+      <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="0px">
         <el-form-item prop="username">
-          <el-input type="text" v-model="ruleForm.username" placeholder="账号"></el-input>
+          <el-input v-model="ruleForm.username" type="text" placeholder="账号"></el-input>
         </el-form-item>
         <el-form-item prop="pwd">
-          <el-input type="password" placeholder="密码" show-password v-model="ruleForm.pwd" @keyup.enter.native="Vcode_show = true"></el-input>
+          <el-input v-model="ruleForm.pwd" type="password" placeholder="密码" show-password @keyup.enter.native="Vcode_show = true"></el-input>
         </el-form-item>
       </el-form>
-      <el-button type="primary" @click="Vcode_show = true" v-preventReClick>登录</el-button>
+      <el-button v-preventReClick type="primary" @click="Vcode_show = true">登录</el-button>
       <el-button type="text" @click="retrieve = false">找回密码</el-button>
       <!-- 滑动验证组件，正式使用请删除 -->
-      <Vcode :show="Vcode_show" @success="login" @close="Vcode_show=false" />
+      <Vcode :show="Vcode_show" @success="login" @close="Vcode_show=false" ></Vcode>
     </div>
     <retrievePassword v-else v-on:isshow="retrieve = true"></retrievePassword>
     <!-- 友情链接 -->
-    <div class="links" v-if="$store.state.control_lable.isPC">
+    <div v-if="$store.state.control_lable.isPC" class="links">
       <span>
         Copyright©2022 vue2
       </span>
@@ -46,15 +46,16 @@
   </div>
 </template>
 <script>
-import Vcode from "vue-puzzle-vcode"
-import retrievePassword from "./retrievePassword.vue"
-import user from "@/api/user"
+import Vcode from 'vue-puzzle-vcode'
+import retrievePassword from './retrievePassword.vue'
+import user from '@/api/user'
+
 export default {
   components: {
     Vcode,
     retrievePassword
   },
-  data: function () {
+  data () {
     return {
       loading: false,
       // 滑动验证显示控制变量
@@ -62,15 +63,25 @@ export default {
       retrieve: true,
       // 输入的账号密码
       ruleForm: {
-        username: "",
-        pwd: ""
+        username: '',
+        pwd: ''
       },
       // 输入框数据验证方式
       rules: {
-        username: [{ required: true, message: "请输入账号", trigger: "blur" }],
-        pwd: [{ required: true, message: "请输入密码", trigger: "blur" }]
+        username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+        pwd: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       }
     }
+  },
+  // 以下两个生命周期函数作用为提示试用账号密码，正式场景应删除掉
+  mounted () {
+    this.notifyId = this.$notify({
+      message: '一级账号为admin,二级账号为visitor。密码皆随便输入',
+      duration: 0
+    })
+  },
+  beforeDestroy () {
+    this.notifyId.close()
   },
 
   methods: {
@@ -79,26 +90,16 @@ export default {
       const data = this.ruleForm
       this.Vcode_show = false
       this.loading = true
-      user.loginApi(data).then(res => {
+      user.loginApi(data).then((res) => {
         if (res.data.code === 200) {
           // 将用户信息写入VUEX
-          this.$store.dispatch("user/saveUserInfo", res).then(() => {
-            this.$router.replace("/home")
+          this.$store.dispatch('user/saveUserInfo', res).then(() => {
+            this.$router.replace('/home')
           })
           that.loading = false
         }
       })
     }
-  },
-  // 以下两个生命周期函数作用为提示试用账号密码，正式场景应删除掉
-  mounted () {
-    this.notifyId = this.$notify({
-      message: "一级账号为admin,二级账号为visitor。密码皆随便输入",
-      duration: 0
-    })
-  },
-  beforeDestroy () {
-    this.notifyId.close()
   }
 }
 </script>

@@ -1,12 +1,12 @@
 <template>
   <el-container style="height: 100vh;">
     <el-aside v-if="$store.state.control_lable.isPC" class="aside" :style="`background-color: ${ $store.state.aside_color }`">
-      <Main-Aside></Main-Aside>
+      <MainAside></MainAside>
     </el-aside>
     <el-container>
       <el-header>
         <Topheader v-if="$store.state.control_lable.isPC"></Topheader>
-        <headerMenu class="headerMenu" v-if="!$store.state.control_lable.isPC"></headerMenu>
+        <headerMenu v-if="!$store.state.control_lable.isPC" class="headerMenu"></headerMenu>
       </el-header>
       <el-main class="main">
         <router-view></router-view>
@@ -15,11 +15,12 @@
   </el-container>
 </template>
 <script>
-import MainAside from "./components/aside.vue"
-import headerMenu from "./components/headerMenu.vue"
-import Topheader from "./components/header.vue"
+import MainAside from './components/aside.vue'
+import headerMenu from './components/headerMenu.vue'
+import Topheader from './components/header.vue'
+
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     MainAside,
     headerMenu,

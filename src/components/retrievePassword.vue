@@ -1,7 +1,7 @@
 <template>
   <div class="ms-login">
     <div class="title">找回密码</div>
-    <el-form :model="ruleForm" ref="ruleForm" label-width="0px" class="demo-ruleForm">
+    <el-form ref="ruleForm" :model="ruleForm" label-width="0px" class="demo-ruleForm">
       <el-form-item prop="username">
         <el-input v-model="ruleForm.username" placeholder="请输入账号"></el-input>
       </el-form-item>
@@ -14,7 +14,7 @@
       <el-form-item>
         <div class="emailCode">
           <el-input v-model="ruleForm.code" placeholder="验证码" style="margin-right:10px"></el-input>
-          <countdownBtn @click="emailCode" :rules="[{value:ruleForm.email,type:'email'}]"></countdownBtn>
+          <countdownBtn :rules="[{value:ruleForm.email,type:'email'}]" @click="emailCode"></countdownBtn>
         </div>
       </el-form-item>
     </el-form>
@@ -23,17 +23,18 @@
   </div>
 </template>
 <script>
-import countdownBtn from "@/components/countdownBtn"
+import countdownBtn from '@/components/countdownBtn'
+
 export default {
-  name: "SchoolRetrievepassword",
+  name: 'SchoolRetrievepassword',
   components: {
     countdownBtn
   },
   data () {
     return {
       ruleForm: {
-        username: "",
-        email: "",
+        username: '',
+        email: '',
         code: null
       }
     }

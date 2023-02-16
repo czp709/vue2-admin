@@ -1,13 +1,23 @@
 // import Vue from 'vue'
-import VueRouter from "vue-router"
-import beforEach from "@/router/beforEach"
+import VueRouter from 'vue-router'
+import beforEach from '@/router/beforEach'
+import Cookies from 'js-cookie'
+
+// eslint-disable-next-line no-undef
 Vue.use(VueRouter)
 
 export const baseRouter = [
   {
-    path: "/",
-    name: "login",
-    component: () => { return import("@/components/login") }
+    path: '/',
+    name: 'login',
+    component: () => { return import('@/components/login') },
+    beforeEnter (to, from, next) {
+      if (sessionStorage.getItem('userInfo') && Cookies.get('token')) {
+        next('/home')
+      } else {
+        next()
+      }
+    }
   }
 ]
 
@@ -19,7 +29,7 @@ const createRouter = () => {
 // 创建路由信息
 const router = createRouter()
 // 重置路由（由于router2没有提供重置路由的方式，所以采用替换路由的方式）
-export function resetRouter() {
+export function resetRouter () {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }
