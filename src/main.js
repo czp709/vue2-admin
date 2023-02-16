@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 import axios from 'axios'
-import Cookies from 'js-cookie'
 import router from './router'
 import store from './store'
 import './mock/mock.js'
@@ -10,7 +9,6 @@ import 'element-ui/lib/theme-chalk/index.css'
 import TextTooltip from '@/components/TextTooltip'
 
 Vue.component('TextTooltip', TextTooltip)
-Vue.prototype.$Cookies = Cookies
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.config.devtools = process.env.NODE_ENV === 'development'

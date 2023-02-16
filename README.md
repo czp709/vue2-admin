@@ -24,7 +24,7 @@ vue3版本github地址：[vue3-admin](https://github.com/czp709/vue-admin)
 
 
 ## vue2+element+axios 后台模板
-
+不对功能做过度封装，只提供基础的页面框架和路由结构，其余功能完全交由使用之自行开发。
 
 ## 引入 mock，便于前后端分离开发。
 
@@ -68,10 +68,10 @@ npm install mockjs -D
 首先引入文件
 
 ```JavaScript
-import user from "@/api/user"
+import { loginApi } from "@/api/user"
 login () {
   let data = this.ruleForm
-  user.loginApi(data).then(res => {
+  loginApi(data).then(res => {
     console.log(res)
   })
 }
