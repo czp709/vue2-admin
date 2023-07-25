@@ -24,14 +24,14 @@ module.exports = {
     // 启动热更新
     hotOnly: true,
     // 配置代理，处理多个跨域
-    proxy: {
-      // 配置跨域
-      [process.env.VUE_APP_BASE_URL]: {
-        target: process.env.VUE_APP_BASE_URL, // 这里后台的地址模拟的;应该填写你们真实的后台接口
-        ws: true,
-        changOrigin: true, // 允许跨域
-      },
-    },
+    // proxy: {
+    //   // 配置跨域
+    //   [process.env.VUE_APP_BASE_URL]: {
+    //     target: process.env.VUE_APP_BASE_URL, // 这里后台的地址模拟的;应该填写你们真实的后台接口
+    //     ws: true,
+    //     changOrigin: true, // 允许跨域
+    //   },
+    // },
   },
   // css处理
   css: {

@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 Vue.use(Vuex)
 const state = {
   userInfo: {},
-  level: 0,
+  level: '0',
 }
 const mutations = {
   saveuserInfo(state, userInfo) {
@@ -21,10 +21,9 @@ const mutations = {
 const actions = {
   saveUserInfo({ commit, getters }, res) {
     return new Promise((resolve) => {
-      Cookies.set('token', res.data.data.token, { expires: 1 })
-      sessionStorage.setItem('userInfo', JSON.stringify(res))
-      commit('saveuserInfo', res.data.data)
-      commit('savelevel', res.data.data.level)
+      localStorage.setItem('userInfo', JSON.stringify(res))
+      commit('saveuserInfo', res)
+
       // 生成用户可访问的路由表
       const route = getters.addRouters
       // 将生成的路由表逐个添加入路由
@@ -37,7 +36,7 @@ const actions = {
   logout() {
     return new Promise((resolve) => {
       Cookies.remove('token')
-      sessionStorage.removeItem('userInfo')
+      localStorage.removeItem('userInfo')
       resetRouter()
       resolve()
     })

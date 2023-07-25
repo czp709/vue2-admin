@@ -3,12 +3,12 @@
     <div class="block">
       <el-avatar
         slot="reference"
-        :src="userInfo.logo || logo"
+        :src="userInfo.avatar || avatar"
         :size="35"
-        :title="userInfo.name"></el-avatar>
+        :title="userInfo.nickname"></el-avatar>
       <el-dropdown placement="bottom">
         <span id="large" class="el-dropdown-link">
-          {{ userInfo.name || name
+          {{ userInfo.nickname || nickname
           }}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -37,8 +37,9 @@ export default {
   name: 'HomeAvater',
   data() {
     return {
-      logo: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
-      name: 'admin',
+      avatar:
+        'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
+      nickname: 'admin',
     }
   },
   computed: {

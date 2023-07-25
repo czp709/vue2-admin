@@ -27,7 +27,7 @@ export const levelRouters = [
         },
         meta: {
           hidden: false, // hidden为false，在侧边导航栏显示
-          levelname: 'acd150a6885f609532931d89844070b1', // 那些权限用户可以访问此页面，即level=1，level=2都可以访问
+          // levelname: 'acd150a6885f609532931d89844070b1', // 那些权限用户可以访问此页面，即level=1，level=2都可以访问
           title: '实例页面1', // 侧边导航栏显示的名称
           icon: 'el-icon-coin', // 侧边导航栏的图标
         },
@@ -40,7 +40,7 @@ export const levelRouters = [
         },
         meta: {
           hidden: false,
-          levelname: '87da0c1d74d7335f83acb6f445b85a44',
+          // levelname: '87da0c1d74d7335f83acb6f445b85a44',
           icon: 'el-icon-s-custom',
           title: '实例页面2',
         },
@@ -60,7 +60,7 @@ export const levelRouters = [
             },
             meta: {
               hidden: false,
-              levelname: '87da0c1d74d7335f83acb6f445b85a44',
+              // levelname: '87da0c1d74d7335f83acb6f445b85a44',
               icon: 'el-icon-s-flag',
               title: '实例页面3',
             },
@@ -68,7 +68,7 @@ export const levelRouters = [
         ],
         meta: {
           hidden: false,
-          levelname: '87da0c1d74d7335f83acb6f445b85a44',
+          // levelname: '87da0c1d74d7335f83acb6f445b85a44',
           icon: 'el-icon-s-opportunity',
           title: '实例菜单3',
         },
