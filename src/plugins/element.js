@@ -22,6 +22,7 @@ import {
   MessageBox,
   Message,
   Notification,
+  Tree,
 } from 'element-ui'
 
 Vue.use(Avatar)
@@ -43,7 +44,7 @@ Vue.use(Submenu)
 Vue.use(Aside)
 Vue.use(Button)
 Vue.use(Loading.directive)
-
+Vue.use(Tree)
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$alert = MessageBox.alert

@@ -61,8 +61,9 @@ export default {
 
   methods: {
     onMouseOver() {
-      const parentWidth = this.$refs.refName.parentNode.offsetWidth
-      const contentWidth = this.$refs.refName.offsetWidth
+      const parentWidth =
+        this.$refs.refName.parentNode.getBoundingClientRect().width
+      const contentWidth = this.$refs.refName.getBoundingClientRect().width
       // 判断是否开启tooltip功能
       if (contentWidth > parentWidth) {
         this.isShowTooltip = false
@@ -74,7 +75,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .over-flow {
   text-align: left;
   margin: 0;
