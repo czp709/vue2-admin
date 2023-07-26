@@ -68,6 +68,8 @@
 <script>
 import { loginApi, getCaptcha } from '@/api/user'
 import Cookies from 'js-cookie'
+import JsEncrypt from 'jsencrypt'
+import { _pubKey } from '@/utils/rsaEncrypt'
 
 export default {
   name: 'LoginPager',
@@ -101,6 +103,9 @@ export default {
     },
     login() {
       this.loading = true
+      const en = new JsEncrypt()
+      en.setPublicKey(_pubKey)
+      this.ruleForm.password = en.encrypt(this.ruleForm.password)
       loginApi(this.ruleForm)
         .then((res) => {
           if (res.code === 200) {
