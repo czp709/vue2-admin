@@ -45,3 +45,11 @@ export function getDeptTree() {
     method: 'get',
   })
 }
+
+export function changeStatus(data) {
+  return request({
+    url: 'users/changeStatus',
+    method: 'POST',
+    data,
+  })
+}

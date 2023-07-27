@@ -46,22 +46,29 @@
         </el-form-item>
       </el-form>
       <el-table :data="tableData" border style="width: 100%">
-        <el-table-column prop="userId" label="用户ID"> </el-table-column>
-        <el-table-column prop="username" label="账号"> </el-table-column>
-        <el-table-column prop="nickname" label="昵称"> </el-table-column>
-        <el-table-column prop="deptName" label="部门"> </el-table-column>
-        <el-table-column prop="phone" label="手机"> </el-table-column>
-        <el-table-column prop="email" label="邮箱"> </el-table-column>
-        <el-table-column prop="status" label="状态">
+        <el-table-column align="center" prop="userId" label="用户ID">
+        </el-table-column>
+        <el-table-column align="center" prop="username" label="账号">
+        </el-table-column>
+        <el-table-column align="center" prop="nickname" label="昵称">
+        </el-table-column>
+        <el-table-column align="center" prop="deptName" label="部门">
+        </el-table-column>
+        <el-table-column align="center" prop="phone" label="手机">
+        </el-table-column>
+        <el-table-column align="center" prop="email" label="邮箱">
+        </el-table-column>
+        <el-table-column align="center" prop="status" label="状态">
           <template slot-scope="scope">
             <el-switch
               :value="scope.row.status == '0'"
               active-color="#13ce66"
-              inactive-color="#ff4949">
+              inactive-color="#ff4949"
+              @change="changeStatus(scope.row, $event)">
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="操作" width="100">
+        <el-table-column align="center" fixed="right" label="操作" width="100">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="handleClick(scope.row)">
               查看
@@ -74,7 +81,7 @@
   </div>
 </template>
 <script>
-import { getDeptTree, queryUser } from '@/api/user.js'
+import { getDeptTree, queryUser, changeStatus } from '@/api/user.js'
 
 export default {
   name: 'PageTest2',
@@ -119,6 +126,15 @@ export default {
     handleNodeClick(node) {
       this.formInline.deptId = node.deptId
       this.$nextTick(() => {
+        this.queryUser()
+      })
+    },
+    changeStatus(row, newStatus) {
+      const data = {
+        userId: row.userId,
+        status: newStatus ? 0 : 1,
+      }
+      changeStatus(data).then(() => {
         this.queryUser()
       })
     },
