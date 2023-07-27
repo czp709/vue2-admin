@@ -2,19 +2,20 @@ import store from '../store/index'
 import Cookies from 'js-cookie'
 
 const whiteList = ['/']
-const beforeEach = (to, from, next, router) => {
+const beforeEach = async (to, from, next, router) => {
   if (Cookies.get('token') && localStorage.getItem('userInfo')) {
     // 判断是否已经登陆过
     // 如果登陆过但是路由还未生成就先生成路由
     if (whiteList.indexOf(to.path) === -1 && to.matched.length === 0) {
-      store
-        .dispatch(
-          'user/saveUserInfo',
-          JSON.parse(localStorage.getItem('userInfo'))
-        )
-        .then(() => {
-          next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
-        })
+      await store.dispatch(
+        'user/saveUserInfo',
+        JSON.parse(localStorage.getItem('userInfo'))
+      )
+      await store.dispatch(
+        'user/saveUserMenu',
+        JSON.parse(localStorage.getItem('menu'))
+      )
+      next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
     }
     selfExecution({ to, from, next, router })
     next()

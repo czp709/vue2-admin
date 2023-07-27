@@ -8,35 +8,37 @@
     unique-opened
     router
     :collapse="$store.state.controlLable.menufold">
-    <template v-for="item in addRouters[0].children">
+    <template v-for="item in menuTree">
       <el-submenu
-        v-if="item.children && !item.meta.hidden"
+        v-if="item.children && item.visible == 0"
         :key="item.path"
-        :index="item.path">
+        :index="'/' + item.path">
         <template slot="title">
-          <i :class="item.meta.icon"></i>
-          <span slot="title">{{ item.meta.title }}</span>
+          <i :class="item.icon"></i>
+          <span slot="title">{{ item.menuName }}</span>
         </template>
         <el-menu-item
           v-for="child in item.children"
           :key="child.index"
-          :index="child.path">
-          <i :class="child.meta.icon"></i>
-          <span slot="title">{{ child.meta.title }}</span>
+          :index="'/' + child.path">
+          <i :class="child.icon"></i>
+          <span slot="title">{{ child.menuName }}</span>
         </el-menu-item>
       </el-submenu>
       <el-menu-item
-        v-else-if="!item.meta.hidden"
+        v-else-if="item.visible == 0"
         :key="item.index"
-        :index="item.path">
-        <i :class="item.meta.icon"></i>
-        <span slot="title">{{ item.meta.title }}</span>
+        :index="'/' + item.path">
+        <i :class="item.icon"></i>
+        <span slot="title">{{ item.menuName }}</span>
       </el-menu-item>
     </template>
   </el-menu>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
+import array2Tree from '@/utils/index.js'
+import { cloneDeep } from 'lodash'
 
 export default {
   name: 'AsideMenu',
@@ -44,15 +46,22 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters({
-      addRouters: 'user/addRouters',
+    ...mapState({
+      menu: (state) => {
+        return state.user.level
+      },
     }),
     menuDefaultActive() {
       const path =
         this.$route.path === '/home'
-          ? this.$store.getters['user/addRouters'][0].children[1].path
+          ? this.menuTree[0].children
+            ? '/' + this.menuTree[0].children[0].path
+            : '/' + this.menuTree[0].path
           : this.$route.path
       return path
+    },
+    menuTree() {
+      return array2Tree(cloneDeep(this.menu), { id: 'menuId' })
     },
   },
 }

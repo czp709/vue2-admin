@@ -14,16 +14,22 @@ const mutations = {
   saveuserInfo(state, userInfo) {
     state.userInfo = userInfo
   },
-  savelevel(state, level) {
+  saveUserMenu(state, level) {
     state.level = level
   },
 }
 const actions = {
-  saveUserInfo({ commit, getters }, res) {
+  saveUserInfo({ commit }, res) {
     return new Promise((resolve) => {
       localStorage.setItem('userInfo', JSON.stringify(res))
       commit('saveuserInfo', res)
-
+      resolve()
+    })
+  },
+  saveUserMenu({ commit, getters }, res) {
+    return new Promise((resolve) => {
+      commit('saveUserMenu', res)
+      localStorage.setItem('menu', JSON.stringify(res))
       // 生成用户可访问的路由表
       const route = getters.addRouters
       // 将生成的路由表逐个添加入路由
@@ -37,6 +43,8 @@ const actions = {
     return new Promise((resolve) => {
       Cookies.remove('token')
       localStorage.removeItem('userInfo')
+      localStorage.removeItem('menu')
+      localStorage.removeItem('refreshToken')
       resetRouter()
       resolve()
     })
@@ -46,7 +54,9 @@ const actions = {
 const getters = {
   addRouters(state) {
     const { levelRouters } = require('@/router/levelRouters/index')
-    return createdRoutes(levelRouters, state.level)
+    const menu = createdRoutes(state.level)
+    levelRouters[0].children = menu
+    return levelRouters
   },
 }
 

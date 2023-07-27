@@ -13,7 +13,7 @@ export const baseRouter = [
       return import('@/views/main/login/login')
     },
     beforeEnter(to, from, next) {
-      if (sessionStorage.getItem('userInfo') && Cookies.get('token')) {
+      if (localStorage.getItem('userInfo') && Cookies.get('token')) {
         next('/home')
       } else {
         next()

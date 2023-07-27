@@ -107,14 +107,14 @@ export default {
       en.setPublicKey(_pubKey)
       this.ruleForm.password = en.encrypt(this.ruleForm.password)
       loginApi(this.ruleForm)
-        .then((res) => {
+        .then(async (res) => {
           if (res.code === 200) {
             Cookies.set('token', res.token)
             localStorage.setItem('refreshToken', res.refresh_token)
             // 将用户信息写入VUEX
-            this.$store.dispatch('user/saveUserInfo', res.data).then(() => {
-              this.$router.replace('/home')
-            })
+            await this.$store.dispatch('user/saveUserInfo', res.data)
+            await this.$store.dispatch('user/saveUserMenu', res.menu)
+            this.$router.replace('/home')
           }
         })
         .finally(() => {

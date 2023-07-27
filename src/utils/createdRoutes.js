@@ -1,34 +1,47 @@
-/**
- * 判单当前的路由对象是否在登录人的权限之内
- * @param {Array} roles 权限
- * @param {Object} route 路由
- */
-function hasPermission(roles, route) {
-  if (route.meta && route.meta.levelname) {
-    // 路由需要权限就要在权限数组里面判断
-    return roles.includes(route.meta.levelname)
-  } // 不需要权限就直接通过
-  return true
-}
+import page404 from '@/views/main/error/404'
+import array2Tree from '@/utils/index'
+import { cloneDeep } from 'lodash'
 
-/**
- * 根据接口获取的权限列表动态生成当前用户的侧边导航栏，返回通过权限验证的路由数组
- * @param {Array} asyncRoutes 需要过滤的路由
- * @param {Array} roles 权限
- */
-function createdRoutes(asyncRoute, roles) {
-  const res = []
-  asyncRoute.forEach((route) => {
-    const tmp = { ...route }
-    if (hasPermission(roles, tmp)) {
-      // 当前路由通过权限验证直接通过
-      if (tmp.children && tmp.children.length) {
-        // 当前路由有子路由，就递归验证
-        tmp.children = createdRoutes(route.children, roles)
+function createdRoutes(json) {
+  const sort = array2Tree(cloneDeep(json), { id: 'menuId' })
+  const router = []
+  const json2Route = (arr) => {
+    arr.forEach((item) => {
+      if (item.menuType == 'C') {
+        router.push({
+          path: '/' + item.path,
+          name: item.path,
+          component: (resolve) => {
+            return require([`@/views/${item.component}`], resolve)
+          },
+          meta: {
+            hidden: false, // hidden为false，在侧边导航栏显示
+            title: item.menuName, // 侧边导航栏显示的名称
+            icon: item.icon, // 侧边导航栏的图标
+          },
+        })
+      } else if (item.menuType == 'M' && item.children) {
+        json2Route(item.children)
       }
-      res.push(tmp)
-    }
+    })
+  }
+
+  json2Route(sort)
+  router.unshift({
+    path: '',
+    name: '',
+    component: router[0].component,
+    meta: {
+      hidden: true, // hidden为true时不在侧边导航栏显示
+    },
   })
-  return res
+  router.push({
+    path: '/*',
+    meta: {
+      hidden: true,
+    },
+    component: page404,
+  })
+  return router
 }
 export default createdRoutes
