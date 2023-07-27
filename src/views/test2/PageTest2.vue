@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%">
+  <div class="page">
     <div class="tree-box">
       <el-tree
         :data="tree"
@@ -22,10 +22,59 @@
         </span>
       </el-tree>
     </div>
+    <div class="table">
+      <el-form
+        ref="ruleForm"
+        :inline="true"
+        :model="formInline"
+        class="demo-form-inline">
+        <el-form-item label="账号">
+          <el-input v-model="formInline.username" placeholder="账号"></el-input>
+        </el-form-item>
+        <el-form-item label="昵称">
+          <el-input v-model="formInline.nickname" placeholder="昵称"></el-input>
+        </el-form-item>
+        <el-form-item label="状态">
+          <el-select v-model="formInline.status" clearable placeholder="状态">
+            <el-option label="正常" value="0"></el-option>
+            <el-option label="停用" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="queryUser">查询</el-button>
+          <el-button @click="resetForm"> 重置 </el-button>
+        </el-form-item>
+      </el-form>
+      <el-table :data="tableData" border style="width: 100%">
+        <el-table-column prop="userId" label="用户ID"> </el-table-column>
+        <el-table-column prop="username" label="账号"> </el-table-column>
+        <el-table-column prop="nickname" label="昵称"> </el-table-column>
+        <el-table-column prop="deptName" label="部门"> </el-table-column>
+        <el-table-column prop="phone" label="手机"> </el-table-column>
+        <el-table-column prop="email" label="邮箱"> </el-table-column>
+        <el-table-column prop="status" label="状态">
+          <template slot-scope="scope">
+            <el-switch
+              :value="scope.row.status == '0'"
+              active-color="#13ce66"
+              inactive-color="#ff4949">
+            </el-switch>
+          </template>
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" width="100">
+          <template slot-scope="scope">
+            <el-button type="text" size="small" @click="handleClick(scope.row)">
+              查看
+            </el-button>
+            <el-button type="text" size="small">编辑</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
   </div>
 </template>
 <script>
-import { getDeptTree } from '@/api/user.js'
+import { getDeptTree, queryUser } from '@/api/user.js'
 
 export default {
   name: 'PageTest2',
@@ -36,6 +85,13 @@ export default {
         label: 'deptName',
         children: 'children',
       },
+      formInline: {
+        username: '',
+        nickname: '',
+        status: null,
+        deptId: '',
+      },
+      tableData: [],
     }
   },
   created() {
@@ -45,20 +101,47 @@ export default {
     getDeptTree() {
       getDeptTree().then((res) => {
         this.tree = res.data
+        this.queryUser()
+      })
+    },
+    queryUser() {
+      queryUser(this.formInline).then((res) => {
+        this.tableData = res.data
+      })
+    },
+    resetForm() {
+      Object.assign(this.$data.formInline, this.$options.data().formInline)
+
+      this.$nextTick(() => {
+        this.queryUser()
       })
     },
     handleNodeClick(node) {
-      console.log('Node', node)
+      this.formInline.deptId = node.deptId
+      this.$nextTick(() => {
+        this.queryUser()
+      })
     },
   },
 }
 </script>
 <style scoped lang="less">
+.page {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
 .tree-box {
   width: 20%;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   padding: 16px;
   height: calc(~'100% - 32px');
+}
+.table {
+  width: 80%;
+  height: calc(~'100% - 32px');
+  padding: 16px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 /deep/.el-tree-node__content {
   box-sizing: border-box;

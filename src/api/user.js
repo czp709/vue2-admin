@@ -18,6 +18,16 @@ export function getCaptcha(params) {
     },
   })
 }
+export function queryUser(params) {
+  return request({
+    url: 'users/queryUser',
+    method: 'get',
+    params,
+    self: {
+      hiddenMsg: true,
+    },
+  })
+}
 export function refreshTokenApi(data) {
   return request({
     url: 'refreshToken',
