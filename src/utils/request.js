@@ -1,25 +1,14 @@
-/*
- * @Descripttion:axios封装
- * @version:
- * @Author: 陈志鹏
- * @Date: 2021-08-11 19:03:56
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-07-25 15:18:56
- */
 // 导入axios
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { Message } from 'element-ui'
 import { refreshTokenApi } from '../api/user'
 
-// 1. 创建新的axios实例，
 const service = axios.create({
-  // 公共接口--这里注意后面会讲
   baseURL: process.env.VUE_APP_BASE_URL,
-  // 超时时间 单位是ms，这里设置了10s的超时时间
   timeout: 10 * 1000,
 })
-// 2.请求拦截器
+
 service.interceptors.request.use(
   (config) => {
     // 在发送请求之前做些什么
@@ -38,7 +27,7 @@ service.interceptors.request.use(
 
 let isRefreshing = false // 标志是否正在刷新,防止多个请求同时进入时多次调用刷新token
 let requests = [] // 存储待重新发送请求的数组
-// 3.响应拦截器
+
 service.interceptors.response.use(
   (response) => {
     if (
@@ -90,10 +79,14 @@ service.interceptors.response.use(
         })
       })
     }
+    if (err.response.status == 401) {
+      location.href = '/'
+      Message.error('登录超时，请重新登录！')
+      return Promise.reject(err.response)
+    }
     Message.error(err.response.data.msg)
     /** *** 处理结束 *****/
-    // 如果不需要错误处理，以上的处理过程都可省略
-    return Promise.resolve(err.response)
+    return Promise.reject(err.response)
   }
 )
 // 4.导入文件

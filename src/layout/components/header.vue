@@ -38,8 +38,7 @@ export default {
 </script>
 <style scoped>
 .header {
-  height: auto !important;
-  padding: 10px 20px;
+  height: 60px;
   border-bottom: 1px solid #dcdfe6;
   display: flex;
   flex-direction: row;

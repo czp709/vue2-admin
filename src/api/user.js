@@ -1,8 +1,9 @@
 import request from '@/utils/request'
+import Setting from '@/utils/setting'
 
 export function loginApi(data) {
   return request({
-    url: 'login',
+    url: Setting.api + '/login',
     method: 'POST',
     data,
   })
@@ -10,7 +11,7 @@ export function loginApi(data) {
 
 export function getCaptcha(params) {
   return request({
-    url: 'captcha',
+    url: Setting.api + '/captcha',
     method: 'get',
     params,
     self: {
@@ -20,7 +21,7 @@ export function getCaptcha(params) {
 }
 export function queryUser(params) {
   return request({
-    url: 'users/queryUser',
+    url: Setting.api + '/users/queryUser',
     method: 'get',
     params,
     self: {
@@ -30,7 +31,7 @@ export function queryUser(params) {
 }
 export function refreshTokenApi(data) {
   return request({
-    url: 'refreshToken',
+    url: Setting.api + '/refreshToken',
     method: 'POST',
     data,
     self: {
@@ -41,14 +42,14 @@ export function refreshTokenApi(data) {
 
 export function getDeptTree() {
   return request({
-    url: 'dept/tree',
+    url: Setting.api + '/dept/tree',
     method: 'get',
   })
 }
 
 export function changeStatus(data) {
   return request({
-    url: 'users/changeStatus',
+    url: Setting.api + '/users/changeStatus',
     method: 'POST',
     data,
   })

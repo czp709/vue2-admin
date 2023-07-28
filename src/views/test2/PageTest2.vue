@@ -146,18 +146,19 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 .tree-box {
-  width: 20%;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  width: calc(~'20% - 40px');
+  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.2);
   padding: 16px;
   height: calc(~'100% - 32px');
 }
 .table {
-  width: 80%;
+  width: calc(~'80% - 40px');
   height: calc(~'100% - 32px');
   padding: 16px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.2);
 }
 /deep/.el-tree-node__content {
   box-sizing: border-box;

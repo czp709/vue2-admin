@@ -2,35 +2,23 @@
   <el-menu
     ref="asidemenu"
     class="el-menu-vertical-demo"
-    :default-active="menuDefaultActive"
-    :background-color="$store.state.aside_color"
-    :text-color="$store.state.aside_text_color"
     unique-opened
     router
     :collapse="$store.state.controlLable.menufold">
     <template v-for="item in menuTree">
-      <el-submenu
-        v-if="item.children && item.visible == 0"
+      <MenuItem
+        v-if="item.children"
         :key="item.path"
-        :index="'/' + item.path">
-        <template slot="title">
-          <i :class="item.icon"></i>
-          <span slot="title">{{ item.menuName }}</span>
-        </template>
-        <el-menu-item
-          v-for="child in item.children"
-          :key="child.index"
-          :index="'/' + child.path">
-          <i :class="child.icon"></i>
-          <span slot="title">{{ child.menuName }}</span>
-        </el-menu-item>
-      </el-submenu>
+        :menu-data="item"></MenuItem>
       <el-menu-item
         v-else-if="item.visible == 0"
         :key="item.index"
         :index="'/' + item.path">
         <i :class="item.icon"></i>
-        <span slot="title">{{ item.menuName }}</span>
+        <div slot="title" class="title">
+          <TextTooltip :content="item.menuName"></TextTooltip>
+          <i v-if="item.isFrame == 0" class="el-icon-link"></i>
+        </div>
       </el-menu-item>
     </template>
   </el-menu>
@@ -39,11 +27,18 @@
 import { mapState } from 'vuex'
 import array2Tree from '@/utils/index.js'
 import { cloneDeep } from 'lodash'
+import Setting from '../../utils/setting'
+import MenuItem from './MenuItem.vue'
 
 export default {
   name: 'AsideMenu',
+  components: {
+    MenuItem,
+  },
   data() {
-    return {}
+    return {
+      Setting,
+    }
   },
   computed: {
     ...mapState({
@@ -66,10 +61,13 @@ export default {
   },
 }
 </script>
-<style scoped>
-.el-menu {
-  border-right: 0 !important;
-  padding: 0 5px;
+<style scoped lang="less">
+.title {
+  float: right;
+  width: calc(~'100% - 30px');
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .el-menu-vertical-demo:not(.el-menu--collapse) {
@@ -79,46 +77,33 @@ export default {
 .el-menu-vertical-demo:is(.el-menu--collapse) {
   width: auto;
 }
-
-.el-sub-menu__title,
-.el-menu-item {
-  min-width: 0 !important;
+.el-menu {
+  border: none;
+}
+/deep/.el-sub-menu__title {
   padding: 0 20px !important;
-  margin-bottom: 3px !important;
-  border-radius: 10px !important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.el-menu-item {
+  padding: 0 20px !important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
 }
 
-.el-sub-menu {
-  padding: 0 5px !important;
-  min-width: 0 !important;
-}
-
-.el-menu-item,
-.el-submenu {
-  border-left: rgba(0, 0, 0, 0) solid 4px !important;
-  border-right: rgba(0, 0, 0, 0) solid 4px !important;
-  background-color: rgba(0, 0, 0, 0) !important;
-}
-
-.el-menu-item.is-active,
-.el-submenu.el-submenu__title:hover {
-  background-color: #33a2ef !important;
-  color: white !important;
-  border-radius: 10px !important;
-}
-
-.el-menu-item:hover {
-  background-color: #33a2ef !important;
-}
-
-.el-menu--popup {
-  padding: 5px !important;
-}
-
-.el-popper,
-.is-pure,
-.is-light {
-  border: none !important;
-  border-radius: 10px;
+/deep/.el-menu-item.is-active:after {
+  content: '';
+  display: block;
+  width: 2px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #2d8cf0;
 }
 </style>

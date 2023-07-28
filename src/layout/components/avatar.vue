@@ -32,14 +32,14 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import Setting from '../../utils/setting'
 
 export default {
   name: 'HomeAvater',
   data() {
     return {
-      avatar:
-        'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
-      nickname: 'admin',
+      avatar: Setting.defaultUserInfo.avatar,
+      nickname: Setting.defaultUserInfo.nickname,
     }
   },
   computed: {
