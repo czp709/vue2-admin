@@ -17,7 +17,8 @@ function createdRoutes(json) {
           meta: {
             hidden: false, // hidden为false，在侧边导航栏显示
             title: item.menuName, // 侧边导航栏显示的名称
-            icon: item.icon, // 侧边导航栏的图标
+            icon: item.icon,
+            caches: item.isCache == 0,
           },
         })
       } else if (item.menuType == 'M' && item.children) {

@@ -17,7 +17,7 @@ export default {
   props: {
     // 显示的文字内容
     content: {
-      type: String,
+      type: [String, Number],
       default: '',
     },
     // 设置超出省略提示宽度

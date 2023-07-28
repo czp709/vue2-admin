@@ -23,60 +23,11 @@
       </el-tree>
     </div>
     <div class="table">
-      <el-form
-        ref="ruleForm"
-        :inline="true"
-        :model="formInline"
-        class="demo-form-inline">
-        <el-form-item label="账号">
-          <el-input v-model="formInline.username" placeholder="账号"></el-input>
-        </el-form-item>
-        <el-form-item label="昵称">
-          <el-input v-model="formInline.nickname" placeholder="昵称"></el-input>
-        </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model="formInline.status" clearable placeholder="状态">
-            <el-option label="正常" value="0"></el-option>
-            <el-option label="停用" value="1"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="queryUser">查询</el-button>
-          <el-button @click="resetForm"> 重置 </el-button>
-        </el-form-item>
-      </el-form>
-      <el-table :data="tableData" border style="width: 100%">
-        <el-table-column align="center" prop="userId" label="用户ID">
-        </el-table-column>
-        <el-table-column align="center" prop="username" label="账号">
-        </el-table-column>
-        <el-table-column align="center" prop="nickname" label="昵称">
-        </el-table-column>
-        <el-table-column align="center" prop="deptName" label="部门">
-        </el-table-column>
-        <el-table-column align="center" prop="phone" label="手机">
-        </el-table-column>
-        <el-table-column align="center" prop="email" label="邮箱">
-        </el-table-column>
-        <el-table-column align="center" prop="status" label="状态">
-          <template slot-scope="scope">
-            <el-switch
-              :value="scope.row.status == '0'"
-              active-color="#13ce66"
-              inactive-color="#ff4949"
-              @change="changeStatus(scope.row, $event)">
-            </el-switch>
-          </template>
-        </el-table-column>
-        <el-table-column align="center" fixed="right" label="操作" width="100">
-          <template slot-scope="scope">
-            <el-button type="text" size="small" @click="handleClick(scope.row)">
-              查看
-            </el-button>
-            <el-button type="text" size="small">编辑</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+      <TablePage
+        ref="tablePage"
+        :columns="columns"
+        :filters="filters"
+        :options="options"></TablePage>
     </div>
   </div>
 </template>
@@ -98,8 +49,78 @@ export default {
         status: null,
         deptId: '',
       },
+      page: {
+        pageNum: 1,
+        pageSize: 10,
+      },
+      total: 0,
       tableData: [],
     }
+  },
+  computed: {
+    options() {
+      return {
+        apiFunc: queryUser,
+      }
+    },
+    columns() {
+      return [
+        {
+          key: 'userId',
+          label: '用户ID',
+        },
+        {
+          key: 'username',
+          label: '账号',
+        },
+        {
+          key: 'nickname',
+          label: '昵称',
+        },
+        {
+          key: 'deptName',
+          label: '部门',
+        },
+        {
+          key: 'phone',
+          label: '手机',
+        },
+        {
+          key: 'email',
+          label: '邮箱',
+        },
+        {
+          key: 'status',
+          label: '状态',
+          render: (h, params) => {
+            return h('el-switch', {
+              props: {
+                activeColor: '#13ce66',
+                inactiveColor: '#ff4949',
+                value: params.row.status == 0,
+              },
+              on: {
+                change: (newStatus) => {
+                  this.changeStatus(params.row, newStatus)
+                },
+              },
+            })
+          },
+        },
+      ]
+    },
+    filters() {
+      return [
+        {
+          key: 'username',
+          label: '账号',
+        },
+        {
+          key: 'nickname',
+          label: '昵称',
+        },
+      ]
+    },
   },
   created() {
     this.getDeptTree()
@@ -111,22 +132,10 @@ export default {
         this.queryUser()
       })
     },
-    queryUser() {
-      queryUser(this.formInline).then((res) => {
-        this.tableData = res.data
-      })
-    },
-    resetForm() {
-      Object.assign(this.$data.formInline, this.$options.data().formInline)
-
-      this.$nextTick(() => {
-        this.queryUser()
-      })
-    },
     handleNodeClick(node) {
       this.formInline.deptId = node.deptId
       this.$nextTick(() => {
-        this.queryUser()
+        this.$refs.tablePage.getList()
       })
     },
     changeStatus(row, newStatus) {
@@ -135,7 +144,7 @@ export default {
         status: newStatus ? 0 : 1,
       }
       changeStatus(data).then(() => {
-        this.queryUser()
+        this.$refs.tablePage.getList()
       })
     },
   },
@@ -143,6 +152,7 @@ export default {
 </script>
 <style scoped lang="less">
 .page {
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -155,6 +165,8 @@ export default {
   height: calc(~'100% - 32px');
 }
 .table {
+  display: flex;
+  flex-direction: column;
   width: calc(~'80% - 40px');
   height: calc(~'100% - 32px');
   padding: 16px;
@@ -186,5 +198,9 @@ export default {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+}
+.el-pagination {
+  text-align: right;
+  margin: 8px 0;
 }
 </style>

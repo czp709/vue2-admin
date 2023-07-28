@@ -6,7 +6,10 @@ import store from './store'
 import './plugins/element.js'
 import 'element-ui/lib/theme-chalk/index.css'
 import TextTooltip from '@/components/TextTooltip'
+import components from './components/index'
+import VueJsx from 'vue-jsx'
 
+Vue.use(VueJsx)
 Vue.component('TextTooltip', TextTooltip)
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
@@ -15,6 +18,7 @@ Vue.config.devtools = process.env.NODE_ENV === 'development'
 window.addEventListener('storage', (e) => {
   sessionStorage.setItem(e.key, e.oldValue)
 })
+Vue.use(components)
 // button节流，在button中添加v-preventReClick即可控制按钮，防止按钮连击，时间限制2s
 Vue.directive('preventReClick', {
   inserted(el) {
