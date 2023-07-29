@@ -1,20 +1,33 @@
 <template>
-  <div>
+  <div class="tablePage-box">
     <el-form
       ref="ruleForm"
       :inline="true"
       :model="filterData"
       class="demo-form-inline">
-      <el-form-item v-for="item in filters" :key="item.key" label="账号">
-        <RenderCell v-if="item.render"></RenderCell>
+      <el-form-item
+        v-for="item in filterShow"
+        :key="item.key"
+        :label="item.label">
+        <RenderCell
+          v-if="item.render"
+          :render="item.render"
+          :params="filterData"></RenderCell>
         <el-input
           v-else
           v-model="filterData[item.key]"
-          placeholder="账号"></el-input>
+          :placeholder="'请输入' + item.label"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item class="search-btn">
         <el-button type="primary" @click="getList">查询</el-button>
         <el-button @click="resetForm"> 重置 </el-button>
+        <span
+          v-if="filters.length > 4"
+          class="expand"
+          @click="expand = !expand">
+          <span>{{ !expand ? '展开' : '收起' }}</span>
+          <i :class="!expand ? 'el-icon-arrow-down' : 'el-icon-arrow-up'"></i>
+        </span>
       </el-form-item>
     </el-form>
     <el-table :data="tableData" border style="width: 100%; flex: 1">
@@ -89,7 +102,19 @@ export default {
       },
       total: 0,
       tableData: [],
+      expand: false,
     }
+  },
+  computed: {
+    filterShow() {
+      if (this.filters.length < 5) {
+        return this.filters
+      }
+      if (!this.expand) {
+        return this.filters.slice(0, 4)
+      }
+      return this.filters
+    },
   },
   mounted() {
     this.getList()
@@ -117,7 +142,7 @@ export default {
 }
 </script>
 <style scoped lang="less">
-.table {
+.tablePage-box {
   display: flex;
   flex-direction: column;
   width: calc(~'100% - 32px');
@@ -128,5 +153,24 @@ export default {
 .el-pagination {
   text-align: right;
   margin: 8px 0;
+}
+.demo-form-inline {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  transition: all 0.5 ease-in-out;
+}
+.search-btn {
+  text-align: right;
+  grid-column-start: 5;
+  .expand {
+    display: inline-block;
+    width: 56px;
+    margin-left: 8px;
+    color: #2d8cf0;
+    cursor: pointer;
+    user-select: none;
+    font-size: 12px;
+    margin-left: 8px;
+  }
 }
 </style>

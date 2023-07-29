@@ -111,6 +111,29 @@ export default {
           key: 'nickname',
           label: '昵称',
         },
+        {
+          key: 'phone',
+          label: '手机',
+        },
+        {
+          key: 'email',
+          label: '邮箱',
+        },
+        {
+          key: 'status',
+          label: '状态',
+          render: (h, filterData) => {
+            return (
+              <el-select
+                v-model={filterData.status}
+                placeholder='请选择'
+                clearable>
+                <el-option key='0' label='启用' value='0'></el-option>
+                <el-option key='1' label='禁用' value='1'></el-option>
+              </el-select>
+            )
+          },
+        },
       ]
     },
   },
@@ -158,9 +181,8 @@ export default {
 .table {
   display: flex;
   flex-direction: column;
-  width: calc(~'80% - 40px');
-  height: calc(~'100% - 32px');
-  padding: 16px;
+  width: calc(~'80% - 8px');
+  height: 100%;
   box-shadow: 1px 0 6px rgba(0, 0, 0, 0.2);
 }
 /deep/.el-tree-node__content {
