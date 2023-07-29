@@ -1,28 +1,43 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import beforEach from '@/router/beforEach'
+import Cookies from 'js-cookie'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
-const routes = [
+export const baseRouter = [
   {
-    path: "/",
-    name: "home",
-    component: HomeView,
+    path: '/',
+    name: 'login',
+    component: () => {
+      return import('@/views/main/login/login')
+    },
+    beforeEnter(to, from, next) {
+      if (localStorage.getItem('userInfo') && Cookies.get('token')) {
+        next('/home')
+      } else {
+        next()
+      }
+    },
   },
-  {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  },
-];
+]
 
-const router = new VueRouter({
-  routes,
-});
+const createRouter = () => {
+  return new VueRouter({
+    routes: baseRouter,
+  })
+}
+// 创建路由信息
+const router = createRouter()
+// 重置路由（由于router2没有提供重置路由的方式，所以采用替换路由的方式）
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
+}
 
-export default router;
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  return beforEach(to, from, next, router)
+})
+
+export default router
