@@ -12,6 +12,8 @@
           <keep-alive>
             <router-view v-if="$route.meta.caches"></router-view>
           </keep-alive>
+        </transition>
+        <transition :name="switchTransition">
           <router-view v-if="!$route.meta.caches"></router-view>
         </transition>
       </el-main>

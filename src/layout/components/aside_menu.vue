@@ -4,6 +4,7 @@
     class="el-menu-vertical-demo"
     unique-opened
     router
+    :default-active="menuDefaultActive"
     :collapse="$store.state.controlLable.menufold">
     <template v-for="item in menuTree">
       <MenuItem

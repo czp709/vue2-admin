@@ -43,24 +43,16 @@ export default {
         label: 'deptName',
         children: 'children',
       },
-      formInline: {
-        username: '',
-        nickname: '',
-        status: null,
-        deptId: '',
-      },
-      page: {
-        pageNum: 1,
-        pageSize: 10,
-      },
-      total: 0,
-      tableData: [],
+      deptId: '',
     }
   },
   computed: {
     options() {
       return {
         apiFunc: queryUser,
+        filter: {
+          deptId: this.deptId,
+        },
       }
     },
     columns() {
@@ -129,13 +121,12 @@ export default {
     getDeptTree() {
       getDeptTree().then((res) => {
         this.tree = res.data
-        this.queryUser()
       })
     },
     handleNodeClick(node) {
-      this.formInline.deptId = node.deptId
+      this.deptId = node.deptId
       this.$nextTick(() => {
-        this.$refs.tablePage.getList()
+        this.$refs.tablePage?.getList()
       })
     },
     changeStatus(row, newStatus) {

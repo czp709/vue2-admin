@@ -104,11 +104,13 @@ export default {
     getList() {
       const func = this.options.apiFunc
       if (func) {
-        func({ ...this.filterData, ...this.page }).then((res) => {
-          this.tableData = res.data
-          this.total = res.total
-          this.page.pageSize = Number(res.pageSize)
-        })
+        func({ ...this.filterData, ...this.page, ...this.options.filter }).then(
+          (res) => {
+            this.tableData = res.data
+            this.total = res.total
+            this.page.pageSize = Number(res.pageSize)
+          }
+        )
       }
     },
   },

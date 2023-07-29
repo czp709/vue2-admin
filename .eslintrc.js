@@ -4,13 +4,12 @@ module.exports = {
     node: true,
   },
   extends: [
-    'plugin:vue/recommended',
+    'plugin:vue/essential',
     'eslint:recommended',
-    '@vue/prettier',
-    'plugin:import/recommended',
+    'plugin:prettier/recommended',
   ],
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
   },
   rules: {
     'prettier/prettier': [
@@ -25,20 +24,8 @@ module.exports = {
         jsxBracketSameLine: true,
       },
     ],
-
-    // eslint规则 https://cn.eslint.org/docs/rules/
-    // Possible Errors
-    // 禁用 console
-    'no-console': [
-      process.env.NODE_ENV === 'production' ? 'warn' : 'warn',
-      {
-        allow: ['info', 'table', 'warn', 'error'],
-      },
-    ],
-
-    // 禁用 debugger
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
-
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     // 禁止在循环中出现 await
     'no-await-in-loop': 'error',
 
@@ -111,7 +98,7 @@ module.exports = {
         max: 1,
       },
     ],
-    
+
     // 强制函数中的变量在一起声明或分开声明
     'one-var': ['error', 'never'],
 
@@ -169,16 +156,22 @@ module.exports = {
     // 组件名称
     'vue/component-definition-name-casing': ['error', 'PascalCase'],
 
-    "vue/html-closing-bracket-newline": ["error", {
-      "singleline": "never",
-      "multiline": "never"
-    }],
+    'vue/html-closing-bracket-newline': [
+      'error',
+      {
+        singleline: 'never',
+        multiline: 'never',
+      },
+    ],
 
-    "vue/multiline-html-element-content-newline": ["error", {
-      "ignoreWhenEmpty": true,
-      "allowEmptyLines": false,
-      "ignores": ["pre", "textarea"],
-    }],
+    'vue/multiline-html-element-content-newline': [
+      'error',
+      {
+        ignoreWhenEmpty: true,
+        allowEmptyLines: false,
+        ignores: ['pre', 'textarea'],
+      },
+    ],
 
     // 标签自闭和
     'vue/html-self-closing': [
@@ -317,12 +310,5 @@ module.exports = {
     // https://github.com/import-js/eslint-plugin-import/tree/v2.25.3/docs/rules
     'import/no-unresolved': 'off',
     'import/no-named-as-default': 'off',
-    'import/first': 'error',
-    'import/newline-after-import': [
-      'error',
-      {
-        count: 1,
-      },
-    ],
   },
 }

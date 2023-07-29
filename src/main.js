@@ -1,24 +1,19 @@
 import Vue from 'vue'
 import App from './App.vue'
-import axios from 'axios'
 import router from './router'
 import store from './store'
-import './plugins/element.js'
-import 'element-ui/lib/theme-chalk/index.css'
-import TextTooltip from '@/components/TextTooltip'
+import axios from 'axios'
 import components from './components/index'
-import VueJsx from 'vue-jsx'
+import './plugins/element.js'
 
-Vue.use(VueJsx)
-Vue.component('TextTooltip', TextTooltip)
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.config.devtools = process.env.NODE_ENV === 'development'
-// 防止用户修改sessionStorage
-window.addEventListener('storage', (e) => {
-  sessionStorage.setItem(e.key, e.oldValue)
-})
 Vue.use(components)
+// 防止用户修改localStorage
+window.addEventListener('storage', (e) => {
+  localStorage.setItem(e.key, e.oldValue)
+})
 // button节流，在button中添加v-preventReClick即可控制按钮，防止按钮连击，时间限制2s
 Vue.directive('preventReClick', {
   inserted(el) {

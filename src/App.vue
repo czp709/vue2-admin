@@ -12,6 +12,7 @@ export default {
 <style>
 * {
   padding: 0;
+  margin: 0;
 }
 /*滚动条样式*/
 ::-webkit-scrollbar {
