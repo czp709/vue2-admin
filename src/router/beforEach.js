@@ -11,10 +11,7 @@ const beforeEach = async (to, from, next, router) => {
         'user/saveUserInfo',
         JSON.parse(localStorage.getItem('userInfo'))
       )
-      await store.dispatch(
-        'user/saveUserMenu',
-        JSON.parse(localStorage.getItem('menu'))
-      )
+      await store.dispatch('user/saveUserMenu')
       next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
     }
     selfExecution({ to, from, next, router })

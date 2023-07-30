@@ -105,15 +105,15 @@ export default {
       this.loading = true
       const en = new JsEncrypt()
       en.setPublicKey(_pubKey)
-      this.ruleForm.password = en.encrypt(this.ruleForm.password)
-      loginApi(this.ruleForm)
+      const password = en.encrypt(this.ruleForm.password)
+      loginApi({ ...this.ruleForm, password })
         .then(async (res) => {
           if (res.code === 200) {
             Cookies.set('token', res.token)
             localStorage.setItem('refreshToken', res.refresh_token)
             // 将用户信息写入VUEX
             await this.$store.dispatch('user/saveUserInfo', res.data)
-            await this.$store.dispatch('user/saveUserMenu', res.menu)
+            await this.$store.dispatch('user/saveUserMenu')
             this.$router.replace('/home')
           }
         })

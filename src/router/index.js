@@ -22,6 +22,17 @@ export const baseRouter = [
   },
 ]
 
+export const levelRouters = [
+  {
+    path: '/home',
+    component: () => {
+      return import('@/layout/home')
+    },
+    meta: { hidden: false },
+    children: [],
+  },
+]
+
 const createRouter = () => {
   return new VueRouter({
     routes: baseRouter,

@@ -54,3 +54,10 @@ export function changeStatus(data) {
     data,
   })
 }
+
+export function getMenu() {
+  return request({
+    url: Setting.api + '/menus/getMenu',
+    method: 'get',
+  })
+}

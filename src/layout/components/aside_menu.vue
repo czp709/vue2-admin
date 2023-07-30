@@ -8,7 +8,7 @@
     :collapse="$store.state.controlLable.menufold">
     <template v-for="item in menuTree">
       <MenuItem
-        v-if="item.children"
+        v-if="item.menuType == 'M' && item.children"
         :key="item.path"
         :menu-data="item"></MenuItem>
       <el-menu-item
