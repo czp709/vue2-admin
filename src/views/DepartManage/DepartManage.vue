@@ -35,7 +35,7 @@
 import { getDeptTree, queryUser, changeStatus } from '@/api/user.js'
 
 export default {
-  name: 'PageTest2',
+  name: 'DepartManage',
   data() {
     return {
       tree: null,
