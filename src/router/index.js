@@ -20,6 +20,13 @@ export const baseRouter = [
       }
     },
   },
+  {
+    path: '/TestPage',
+    name: 'TestPage',
+    component: () => {
+      return import('@/views/TestPage')
+    },
+  },
 ]
 
 export const levelRouters = [

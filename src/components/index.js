@@ -1,4 +1,4 @@
-const importFn = require.context('../components', true, /\.js$/)
+const importFn = require.context('../components', true, /index.js$/)
 export default {
   install(app) {
     importFn.keys().forEach((path) => {

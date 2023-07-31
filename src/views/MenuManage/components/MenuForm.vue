@@ -43,7 +43,7 @@
         <el-input v-model="ruleForm.query"></el-input>
       </el-form-item>
       <el-form-item label="图标" prop="icon">
-        <el-input v-model="ruleForm.icon"></el-input>
+        <IconChooser v-model="ruleForm.icon"></IconChooser>
       </el-form-item>
       <div class="MenuForm-switch">
         <el-form-item label="外链" prop="isFrame">
