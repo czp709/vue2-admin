@@ -4,10 +4,12 @@
       ref="ruleForm"
       :inline="true"
       :model="filterData"
+      label-width="50px"
       class="demo-form-inline">
       <el-form-item
         v-for="item in filterShow"
         :key="item.key"
+        :label-width="item.labelWidth || '50px'"
         :label="item.label">
         <RenderCell
           v-if="item.render"
@@ -171,6 +173,11 @@ export default {
     user-select: none;
     font-size: 12px;
     margin-left: 8px;
+  }
+}
+/deep/.el-input--suffix {
+  .el-input__inner {
+    padding-right: 0;
   }
 }
 </style>
