@@ -3,7 +3,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { Message } from 'element-ui'
 import { refreshTokenApi } from '../api/user'
-
+import { cloneDeep } from 'lodash'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_URL,
   timeout: 10 * 1000,
@@ -41,7 +41,11 @@ service.interceptors.response.use(
   (err) => {
     if (err.response.status == 405) {
       const refreshToken = localStorage.getItem('refreshToken')
-      const { config } = err
+      let { config } = err
+      config = cloneDeep(config)
+      if (config.data) {
+        config.data = JSON.parse(config.data)
+      }
       if (!isRefreshing) {
         isRefreshing = true
         // 用刷新refreshToken去刷新accessToken

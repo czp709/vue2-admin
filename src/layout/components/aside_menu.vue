@@ -8,14 +8,14 @@
     :collapse="$store.state.controlLable.menufold">
     <template v-for="item in menuTree">
       <MenuItem
-        v-if="item.menuType == 'M' && item.children"
+        v-if="item.menuType == 'M'"
         :key="item.path"
         :menu-data="item"></MenuItem>
       <el-menu-item
         v-else-if="item.visible == 0"
-        :key="item.index"
+        :key="item.menuId"
         :index="'/' + item.path">
-        <i :class="item.icon"></i>
+        <i v-if="item.icon" :class="item.icon"></i>
         <div slot="title" class="title">
           <TextTooltip :content="item.menuName"></TextTooltip>
           <i v-if="item.isFrame == 0" class="el-icon-link"></i>
@@ -95,6 +95,7 @@ export default {
   flex-direction: row;
   align-items: center;
   box-sizing: border-box;
+  width: 100%;
 }
 
 /deep/.el-menu-item.is-active:after {

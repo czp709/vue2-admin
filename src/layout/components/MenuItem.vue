@@ -1,10 +1,10 @@
 <template>
   <el-submenu
     v-if="menuData.visible == 0"
-    :key="menuData.path"
+    :key="menuData.menuId"
     :index="'/' + menuData.path">
     <div slot="title" class="folder-title">
-      <i :class="menuData.icon" class="folder-icon"></i>
+      <i v-if="menuData.icon" :class="menuData.icon" class="folder-icon"></i>
       <TextTooltip
         placement="right"
         effect="light"
@@ -12,12 +12,12 @@
     </div>
 
     <template v-for="child in menuData.children">
-      <template v-if="child.children">
-        <MenuItem :key="child.path" :menu-data="child"></MenuItem>
+      <template v-if="child.menuType == 'M'">
+        <MenuItem :key="child.menuId" :menu-data="child"></MenuItem>
       </template>
       <template v-else>
-        <el-menu-item :key="child.index" :index="'/' + child.path">
-          <i :class="child.icon"></i>
+        <el-menu-item :key="child.menuId" :index="'/' + child.path">
+          <i v-if="child.icon" :class="child.icon"></i>
           <div slot="title" class="title">
             <TextTooltip :content="child.menuName"></TextTooltip>
             <i v-if="child.isFrame == 0" class="el-icon-link"></i>
