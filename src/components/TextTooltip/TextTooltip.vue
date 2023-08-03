@@ -2,10 +2,10 @@
   <el-tooltip
     v-bind="attrs"
     :content="content"
-    :disabled="isShowTooltip"
+    :disabled="isShowTooltip || disabled"
     :style="{ width: width, maxWidth: maxWidth, minWidth: minWidth }"
     v-on="$listeners">
-    <div class="over-flow" :style="customStyle" @mouseover="onMouseOver()">
+    <div class="over-flow" :style="customStyle" @mouseover.stop="onMouseOver()">
       <span ref="refName">{{ content || '' }}</span>
     </div>
   </el-tooltip>
@@ -36,6 +36,10 @@ export default {
     textAlign: {
       type: String,
       default: 'left',
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
 

@@ -16,6 +16,7 @@ const mutations = {
   },
   saveUserMenu(state, level) {
     state.level = level
+    localStorage.setItem('menuData', JSON.stringify(level))
   },
 }
 const actions = {
@@ -26,20 +27,32 @@ const actions = {
       resolve()
     })
   },
-  async saveUserMenu({ commit, getters }) {
-    const { data: menuData } = await getMenu()
-    commit('saveUserMenu', menuData)
-    // 生成用户可访问的路由表
-    const route = getters.addRouters
-    // 将生成的路由表逐个添加入路由
-    for (const item of route) {
-      router.addRoute(item)
+  async saveUserMenu({ commit, getters }, to) {
+    const addRoute = (menuData) => {
+      commit('saveUserMenu', menuData)
+      // 生成用户可访问的路由表
+      const route = getters.addRouters
+      // 将生成的路由表逐个添加入路由
+      for (const item of route) {
+        router.addRoute(item)
+      }
     }
+    const localMenu = JSON.parse(localStorage.getItem('menuData')) || []
+    const haveRoute = localMenu.some((item) => {
+      return '/' + item.path == to.path || to.path == '/home'
+    })
+    if (haveRoute) {
+      addRoute(localMenu)
+      return
+    }
+    const { data: menuData } = await getMenu()
+    addRoute(menuData)
   },
   logout() {
     Cookies.remove('token')
     localStorage.removeItem('userInfo')
     localStorage.removeItem('refreshToken')
+    localStorage.removeItem('menuData')
     resetRouter()
   },
 }

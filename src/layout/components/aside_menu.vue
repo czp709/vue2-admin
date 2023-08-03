@@ -16,10 +16,14 @@
         :key="item.menuId"
         :index="'/' + item.path">
         <i v-if="item.icon" :class="item.icon"></i>
-        <div slot="title" class="title">
+        <div
+          v-if="!$store.state.controlLable.menufold"
+          slot="title"
+          class="title">
           <TextTooltip :content="item.menuName"></TextTooltip>
           <i v-if="item.isFrame == 0" class="el-icon-link"></i>
         </div>
+        <span v-else slot="title">{{ item.menuName }}</span>
       </el-menu-item>
     </template>
   </el-menu>
@@ -107,5 +111,16 @@ export default {
   bottom: 0;
   right: 0;
   background: #2d8cf0;
+}
+/deep/.el-menu--collapse > div > .el-submenu .el-submenu__title span {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  visibility: hidden;
+  display: inline-block;
+}
+
+/deep/.el-menu--collapse > div > .el-menu-item span {
+  display: none;
 }
 </style>

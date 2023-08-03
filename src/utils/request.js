@@ -39,7 +39,7 @@ service.interceptors.response.use(
     return Promise.resolve(response.data)
   },
   (err) => {
-    if (err.response.status == 405) {
+    if (err.response?.status == 405) {
       const refreshToken = localStorage.getItem('refreshToken')
       let { config } = err
       config = cloneDeep(config)
@@ -83,12 +83,12 @@ service.interceptors.response.use(
         })
       })
     }
-    if (err.response.status == 401) {
+    if (err.response?.status == 401) {
       location.href = '/'
       Message.error('登录超时，请重新登录！')
       return Promise.reject(err.response)
     }
-    Message.error(err.response.data.msg)
+    Message.error(err.response?.data?.msg)
     /** *** 处理结束 *****/
     return Promise.reject(err.response)
   }

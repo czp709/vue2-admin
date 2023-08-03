@@ -1,31 +1,38 @@
 <template>
-  <el-submenu
-    v-if="menuData.visible == 0"
-    :key="menuData.menuId"
-    :index="'/' + menuData.path">
-    <div slot="title" class="folder-title">
-      <i v-if="menuData.icon" :class="menuData.icon" class="folder-icon"></i>
-      <TextTooltip
-        placement="right"
-        effect="light"
-        :content="menuData.menuName"></TextTooltip>
-    </div>
+  <div>
+    <el-submenu
+      v-if="menuData.visible == 0"
+      :key="menuData.menuId"
+      :index="'/' + menuData.path"
+      @mouseover.stop>
+      <div slot="title" class="folder-title">
+        <i v-if="menuData.icon" :class="menuData.icon" class="folder-icon"></i>
+        <TextTooltip
+          placement="right"
+          effect="light"
+          :content="menuData.menuName"></TextTooltip>
+      </div>
 
-    <template v-for="child in menuData.children">
-      <template v-if="child.menuType == 'M'">
-        <MenuItem :key="child.menuId" :menu-data="child"></MenuItem>
+      <template v-for="child in menuData.children">
+        <template v-if="child.menuType == 'M'">
+          <MenuItem :key="child.menuId" :menu-data="child"></MenuItem>
+        </template>
+        <template v-else>
+          <el-menu-item :key="child.menuId" :index="'/' + child.path">
+            <i v-if="child.icon" :class="child.icon"></i>
+            <div
+              v-if="!$store.state.controlLable.menufold"
+              slot="title"
+              class="title">
+              <TextTooltip :content="child.menuName"></TextTooltip>
+              <i v-if="child.isFrame == 0" class="el-icon-link"></i>
+            </div>
+            <span v-else slot="title">{{ child.menuName }}</span>
+          </el-menu-item>
+        </template>
       </template>
-      <template v-else>
-        <el-menu-item :key="child.menuId" :index="'/' + child.path">
-          <i v-if="child.icon" :class="child.icon"></i>
-          <div slot="title" class="title">
-            <TextTooltip :content="child.menuName"></TextTooltip>
-            <i v-if="child.isFrame == 0" class="el-icon-link"></i>
-          </div>
-        </el-menu-item>
-      </template>
-    </template>
-  </el-submenu>
+    </el-submenu>
+  </div>
 </template>
 
 <script>
@@ -74,6 +81,20 @@ export default {
 
 .el-menu-vertical-demo:is(.el-menu--collapse) {
   width: auto;
+  div {
+    li {
+      /deep/.el-submenu__title {
+        display: flex;
+        align-items: center;
+        .el-submenu__icon-arrow {
+          display: none;
+        }
+        .el-tooltip {
+          display: none;
+        }
+      }
+    }
+  }
 }
 .el-submenu {
   position: relative;
