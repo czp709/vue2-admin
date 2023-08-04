@@ -113,7 +113,7 @@ export default {
             localStorage.setItem('refreshToken', res.refresh_token)
             // 将用户信息写入VUEX
             await this.$store.dispatch('user/saveUserInfo', res.data)
-            await this.$store.dispatch('user/saveUserMenu')
+            await this.$store.commit('user/saveUserMenu', res.role)
             this.$router.replace('/home')
           }
         })

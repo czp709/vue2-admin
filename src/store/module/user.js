@@ -39,11 +39,10 @@ const actions = {
     }
     const localMenu = JSON.parse(localStorage.getItem('menuData')) || []
     const haveRoute = localMenu.some((item) => {
-      return '/' + item.path == to.path || to.path == '/home'
+      return '/' + item.path == to?.path || to?.path == '/home'
     })
     if (haveRoute) {
       addRoute(localMenu)
-      return
     }
     const { data: menuData } = await getMenu()
     addRoute(menuData)
