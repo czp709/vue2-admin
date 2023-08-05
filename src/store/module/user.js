@@ -37,7 +37,9 @@ const actions = {
         router.addRoute(item)
       }
     }
-    const localMenu = JSON.parse(localStorage.getItem('menuData')) || []
+    const localMenu = localStorage.getItem('menuData')
+      ? JSON.parse(localStorage.getItem('menuData'))
+      : []
     const haveRoute = localMenu.some((item) => {
       return '/' + item.path == to?.path || to?.path == '/home'
     })

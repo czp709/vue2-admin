@@ -120,15 +120,16 @@ export default {
   justify-content: space-between;
 }
 .tree-box {
-  width: calc(~'30% - 40px');
+  width: 300px;
   box-shadow: 1px 0 6px rgba(0, 0, 0, 0.2);
   padding: 16px;
+  margin-right: 16px;
   height: calc(~'100% - 32px');
 }
 .table {
   display: flex;
   flex-direction: column;
-  width: calc(~'70% - 8px');
+  flex: 1;
   height: 100%;
   box-shadow: 1px 0 6px rgba(0, 0, 0, 0.2);
 }
