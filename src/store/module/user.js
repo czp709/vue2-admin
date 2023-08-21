@@ -43,8 +43,10 @@ const actions = {
     const haveRoute = localMenu.some((item) => {
       return '/' + item.path == to?.path || to?.path == '/home'
     })
+    // 判断当前路由是否在用户可访问路由表中
     if (haveRoute) {
       addRoute(localMenu)
+      return
     }
     const { data: menuData } = await getMenu()
     addRoute(menuData)

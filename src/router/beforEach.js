@@ -6,7 +6,10 @@ const beforeEach = async (to, from, next, router) => {
   if (Cookies.get('token') && localStorage.getItem('userInfo')) {
     // 判断是否已经登陆过
     // 如果登陆过但是路由还未生成就先生成路由
-    if (whiteList.indexOf(to.path) === -1 && to.matched.length === 0) {
+    const matched = to.matched.some((item) => {
+      return item.path == to.path
+    })
+    if (whiteList.indexOf(to.path) === -1 && !matched) {
       await store.dispatch(
         'user/saveUserInfo',
         JSON.parse(localStorage.getItem('userInfo'))
