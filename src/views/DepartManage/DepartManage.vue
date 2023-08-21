@@ -12,13 +12,13 @@
           <span class="iconStr">
             <TextTooltip :content="data.deptName"></TextTooltip>
           </span>
-          <span class="icons">
+          <!-- <span class="icons">
             <i
               title="编辑"
               class="el-icon-edit icon"
               style="margin-right: 8px"></i>
             <i title="删除" class="el-icon-delete icon"></i>
-          </span>
+          </span> -->
         </span>
       </el-tree>
     </div>

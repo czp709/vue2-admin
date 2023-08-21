@@ -144,6 +144,10 @@ export default {
 }
 </script>
 <style scoped lang="less">
+.el-form-item {
+  display: flex;
+  flex-direction: row;
+}
 .tablePage-box {
   display: flex;
   flex-direction: column;
