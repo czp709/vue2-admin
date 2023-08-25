@@ -137,19 +137,17 @@ export default {
     },
   },
   watch: {
-    page: {
+    'page.pageNum': {
       handler() {
         this.getList()
       },
-      deep: true,
     },
   },
-  mounted() {
-    setTimeout(() => {
-      this.setTableHeight()
+  async mounted() {
+    await this.setTableHeight()
 
-      this.getList()
-    }, 0)
+    this.getList()
+
     window.addEventListener('resize', this.setTableHeight)
     this.$refs.tablePage?.addEventListener('resize', this.setTableHeight)
   },
@@ -182,32 +180,37 @@ export default {
     },
     // 设置表格高度
     setTableHeight() {
-      this.$nextTick(() => {
-        const tablePage = this.$refs.tablePage
-        const tablePagePaddingTop = Number(
-          window.getComputedStyle(tablePage, null).paddingTop.replace('px', '')
-        )
-        const tablePagePaddingBottom = Number(
-          window
-            .getComputedStyle(tablePage, null)
-            .paddingBottom.replace('px', '')
-        )
-        const tablePageHeight = tablePage.offsetHeight
-        const filterHeight = this.$refs.filterCondition.$el.offsetHeight || 0
-        const pageHeight = this.options.hiddenPage ? 0 : 48
-        this.tableHeight =
-          tablePageHeight -
-          16 * 2 - // margin
-          filterHeight - // 搜索高度
-          pageHeight - // 分页器高度
-          (tablePagePaddingTop + tablePagePaddingBottom) // padding
-        if (this.tableHeight < 100) {
-          this.tableHeight = 100
-        }
-        // 表头高度
-        this.tableHeaderHeight = tablePage.getElementsByClassName(
-          'el-table__header-wrapper'
-        )[0].offsetHeight
+      return new Promise((resolve) => {
+        this.$nextTick(() => {
+          const tablePage = this.$refs.tablePage
+          const tablePagePaddingTop = Number(
+            window
+              .getComputedStyle(tablePage, null)
+              .paddingTop.replace('px', '')
+          )
+          const tablePagePaddingBottom = Number(
+            window
+              .getComputedStyle(tablePage, null)
+              .paddingBottom.replace('px', '')
+          )
+          const tablePageHeight = tablePage.offsetHeight
+          const filterHeight = this.$refs.filterCondition.$el.offsetHeight || 0
+          const pageHeight = this.options.hiddenPage ? 0 : 48
+          this.tableHeight =
+            tablePageHeight -
+            16 * 2 - // margin
+            filterHeight - // 搜索高度
+            pageHeight - // 分页器高度
+            (tablePagePaddingTop + tablePagePaddingBottom) // padding
+          if (this.tableHeight < 100) {
+            this.tableHeight = 100
+          }
+          // 表头高度
+          this.tableHeaderHeight = tablePage.getElementsByClassName(
+            'el-table__header-wrapper'
+          )[0].offsetHeight
+          resolve()
+        })
       })
     },
   },
