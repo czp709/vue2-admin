@@ -214,9 +214,10 @@ export default {
 .el-tab-pane,
 .el-tabs {
   height: 100%;
+  position: relative;
 }
 /deep/.el-tabs__content {
-  height: calc(~'100% - 55px');
+  height: ~'calc(100% - 55px)';
 }
 </style>
 <style>

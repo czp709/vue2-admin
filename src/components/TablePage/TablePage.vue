@@ -23,10 +23,7 @@
       <el-form-item class="search-btn">
         <el-button type="primary" @click="getList">查询</el-button>
         <el-button @click="resetForm"> 重置 </el-button>
-        <span
-          v-if="filters.length > 4"
-          class="expand"
-          @click="expand = !expand">
+        <span v-if="filters.length > 4" class="expand" @click="filterExpand">
           <span>{{ !expand ? '展开' : '收起' }}</span>
           <i :class="!expand ? 'el-icon-arrow-down' : 'el-icon-arrow-up'"></i>
         </span>
@@ -36,7 +33,7 @@
       :height="tableHeight"
       :data="tableData"
       border
-      style="width: 100%; flex: 1">
+      style="width: 100%">
       <el-table-column
         v-for="item in columns"
         :key="item.key"
@@ -71,6 +68,7 @@
       </el-table-column>
     </el-table>
     <el-pagination
+      ref="page"
       background
       :current-page.sync="page.pageNum"
       :page-size="page.pageSize"
@@ -143,18 +141,17 @@ export default {
       },
     },
   },
-  async mounted() {
-    await this.setTableHeight()
-
-    this.getList()
+  mounted() {
+    setTimeout(async () => {
+      await this.setTableHeight()
+      this.getList()
+    }, 0)
 
     window.addEventListener('resize', this.setTableHeight)
-    this.$refs.tablePage?.addEventListener('resize', this.setTableHeight)
   },
 
   beforeDestroy() {
     window.removeEventListener('resize', this.setTableHeight)
-    this.$refs.tablePage?.removeEventListener('resize', this.setTableHeight)
   },
   methods: {
     resetForm() {
@@ -183,22 +180,16 @@ export default {
       return new Promise((resolve) => {
         this.$nextTick(() => {
           const tablePage = this.$refs.tablePage
-          const tablePagePaddingTop = Number(
-            window
-              .getComputedStyle(tablePage, null)
-              .paddingTop.replace('px', '')
-          )
-          const tablePagePaddingBottom = Number(
-            window
-              .getComputedStyle(tablePage, null)
-              .paddingBottom.replace('px', '')
-          )
-          const tablePageHeight = tablePage.offsetHeight
+          const tablePagePaddingTop = 16
+          const tablePagePaddingBottom = 16
+          const tablePageHeight = tablePage.clientHeight
           const filterHeight = this.$refs.filterCondition.$el.offsetHeight || 0
-          const pageHeight = this.options.hiddenPage ? 0 : 48
+          const pageHeight = this.options.hiddenPage
+            ? 0
+            : this.$refs.page.$el.offsetHeight + 16
+          console.log('tablePageHeight', tablePageHeight)
           this.tableHeight =
             tablePageHeight -
-            16 * 2 - // margin
             filterHeight - // 搜索高度
             pageHeight - // 分页器高度
             (tablePagePaddingTop + tablePagePaddingBottom) // padding
@@ -213,6 +204,11 @@ export default {
         })
       })
     },
+    filterExpand() {
+      this.expand = !this.expand
+      this.$emit('expand-change', this.expand)
+      this.setTableHeight()
+    },
   },
 }
 </script>
@@ -222,11 +218,10 @@ export default {
   flex-direction: row;
 }
 .tablePage-box {
-  display: flex;
-  flex-direction: column;
   height: 100%;
   width: 100%;
-  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  box-sizing: border-box;
 }
 .el-pagination {
   text-align: right;

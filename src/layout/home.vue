@@ -76,6 +76,7 @@ export default {
 .main {
   margin: 8px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 .el-main {
   padding: 0;

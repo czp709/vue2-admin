@@ -50,6 +50,7 @@ export default {
     options() {
       return {
         apiFunc: queryUser,
+        hideActionBtn: true,
         filter: {
           deptId: this.deptId,
         },
@@ -172,16 +173,18 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
-.tree-box {
-  width: calc(~'20% - 40px');
-  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.2);
+.el-tree {
   padding: 16px;
-  height: calc(~'100% - 32px');
+}
+.tree-box {
+  width: 300px;
+  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.2);
+  height: 100%;
+  margin-right: 16px;
 }
 .table {
-  display: flex;
-  flex-direction: column;
-  width: calc(~'80% - 8px');
+  position: relative;
+  width: calc(~'100% - 300px');
   height: 100%;
   box-shadow: 1px 0 6px rgba(0, 0, 0, 0.2);
 }
