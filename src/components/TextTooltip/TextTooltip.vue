@@ -3,11 +3,14 @@
     v-bind="attrs"
     :content="content"
     :disabled="isShowTooltip || disabled"
-    :style="{ width: width, maxWidth: maxWidth, minWidth: minWidth }"
+    :style="{ maxWidth: maxWidth, minWidth: minWidth }"
     v-on="$listeners">
-    <div class="over-flow" :style="customStyle" @mouseover.stop="onMouseOver()">
+    <span
+      class="over-flow"
+      :style="customStyle"
+      @mouseover.stop="onMouseOver()">
       <span ref="refName">{{ content || '' }}</span>
-    </div>
+    </span>
   </el-tooltip>
 </template>
 
@@ -87,5 +90,6 @@ export default {
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 100%;
+  display: inline-block;
 }
 </style>

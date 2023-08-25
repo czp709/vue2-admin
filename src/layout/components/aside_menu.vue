@@ -16,13 +16,13 @@
         :key="item.menuId"
         :index="'/' + item.path">
         <i v-if="item.icon" :class="item.icon"></i>
-        <div
+        <span
           v-if="!$store.state.controlLable.menufold"
           slot="title"
           class="title">
           <TextTooltip :content="item.menuName"></TextTooltip>
           <i v-if="item.isFrame == 0" class="el-icon-link"></i>
-        </div>
+        </span>
         <span v-else slot="title">{{ item.menuName }}</span>
       </el-menu-item>
     </template>
@@ -68,13 +68,10 @@ export default {
 </script>
 <style scoped lang="less">
 .title {
-  float: right;
-  width: calc(~'100% - 30px');
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  .over-flow {
+    width: calc(~'100% - 24px');
+  }
 }
-
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
 }
@@ -85,23 +82,6 @@ export default {
 .el-menu {
   border: none;
 }
-/deep/.el-sub-menu__title {
-  padding: 0 20px !important;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-}
-.el-menu-item {
-  padding: 0 20px !important;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  box-sizing: border-box;
-  width: 100%;
-}
-
 /deep/.el-menu-item.is-active:after {
   content: '';
   display: block;
