@@ -1,7 +1,7 @@
 <template>
-  <div class="tablePage-box">
+  <div ref="tablePage" class="tablePage-box">
     <el-form
-      ref="ruleForm"
+      ref="filterCondition"
       :inline="true"
       :model="filterData"
       label-width="50px"
@@ -32,25 +32,38 @@
         </span>
       </el-form-item>
     </el-form>
-    <el-table :data="tableData" border style="width: 100%; flex: 1">
+    <el-table
+      :height="tableHeight"
+      :data="tableData"
+      border
+      style="width: 100%; flex: 1">
       <el-table-column
         v-for="item in columns"
         :key="item.key"
         align="center"
         :prop="item.key"
-        :label="item.label">
+        :label="item.label"
+        :width="item.width">
         <template slot-scope="scope">
           <RenderCell
             v-if="item.render"
             :render="item.render"
             :params="scope"></RenderCell>
+          <span v-else-if="item.type == 'index'">
+            {{ scope.$index + 1 }}
+          </span>
           <TextTooltip
             v-else
             :content="String(scope.row[item.key])"
             text-align="center"></TextTooltip>
         </template>
       </el-table-column>
-      <el-table-column align="center" fixed="right" label="操作" width="100">
+      <el-table-column
+        v-if="!options.hideActionBtn"
+        align="center"
+        fixed="right"
+        label="操作"
+        width="100">
         <template slot-scope="">
           <el-button type="text" size="small"> 查看 </el-button>
           <el-button type="text" size="small">编辑</el-button>
@@ -105,6 +118,11 @@ export default {
       total: 0,
       tableData: [],
       expand: false,
+      // 表格默认高度
+      tableHeight: 500,
+      // 表头高度
+      tableHeaderHeight: 39,
+      lineHeight: 57,
     }
   },
   computed: {
@@ -118,8 +136,27 @@ export default {
       return this.filters
     },
   },
+  watch: {
+    page: {
+      handler() {
+        this.getList()
+      },
+      deep: true,
+    },
+  },
   mounted() {
-    this.getList()
+    setTimeout(() => {
+      this.setTableHeight()
+
+      this.getList()
+    }, 0)
+    window.addEventListener('resize', this.setTableHeight)
+    this.$refs.tablePage?.addEventListener('resize', this.setTableHeight)
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.setTableHeight)
+    this.$refs.tablePage?.removeEventListener('resize', this.setTableHeight)
   },
   methods: {
     resetForm() {
@@ -131,6 +168,9 @@ export default {
     getList() {
       const func = this.options.apiFunc
       if (func) {
+        this.page.pageSize = Math.floor(
+          (this.tableHeight + 32 - this.tableHeaderHeight) / this.lineHeight
+        )
         func({ ...this.filterData, ...this.page, ...this.options.filter }).then(
           (res) => {
             this.tableData = res.data
@@ -139,6 +179,36 @@ export default {
           }
         )
       }
+    },
+    // 设置表格高度
+    setTableHeight() {
+      this.$nextTick(() => {
+        const tablePage = this.$refs.tablePage
+        const tablePagePaddingTop = Number(
+          window.getComputedStyle(tablePage, null).paddingTop.replace('px', '')
+        )
+        const tablePagePaddingBottom = Number(
+          window
+            .getComputedStyle(tablePage, null)
+            .paddingBottom.replace('px', '')
+        )
+        const tablePageHeight = tablePage.offsetHeight
+        const filterHeight = this.$refs.filterCondition.$el.offsetHeight || 0
+        const pageHeight = this.options.hiddenPage ? 0 : 48
+        this.tableHeight =
+          tablePageHeight -
+          16 * 2 - // margin
+          filterHeight - // 搜索高度
+          pageHeight - // 分页器高度
+          (tablePagePaddingTop + tablePagePaddingBottom) // padding
+        if (this.tableHeight < 100) {
+          this.tableHeight = 100
+        }
+        // 表头高度
+        this.tableHeaderHeight = tablePage.getElementsByClassName(
+          'el-table__header-wrapper'
+        )[0].offsetHeight
+      })
     },
   },
 }
@@ -151,9 +221,8 @@ export default {
 .tablePage-box {
   display: flex;
   flex-direction: column;
-  width: calc(~'100% - 32px');
-  height: calc(~'100% - 32px');
-  padding: 16px;
+  height: 100%;
+  width: 100%;
   box-shadow: 1px 0 6px rgba(0, 0, 0, 0.2);
 }
 .el-pagination {
@@ -164,10 +233,19 @@ export default {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   transition: all 0.5 ease-in-out;
+  grid-column-gap: 16px;
+}
+/deep/.el-form-item__content {
+  width: 100%;
 }
 .search-btn {
-  text-align: right;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   grid-column-start: 5;
+  /deep/.el-form-item__content {
+    width: auto;
+  }
   .expand {
     display: inline-block;
     width: 56px;
