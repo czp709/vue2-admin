@@ -136,7 +136,11 @@ export default {
         },
         {
           key: 'query',
-          label: '请求参数',
+          label: 'query',
+        },
+        {
+          key: 'body',
+          label: 'body',
         },
         {
           key: 'result',
@@ -193,6 +197,24 @@ export default {
           key: 'method',
           label: '请求方法',
           labelWidth: '100px',
+          render: (h, filterData) => {
+            return (
+              <el-select
+                style='width:100%'
+                v-model={filterData.method}
+                placeholder='请选择'
+                clearable>
+                <el-option key='GET' label='GET' value='GET'></el-option>
+                <el-option key='POST' label='POST' value='POST'></el-option>
+                <el-option
+                  key='DELETE'
+                  label='DELETE'
+                  value='DELETE'></el-option>
+                <el-option key='PUT' label='PUT' value='PUT'></el-option>
+                <el-option key='HEAD' label='HEAD' value='HEAD'></el-option>
+              </el-select>
+            )
+          },
         },
         {
           key: 'url',
