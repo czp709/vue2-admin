@@ -27,7 +27,13 @@
         ref="tablePage"
         :columns="columns"
         :filters="filters"
-        :options="options"></TablePage>
+        :options="options">
+        <template #filterCondition>
+          <div>
+            <el-button type="primary">新增用户</el-button>
+          </div>
+        </template>
+      </TablePage>
     </div>
   </div>
 </template>

@@ -1,34 +1,37 @@
 <template>
   <div ref="tablePage" class="tablePage-box">
-    <el-form
-      ref="filterCondition"
-      :inline="true"
-      :model="filterData"
-      label-width="50px"
-      class="demo-form-inline">
-      <el-form-item
-        v-for="item in filterShow"
-        :key="item.key"
-        :label-width="item.labelWidth || '50px'"
-        :label="item.label">
-        <RenderCell
-          v-if="item.render"
-          :render="item.render"
-          :params="filterData"></RenderCell>
-        <el-input
-          v-else
-          v-model="filterData[item.key]"
-          :placeholder="'请输入' + item.label"></el-input>
-      </el-form-item>
-      <el-form-item class="search-btn">
-        <el-button type="primary" @click="getList">查询</el-button>
-        <el-button @click="resetForm"> 重置 </el-button>
-        <span v-if="filters.length > 4" class="expand" @click="filterExpand">
-          <span>{{ !expand ? '展开' : '收起' }}</span>
-          <i :class="!expand ? 'el-icon-arrow-down' : 'el-icon-arrow-up'"></i>
-        </span>
-      </el-form-item>
-    </el-form>
+    <div ref="filterCondition" style="padding-bottom: 8px">
+      <el-form
+        :inline="true"
+        :model="filterData"
+        label-width="50px"
+        class="demo-form-inline">
+        <el-form-item
+          v-for="item in filterShow"
+          :key="item.key"
+          :label-width="item.labelWidth || '50px'"
+          :label="item.label">
+          <RenderCell
+            v-if="item.render"
+            :render="item.render"
+            :params="filterData"></RenderCell>
+          <el-input
+            v-else
+            v-model="filterData[item.key]"
+            :placeholder="'请输入' + item.label"></el-input>
+        </el-form-item>
+        <el-form-item class="search-btn">
+          <el-button type="primary" @click="getList">查询</el-button>
+          <el-button @click="resetForm"> 重置 </el-button>
+          <span v-if="filters.length > 4" class="expand" @click="filterExpand">
+            <span>{{ !expand ? '展开' : '收起' }}</span>
+            <i :class="!expand ? 'el-icon-arrow-down' : 'el-icon-arrow-up'"></i>
+          </span>
+        </el-form-item>
+      </el-form>
+      <slot name="filterCondition"></slot>
+    </div>
+
     <el-table
       :height="tableHeight"
       :data="tableData"
@@ -183,7 +186,7 @@ export default {
           const tablePagePaddingTop = 16
           const tablePagePaddingBottom = 16
           const tablePageHeight = tablePage.clientHeight
-          const filterHeight = this.$refs.filterCondition.$el.offsetHeight || 0
+          const filterHeight = this.$refs.filterCondition.offsetHeight || 0
           const pageHeight = this.options.hiddenPage
             ? 0
             : this.$refs.page.$el.offsetHeight + 16

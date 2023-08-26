@@ -19,7 +19,7 @@
         <span
           v-if="!$store.state.controlLable.menufold"
           slot="title"
-          class="title">
+          :class="{ title: true, padding: item.isFrame == 0 }">
           <TextTooltip :content="item.menuName"></TextTooltip>
           <i v-if="item.isFrame == 0" class="el-icon-link"></i>
         </span>
@@ -72,6 +72,11 @@ export default {
     width: calc(~'100% - 24px');
   }
 }
+.padding {
+  .over-flow {
+    width: calc(~'100% - 48px');
+  }
+}
 /deep/.el-menu-item [class^='el-icon-'],
 /deep/.el-submenu [class^='el-icon-'] {
   padding-top: 4px;
@@ -106,5 +111,12 @@ export default {
 
 /deep/.el-menu--collapse > div > .el-menu-item span {
   display: none;
+}
+/deep/.el-icon-link {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  padding-top: 6px !important;
+  transform: translateY(-50%);
 }
 </style>
