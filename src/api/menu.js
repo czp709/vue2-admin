@@ -27,3 +27,10 @@ export function getMenuInfo(id) {
     method: 'get',
   })
 }
+export function sortMenu(parentId, data) {
+  return request({
+    url: Setting.api + '/menus/sortMenu?parentId=' + parentId,
+    method: 'POST',
+    data,
+  })
+}

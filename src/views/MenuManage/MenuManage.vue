@@ -4,10 +4,12 @@
       <el-tree
         :data="tree"
         node-key="menuId"
-        default-expand-all
+        draggable
+        :default-expanded-keys="[0]"
         :expand-on-click-node="false"
         :props="defaultProps"
-        @node-click="handleNodeClick">
+        @node-click="handleNodeClick"
+        @node-drop="onNodeDrop">
         <span slot-scope="{ data }" class="tree-line">
           <span class="iconStr">
             <TextTooltip :content="data.menuName"></TextTooltip>
@@ -42,7 +44,7 @@
 import array2Tree from '@/utils/index'
 import { cloneDeep } from 'lodash'
 import MenuForm from './components/MenuForm'
-import { deleteMenu, getMenuTree } from '@/api/menu'
+import { deleteMenu, getMenuTree, sortMenu } from '@/api/menu'
 export default {
   name: 'MenuMange',
   components: {
@@ -67,7 +69,7 @@ export default {
       getMenuTree().then((res) => {
         const tree = [
           {
-            menuId: '0',
+            menuId: 0,
             menuName: '根目录',
             menuType: 'M',
             children: [],
@@ -106,6 +108,24 @@ export default {
         if (data.menuId == this.$refs.MenuForm.ruleForm.menuId) {
           this.close()
         }
+      })
+    },
+    onNodeDrop(node, insertNode, position) {
+      let parentNode
+      if (position !== 'inner') {
+        parentNode = insertNode.parent.data
+      } else {
+        parentNode = insertNode.data
+      }
+      const parentId = parentNode.menuId
+      const childSort = parentNode.children.map((item, index) => {
+        return {
+          id: item.menuId,
+          orderNum: index + 1,
+        }
+      })
+      sortMenu(parentId, childSort).catch(() => {
+        this.getMenu()
       })
     },
   },
