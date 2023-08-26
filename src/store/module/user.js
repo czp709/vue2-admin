@@ -9,16 +9,16 @@ import { debounce } from 'lodash'
 Vue.use(Vuex)
 const state = {
   userInfo: {},
-  level: '0',
+  route: {},
 }
 
 const mutations = {
   saveuserInfo(state, userInfo) {
     state.userInfo = userInfo
   },
-  saveUserMenu(state, level) {
-    state.level = level
-    localStorage.setItem('menuData', JSON.stringify(level))
+  saveUserMenu(state, route) {
+    state.route = route
+    localStorage.setItem('menuData', JSON.stringify(route))
   },
 }
 const actions = {
@@ -73,7 +73,7 @@ const actions = {
 const getters = {
   addRouters(state) {
     const { levelRouters } = require('@/router/index')
-    const menu = createdRoutes(state.level)
+    const menu = createdRoutes(state.route)
     levelRouters[0].children = menu
     return levelRouters
   },

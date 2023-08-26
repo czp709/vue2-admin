@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 import Setting from '@/utils/setting'
-
+import store from '@/store'
 export function addMenu(data) {
   return request({
     url: Setting.api + '/menus/addMenu',
@@ -19,6 +19,9 @@ export function getMenuTree() {
   return request({
     url: Setting.api + '/menus/getMenuTree',
     method: 'get',
+  }).then((res) => {
+    store.dispatch('user/getMenuData')
+    return res
   })
 }
 export function getMenuInfo(id) {
@@ -32,5 +35,8 @@ export function sortMenu(parentId, data) {
     url: Setting.api + '/menus/sortMenu?parentId=' + parentId,
     method: 'POST',
     data,
+  }).then((res) => {
+    store.dispatch('user/getMenuData')
+    return res
   })
 }

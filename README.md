@@ -82,9 +82,7 @@ login () {
 
 ## router 权限控制
 
-根据登录接口返回的 level 字段进行判断，其中 meta 的 levelname 表示页面所需权限，不配置默认全可以访问。给每一位用户添加了 level 字段，level 字段由此用户所持有权限的页面的 levelname 拼接而成。
-
-<font color=red>对于不需要进行分级权限认证的系统请不要删除@/router/levelRouters，可以将所有页面的 levelname 全部删除，即全部设置为无需权限。</font>
+根据接口返回的数据动态生成路由，并根据接口数据生成导航栏
 
 在@/router/beforEach.js 中含有路由守卫，基础的路由守卫已经添加，若还要实现其余功能（如：进行过某个操作后才能进入某个页面）可以在 router/beforEach.js 内的 Selfexecution 函数内添加相应逻辑。
 
@@ -92,9 +90,7 @@ login () {
 
 在@/router/beforEach.js 中 meta 属性中配置侧边栏的 icon，title，hidden。当 hidden:true 时侧边导航栏不显示。
 
-动态导航栏是根据 level、levelname、hidden 生成的。
-
-侧边栏颜色可以修改 VUEX 中的 aside_color 和 aside_rext_color
+侧边栏颜色可以修改 utils/setting 中 theme 的 aside_color 和 aside_rext_color
 
 ---
 

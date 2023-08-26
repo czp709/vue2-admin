@@ -48,7 +48,7 @@ export default {
   computed: {
     ...mapState({
       menu: (state) => {
-        return state.user.level
+        return state.user.route
       },
     }),
     menuDefaultActive() {

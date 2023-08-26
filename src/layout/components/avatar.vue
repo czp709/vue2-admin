@@ -47,9 +47,6 @@ export default {
       userInfo: (state) => {
         return state.user.userInfo
       },
-      level: (state) => {
-        return state.user.level
-      },
     }),
   },
   methods: {
