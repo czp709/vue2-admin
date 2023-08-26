@@ -72,6 +72,10 @@ export default {
     width: calc(~'100% - 24px');
   }
 }
+/deep/.el-menu-item [class^='el-icon-'],
+/deep/.el-submenu [class^='el-icon-'] {
+  padding-top: 4px;
+}
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
 }
