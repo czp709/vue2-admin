@@ -18,7 +18,8 @@
           <el-input
             v-else
             v-model="filterData[item.key]"
-            :placeholder="'请输入' + item.label"></el-input>
+            :placeholder="'请输入' + item.label"
+            @keyup.enter.native="getList"></el-input>
         </el-form-item>
         <el-form-item class="search-btn">
           <el-button type="primary" @click="getList">查询</el-button>
@@ -112,6 +113,7 @@ export default {
   data() {
     return {
       filterData: {},
+      otherFilters: {},
       page: {
         pageNum: 1,
         pageSize: 10,
@@ -136,12 +138,22 @@ export default {
       }
       return this.filters
     },
+    optionsFilter() {
+      return this.options.filter
+    },
   },
   watch: {
     'page.pageNum': {
       handler() {
         this.getList()
       },
+    },
+    optionsFilter: {
+      handler(val) {
+        this.otherFilters = val
+      },
+      deep: true,
+      immediate: true,
     },
   },
   mounted() {
@@ -159,6 +171,7 @@ export default {
   methods: {
     resetForm() {
       this.filterData = {}
+      this.otherFilters = {}
       this.$nextTick(() => {
         this.getList()
       })
@@ -169,7 +182,7 @@ export default {
         this.page.pageSize = Math.floor(
           (this.tableHeight + 32 - this.tableHeaderHeight) / this.lineHeight
         )
-        func({ ...this.filterData, ...this.page, ...this.options.filter }).then(
+        func({ ...this.filterData, ...this.page, ...this.otherFilters }).then(
           (res) => {
             this.tableData = res.data
             this.total = res.total
@@ -190,7 +203,6 @@ export default {
           const pageHeight = this.options.hiddenPage
             ? 0
             : this.$refs.page.$el.offsetHeight + 16
-          console.log('tablePageHeight', tablePageHeight)
           this.tableHeight =
             tablePageHeight -
             filterHeight - // 搜索高度

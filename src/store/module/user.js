@@ -51,11 +51,12 @@ const actions = {
     }
     dispatch('getMenuData')
   },
-  getMenuData: debounce(async ({ commit }) => {
+  getMenuData: debounce(async ({ commit, getters }) => {
     const { data: menuData } = await getMenu()
     commit('saveUserMenu', menuData)
     // 生成用户可访问的路由表
     const route = getters.addRouters
+    resetRouter()
     // 将生成的路由表逐个添加入路由
     for (const item of route) {
       router.addRoute(item)
