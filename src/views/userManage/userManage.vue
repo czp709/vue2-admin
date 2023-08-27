@@ -30,18 +30,22 @@
         :options="options">
         <template #filterCondition>
           <div>
-            <el-button type="primary">新增用户</el-button>
+            <el-button type="primary" @click="addUser"> 新增用户 </el-button>
           </div>
         </template>
       </TablePage>
     </div>
+    <AddUser ref="addUser"></AddUser>
   </div>
 </template>
 <script>
 import { getDeptTree, queryUser, changeStatus } from '@/api/user.js'
-
+import AddUser from './components/addUser.vue'
 export default {
   name: 'DepartManage',
+  components: {
+    AddUser,
+  },
   data() {
     return {
       tree: null,
@@ -167,6 +171,9 @@ export default {
       changeStatus(data).then(() => {
         this.$refs.tablePage.getList()
       })
+    },
+    addUser() {
+      this.$refs.addUser.show()
     },
   },
 }

@@ -61,3 +61,11 @@ export function getMenu() {
     method: 'get',
   })
 }
+
+export function addUser(data) {
+  return request({
+    url: Setting.api + '/users/register',
+    method: 'POST',
+    data,
+  })
+}
