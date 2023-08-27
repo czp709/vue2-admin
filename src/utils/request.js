@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 import { Message } from 'element-ui'
 import { refreshTokenApi } from '../api/user'
 import { cloneDeep } from 'lodash'
+import store from '@/store'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_URL,
   timeout: 10 * 1000,
@@ -64,10 +65,12 @@ service.interceptors.response.use(
               requests = []
               return service(config)
             }
+            store.dispatch('user/logout')
             location.href = '/'
             Message.error('登录超时，请重新登录！')
           })
           .catch(() => {
+            store.dispatch('user/logout')
             location.href = '/'
             Message.error('登录超时，请重新登录！')
           })
