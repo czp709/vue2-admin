@@ -12,7 +12,11 @@ function createdRoutes(json) {
           path: '/' + item.path,
           name: item.path,
           component: (resolve) => {
-            return require([`@/views/${item.component}`], resolve)
+            let component
+            component = import(`@/views/${item.component}`).catch(() => {
+              component = require([`@/views/main/error/404`], resolve)
+            })
+            return component
           },
           meta: {
             hidden: false, // hidden为false，在侧边导航栏显示
