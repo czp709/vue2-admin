@@ -35,7 +35,7 @@
         </template>
       </TablePage>
     </div>
-    <AddUser ref="addUser"></AddUser>
+    <AddUser ref="addUser" @refresh="$refs.tablePage.getList()"></AddUser>
   </div>
 </template>
 <script>
