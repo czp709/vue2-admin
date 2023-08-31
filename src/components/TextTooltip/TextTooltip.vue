@@ -91,5 +91,6 @@ export default {
   text-overflow: ellipsis;
   width: 100%;
   display: inline-block;
+  line-height: 1;
 }
 </style>

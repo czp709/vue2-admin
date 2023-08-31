@@ -12,11 +12,12 @@
         @node-drop="onNodeDrop">
         <span slot-scope="{ data }" class="tree-line">
           <span class="iconStr">
+            <i v-if="data.menuType == 'M'" class="el-icon-folder icon"></i>
+            <i v-if="data.menuType == 'C'" class="el-icon-document icon"></i>
             <TextTooltip :content="data.menuName"></TextTooltip>
           </span>
           <span class="icons">
             <i
-              v-if="data.menuType == 'M'"
               title="新增"
               class="el-icon-circle-plus-outline icon"
               style="margin-right: 8px"
@@ -91,9 +92,8 @@ export default {
     addMenu(data) {
       this.showForm = true
       const sort = data.children?.length || 0
-      console.log('sort', sort)
       this.$nextTick(() => {
-        this.$refs.MenuForm.addMenu(data.menuId, sort + 1)
+        this.$refs.MenuForm.addMenu(data, sort + 1)
       })
     },
     close() {
@@ -170,6 +170,10 @@ export default {
   display: flex;
   align-items: center;
   font-size: 14px;
+  .icon {
+    font-size: 16px;
+    margin-right: 4px;
+  }
 }
 /deep/.icons {
   display: flex;
@@ -179,5 +183,6 @@ export default {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  color: #2d8cf0;
 }
 </style>

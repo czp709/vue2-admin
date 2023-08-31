@@ -79,7 +79,7 @@ export default {
 }
 /deep/.el-menu-item [class^='el-icon-'],
 /deep/.el-submenu [class^='el-icon-'] {
-  padding-top: 4px;
+  text-align: center;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;

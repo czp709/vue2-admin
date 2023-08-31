@@ -28,9 +28,18 @@
       </el-form-item>
       <el-form-item label="菜单类型" prop="menuType">
         <el-select v-model="ruleForm.menuType" style="width: 100%">
-          <el-option label="菜单" value="M"></el-option>
-          <el-option label="非菜单" value="C"></el-option>
-          <el-option label="权限" value="F"></el-option>
+          <el-option
+            :disabled="parentType != 'M'"
+            label="菜单"
+            value="M"></el-option>
+          <el-option
+            :disabled="parentType == 'C'"
+            label="非菜单"
+            value="C"></el-option>
+          <el-option
+            label="权限"
+            value="F"
+            :disabled="parentType != 'C'"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="路由地址" prop="path">
@@ -126,6 +135,7 @@ export default {
         emitPath: false,
         checkStrictly: true,
       },
+      parentType: '',
     }
   },
   computed: {
@@ -184,7 +194,9 @@ export default {
         }
       })
     },
-    addMenu(parentId, orderNum) {
+    addMenu(data, orderNum) {
+      const parentId = data.menuId
+      this.parentType = data.menuType
       this.initData()
       this.$nextTick(() => {
         this.$set(this.ruleForm, 'parentId', parentId)

@@ -58,7 +58,6 @@ export default {
   text-align: center;
   font-size: 18px;
   vertical-align: middle;
-  padding-top: 3px;
 }
 /deep/.el-submenu__icon-arrow {
   margin-top: -4px;
