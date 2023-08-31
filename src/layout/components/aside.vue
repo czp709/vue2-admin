@@ -51,6 +51,8 @@ export default {
   margin-left: 10px;
   font-size: 24px;
   color: #8e8e8e;
+  display: flex;
+  align-items: center;
 }
 .aside_top span {
   margin-left: 10px;

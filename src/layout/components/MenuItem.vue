@@ -18,15 +18,14 @@
         </template>
         <template v-else>
           <el-menu-item :key="child.menuId" :index="'/' + child.path">
-            <i v-if="child.icon" :class="child.icon"></i>
-            <span
-              v-if="!$store.state.controlLable.menufold"
-              slot="title"
-              :class="{ title: true, padding: child.isFrame == 0 }">
+            <div :class="{ title: true, padding: child.isFrame == 0 }">
+              <i v-if="child.icon" :class="child.icon"></i>
               <TextTooltip :content="child.menuName"></TextTooltip>
               <i v-if="child.isFrame == 0" class="el-icon-link"></i>
+            </div>
+            <span v-if="$store.state.controlLable.menufold" slot="title">
+              {{ child.menuName }}
             </span>
-            <span v-else slot="title">{{ child.menuName }}</span>
           </el-menu-item>
         </template>
       </template>
@@ -59,8 +58,11 @@ export default {
   font-size: 18px;
   vertical-align: middle;
 }
-/deep/.el-submenu__icon-arrow {
-  margin-top: -4px;
+/deep/.el-submenu__title * {
+  vertical-align: middle;
+}
+/deep/.el-submenu__title i {
+  vertical-align: calc(~'-50% + 5px');
 }
 .title {
   .over-flow {

@@ -15,16 +15,22 @@
           ref="tablePage"
           :columns="allLogColumns"
           :filters="allLogFilters"
-          :options="allLogOptions"></TablePage>
+          :options="allLogOptions"
+          :rowActionButton="rowActionButton"></TablePage>
       </el-tab-pane>
     </el-tabs>
+    <LogDetail ref="LogDetail"></LogDetail>
   </div>
 </template>
 
 <script>
 import { loginLog, allLog } from '@/api/log'
+import LogDetail from './components/logDetail'
 export default {
   name: 'LogData',
+  components: {
+    LogDetail,
+  },
   data() {
     return {
       activeName: 'loginLog',
@@ -104,7 +110,7 @@ export default {
     allLogOptions() {
       return {
         apiFunc: allLog,
-        hideActionBtn: true,
+        // hideActionBtn: true,
       }
     },
     allLogColumns() {
@@ -223,8 +229,22 @@ export default {
         },
       ]
     },
+    rowActionButton() {
+      return [
+        {
+          textValue: '详细',
+          func: (row) => {
+            this.showDetail(row)
+          },
+        },
+      ]
+    },
   },
-  methods: {},
+  methods: {
+    showDetail(row) {
+      this.$refs.LogDetail.show(row, this.allLogColumns)
+    },
+  },
 }
 </script>
 <style scoped lang="less">
@@ -246,6 +266,5 @@ export default {
 .el-tooltip__popper {
   max-width: 50%;
   max-height: 500px;
-  overflow-y: scroll;
 }
 </style>

@@ -34,6 +34,7 @@
     </div>
 
     <el-table
+      ref="elTable"
       :height="tableHeight"
       :data="tableData"
       border
@@ -54,9 +55,10 @@
             {{ scope.$index + 1 }}
           </span>
           <TextTooltip
-            v-else
+            v-else-if="item.tooltip"
             :content="String(scope.row[item.key])"
             text-align="center"></TextTooltip>
+          <span v-else class="lableContent">{{ scope.row[item.key] }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -65,9 +67,20 @@
         fixed="right"
         label="操作"
         width="100">
-        <template slot-scope="">
-          <el-button type="text" size="small"> 查看 </el-button>
-          <el-button type="text" size="small">编辑</el-button>
+        <template slot-scope="scope">
+          <el-button
+            v-for="(btn, idx) in rowActionButton"
+            :key="'actbtn' + idx"
+            :type="btn.type || 'text'"
+            :style="{ padding: '0 20px', ...btn.style }"
+            :disabled="
+              btn.disabled ||
+              (btn.disabledByRow && btn.disabledByRow(scope.row))
+            "
+            :loading="btn.loading"
+            @click="btn.func(scope.row, scope.$index)">
+            {{ btn.textValue }}
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -109,6 +122,12 @@ export default {
         return {}
       },
     },
+    rowActionButton: {
+      type: Array,
+      default: () => {
+        return []
+      },
+    },
   },
   data() {
     return {
@@ -124,8 +143,7 @@ export default {
       // 表格默认高度
       tableHeight: 500,
       // 表头高度
-      tableHeaderHeight: 39,
-      lineHeight: 57,
+      tableHeaderHeight: 54,
     }
   },
   computed: {
@@ -140,6 +158,13 @@ export default {
     },
     optionsFilter() {
       return this.options.filter
+    },
+    lineHeight() {
+      if (this.$refs.elTable.$el.querySelector('.el-table__row')) {
+        return this.$refs.elTable.$el.querySelector('.el-table__row')[0]
+          .clientHeight
+      }
+      return 54
     },
   },
   watch: {
@@ -180,7 +205,8 @@ export default {
       const func = this.options.apiFunc
       if (func) {
         this.page.pageSize = Math.floor(
-          (this.tableHeight + 32 - this.tableHeaderHeight) / this.lineHeight
+          (Math.floor(this.tableHeight) + 32 - this.tableHeaderHeight) /
+            this.lineHeight
         )
         func({ ...this.filterData, ...this.page, ...this.otherFilters }).then(
           (res) => {
@@ -228,6 +254,12 @@ export default {
 }
 </script>
 <style scoped lang="less">
+.lableContent {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
 .el-form-item {
   display: flex;
   flex-direction: row;

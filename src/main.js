@@ -4,12 +4,14 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import components from './components/index'
+import JsonViewer from 'vue-json-viewer'
 import './plugins/element.js'
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.config.devtools = process.env.NODE_ENV === 'development'
 Vue.use(components)
+Vue.use(JsonViewer)
 // 防止用户修改localStorage
 window.addEventListener('storage', (e) => {
   localStorage.setItem(e.key, e.oldValue)

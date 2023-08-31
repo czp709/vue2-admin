@@ -1,5 +1,9 @@
 <template>
-  <el-dialog title="新增用户" :visible.sync="dialogVisible" width="50%">
+  <el-dialog
+    title="新增用户"
+    :visible.sync="dialogVisible"
+    width="50%"
+    @close="close">
     <el-form
       ref="userInfo"
       label-width="80px"
@@ -25,7 +29,7 @@
         <el-input v-model="userInfo.nickname"></el-input>
       </el-form-item>
       <el-form-item label="性别">
-        <el-select v-model="userInfo.sex">
+        <el-select v-model="userInfo.sex" style="width: 100%">
           <el-option label="男" value="0"></el-option>
           <el-option label="女" value="1"></el-option>
         </el-select>
@@ -106,6 +110,18 @@ export default {
           return false
         }
       })
+    },
+    close() {
+      this.userInfo = {
+        deptId: '',
+        username: '',
+        password: '',
+        nickname: '',
+        sex: '',
+        email: '',
+        phone: '',
+        remark: '',
+      }
     },
   },
 }
