@@ -1,11 +1,10 @@
 # vue2-admin
 
->体验地址：[vue2-admin](https://czp709.github.io/)  
+>体验地址：[vue2-admin](http://60.204.147.119/)  
 >账号：admin 密码：admin  
 >遇到 BUG 或者有更好的实现方式欢迎联系我（有代码不理解的地方也可以给我发邮件询问）。邮箱：chenzhipeng709@163.com  
 
 vue2版本github地址：[vue2-admin](https://github.com/czp709/vue2-admin)  
-vue3版本github地址：[vue3-admin](https://github.com/czp709/vue-admin)  
 另有gitee仓库，只需将上方链接地址中的github修改为gitee便可。
 
 ---
@@ -16,8 +15,10 @@ vue3版本github地址：[vue3-admin](https://github.com/czp709/vue-admin)
 4.根据权限动态生成侧边导航栏  
 5.登录逻辑  
 6.dashboard 页面布局  
-7.mockjs  
 8.基于el-tooltip二次封装的组件，只有当超出长度后才会显示tooltip,支持el-tooltip所有属性
+9.基于el-table二次封装的组件，支持el-table所有属性，并且支持分页
+10.基于el-icon二次封装的icon选择组件
+11.token无感刷新功能
 
 ---
 
@@ -49,7 +50,7 @@ npm install mockjs -D
 
 在 utils/request.js 中可以配置请求头，可以根据自己的实际情况进行修改
 
-将请求的基础 url 配置在环境中
+将请求的基础 url 配置在utils/setting.js中的api
 
 通用环境为.env
 

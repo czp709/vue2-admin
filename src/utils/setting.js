@@ -7,11 +7,13 @@ const Setting = {
     // 侧边栏字体颜色
     aside_text_color: '#ffffff',
   },
+  // 默认用户头像和名称
   defaultUserInfo: {
     avatar:
       'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
     nickname: 'admin',
   },
+  // 系统logo和名称
   system: {
     logo: require('@/assets/logo.png'),
     name: '校小鱼',
