@@ -184,3 +184,9 @@ npm run build
 ```
 npm run lint
 ```
+
+### docker
+
+```
+docker build -t vue-admin . --no-cache
+```
