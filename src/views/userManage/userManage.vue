@@ -39,7 +39,7 @@
   </div>
 </template>
 <script>
-import { getDeptTree, queryUser, changeStatus } from '@/api/user.js'
+import { getDeptTree, queryUser, changeStatus, deleteUser } from '@/api/user.js'
 import AddUser from './components/addUser.vue'
 export default {
   name: 'DepartManage',
@@ -110,6 +110,29 @@ export default {
             })
           },
         },
+        {
+          key: 'action',
+          label: '操作',
+          render: (h, params) => {
+            return h(
+              'el-button',
+              {
+                props: {
+                  type: 'text',
+                },
+                style: {
+                  color: '#F56C6C',
+                },
+                on: {
+                  click: () => {
+                    this.deleteUser(params.row.username)
+                  },
+                },
+              },
+              '删除'
+            )
+          },
+        },
       ]
     },
     filters() {
@@ -174,6 +197,11 @@ export default {
     },
     addUser() {
       this.$refs.addUser.show()
+    },
+    deleteUser(username) {
+      deleteUser({ username }).then(() => {
+        this.$refs.tablePage?.getList()
+      })
     },
   },
 }

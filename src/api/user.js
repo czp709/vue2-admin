@@ -69,3 +69,11 @@ export function addUser(data) {
     data,
   })
 }
+
+export function deleteUser(params) {
+  return request({
+    url: Setting.api + '/users/deleteUser',
+    method: 'delete',
+    params,
+  })
+}

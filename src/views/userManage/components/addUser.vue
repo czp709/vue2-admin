@@ -102,7 +102,6 @@ export default {
       this.$refs.userInfo.validate((valid) => {
         if (valid) {
           addUser(this.userInfo).then(() => {
-            this.$message.success('添加成功')
             this.dialogVisible = false
             this.$emit('refresh')
           })
