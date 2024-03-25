@@ -1,6 +1,7 @@
 import store from '../store/index'
 import Cookies from 'js-cookie'
-
+const maxHackNumber = 1000
+let hackTimes = 0
 const whiteList = ['/']
 const beforeEach = async (to, from, next, router) => {
   if (Cookies.get('token') && localStorage.getItem('userInfo')) {
@@ -9,15 +10,21 @@ const beforeEach = async (to, from, next, router) => {
     const matched = to.matched.some((item) => {
       return item.path == to.path
     })
-    if (whiteList.indexOf(to.path) === -1 && !matched) {
+    if (
+      whiteList.indexOf(to.path) === -1 &&
+      !matched &&
+      hackTimes < maxHackNumber
+    ) {
       await store.dispatch(
         'user/saveUserInfo',
         JSON.parse(localStorage.getItem('userInfo'))
       )
       await store.dispatch('user/saveUserMenu', to)
+      hackTimes++
       next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
     }
     selfExecution({ to, from, next, router })
+    hackTimes = 0
     next()
   } else {
     // 如果没有登陆过就将除了白名单页面之外的页面访问都重定向到登陆页面
