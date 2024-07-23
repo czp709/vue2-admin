@@ -33,6 +33,7 @@ export default {
 <style scoped>
 .aside_top {
   /* color: white; */
+  padding-left: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;

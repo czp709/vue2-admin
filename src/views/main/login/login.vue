@@ -39,7 +39,10 @@
             type="text"
             placeholder="验证码"
             @keyup.enter.native="login"></el-input>
-          <img class="captcha" :src="captchaImg" @click="getCaptcha" />
+          <div
+            v-dompurify-html="captchaImg"
+            class="captcha"
+            @click="getCaptcha"></div>
         </el-form-item>
       </el-form>
       <el-button v-preventReClick type="primary" @click="login">
@@ -210,8 +213,8 @@ export default {
   align-items: center;
 }
 .captcha {
-  height: 100%;
-  width: 50%;
+  height: 40px;
+  width: 100px;
   margin-left: 8px;
   object-fit: contain;
 }

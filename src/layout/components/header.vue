@@ -15,6 +15,14 @@
       </span>
     </el-tooltip>
     <div class="header_right">
+      <a
+        target="blank"
+        class="github"
+        href="https://github.com/czp709/vue2-admin">
+        <img
+          src="../../assets/github.png"
+          style="width: 25px; height: 25px; margin-right: 16px" />
+      </a>
       <Fullscreen class="fullscreen"></Fullscreen>
       <Avatar></Avatar>
     </div>

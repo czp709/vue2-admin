@@ -6,12 +6,15 @@ import axios from 'axios'
 import components from './components/index'
 import JsonViewer from 'vue-json-viewer'
 import './plugins/element.js'
+// 用法 v-dompurify-html
+import VueDOMPurifyHTML from 'vue-dompurify-html'
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.config.devtools = process.env.NODE_ENV === 'development'
 Vue.use(components)
 Vue.use(JsonViewer)
+Vue.use(VueDOMPurifyHTML)
 // 防止用户修改localStorage
 window.addEventListener('storage', (e) => {
   localStorage.setItem(e.key, e.oldValue)

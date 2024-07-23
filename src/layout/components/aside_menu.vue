@@ -113,6 +113,14 @@ export default {
 /deep/.el-menu--collapse > div > .el-menu-item span {
   display: none;
 }
+/deep/.el-menu--collapse > div > .el-menu-item {
+  .el-tooltip {
+    padding: 0 !important;
+    display: inline-flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+}
 /deep/.el-icon-link {
   position: absolute;
   right: 8px;

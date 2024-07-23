@@ -20,7 +20,9 @@
           <el-menu-item :key="child.menuId" :index="'/' + child.path">
             <div :class="{ title: true, padding: child.isFrame == 0 }">
               <i v-if="child.icon" :class="child.icon"></i>
-              <TextTooltip :content="child.menuName"></TextTooltip>
+              <TextTooltip
+                :content="child.menuName"
+                style="padding: 0"></TextTooltip>
               <i v-if="child.isFrame == 0" class="el-icon-link"></i>
             </div>
             <span v-if="$store.state.controlLable.menufold" slot="title">

@@ -46,6 +46,26 @@ export default {
       },
     }),
   },
+  mounted() {
+    if (localStorage.getItem('githubStar')) {
+      return
+    }
+    const github = require('../assets/github.png')
+    this.$alert(
+      `<a target="blank" class="github" href="https://github.com/czp709/vue2-admin"><img src="${github}" style="width:30px;height:30px" />如果感觉不错就去给个Star吧，万分感谢！</a>`,
+      '给个Star吧',
+      {
+        dangerouslyUseHTMLString: true,
+        showCancelButton: true,
+        callback: (action) => {
+          if (action === 'confirm') {
+            window.open('https://github.com/czp709/vue2-admin')
+            localStorage.setItem('githubStar', true)
+          }
+        },
+      }
+    )
+  },
 }
 </script>
 <style lang="less">
@@ -62,6 +82,20 @@ export default {
 .twofade-enter {
   opacity: 0;
   transform: translateX(100%);
+}
+.github {
+  color: #1e1e1e;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  vertical-align: middle;
+  position: relative;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 500;
 }
 </style>
 <style scoped>
